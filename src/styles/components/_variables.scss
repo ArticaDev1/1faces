@@ -1,0 +1,46 @@
+//bootsrtap v5
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1620px
+);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px,
+  xxl: 1440px
+);
+$container-padding-x: 24px;
+$grid-gutter-width: 24px;
+
+$trs1: .25s ease-out;
+$trs2: .5s ease-out;
+$trs3: 1s ease-out;
+
+$radius: 80px;
+
+$color-accent: #db211b;
+$color-accent-hover: #c11812;
+$color-accent-focus: #9c0f0a;
+
+$color-link: $color-accent;
+$color-link-hover: $color-accent-hover;
+$color-link-visited: #B46CB8;
+
+$color-text: #333333;
+$color-text-muted: #767676;
+$color-text-light: #BDBDBD;
+
+$color-blockquote: #E5E5E5;
+$color-table-hover: #F5F5F5;
+$color-table-border: #E5E5E5;
+$color-input-border: #E5E5E5;
+
+$color-sections-bg: #F5F5F5;
+
+$color-border-1: #D9D9DE;
+$color-border-2: #BDBDBD;

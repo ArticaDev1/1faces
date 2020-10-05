@@ -1,0 +1,82 @@
+//variables
+@import "./components/variables";
+
+.helper {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  z-index: 3000;
+  transition: transform $trs1;
+  &__trigger {
+    display: block;
+    position: absolute;
+    left: calc(100% - 1px);
+    width: 40px;
+    height: 40px;
+    border-radius: 0 2px 2px 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #D9D9DE;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.05);
+    display: flex;
+    z-index: 2;
+    color: var(--color-accent);
+    .icon {
+      margin: auto;
+      width: 15px;
+      height: 15px;
+      color: inherit;
+      transition: transform $trs1;
+    }
+  }
+  &__container {
+    position: relative;
+    z-index: 1;
+    padding: 20px 15px;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.05);
+    width: 220px;
+    border-radius: 0 0 2px 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #D9D9DE;
+  }
+  &__section {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+    &-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 7px;
+    }
+    &-content {
+      margin: 0 -5px -5px 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &-button {
+      margin: 0 5px 5px 0;
+      font-size: 0.625rem;
+      text-align: center;
+      background-color: var(--color-accent);
+      color: #fff;
+      transition: background-color $trs1;
+      line-height: 25px;
+      padding: 0 10px;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+  }
+  &.active {
+    transform: translate(0, -50%);
+    .helper__trigger {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

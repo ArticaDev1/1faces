@@ -1,0 +1,45 @@
+//variables
+@import "./components/variables";
+//normalize.css
+@import "../../node_modules/normalize.css/normalize";
+//bootstrap-grid
+@import "../../node_modules/bootstrap/scss/bootstrap-grid";
+
+/*========== Form ==========*/
+@import "./components/helper";
+
+/*========== Fonts ==========*/
+@import "./components/fonts";
+
+/*========== Basic ==========*/
+@import "./components/basic";
+
+/*========== Layout ==========*/
+@import "./components/layout";
+
+/*========== Components ==========*/
+@import "./components/components";
+
+/*========== Typography ==========*/
+@import "./components/typography";
+
+/*========== Helpers ==========*/
+@import 'components/helpers';
+
+/*========== Buttons ==========*/
+@import 'components/buttons';
+
+/*========== Form ==========*/
+@import "./components/form";
+
+/*========== Form ==========*/
+@import "./components/modals";
+
+/*========== Blocks ==========*/
+@import 'components/blocks';
+
+/*========== Header ==========*/
+@import 'components/header';
+
+/*========== Footer ==========*/
+@import 'components/footer';

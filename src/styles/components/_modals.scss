@@ -1,0 +1,83 @@
+.modal {
+  position: fixed;
+  z-index: 200;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 110px 32px 76px 32px;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(15, 11, 23, 0.5);
+    z-index: 1;
+  }
+  &-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    pointer-events: none;
+    span {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 24px;
+      height: 2px;
+      width: 30px;
+      background-color: #fff;
+      transition: background-color $trs2, transform $trs1;
+      &:first-child {
+        transform: rotate(-45deg);
+      }
+      &:last-child {
+        transform: rotate(45deg);
+      }
+    }
+    &.touch,
+    &.hover {
+      span {
+        &:first-child {
+          transform: rotate(-30deg);
+        }
+        &:last-child {
+          transform: rotate(30deg);
+        }
+      }
+    }
+  }
+  &__video {
+    position: relative;
+    z-index: 2;
+    border: 0;
+    margin: auto;
+    background-color: #000;
+  }
+}
+#video-player {
+  opacity: 0;
+  visibility: hidden;
+  transition: $trs2 opacity;
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+  &.ready {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media screen and(max-width:1440px) {
+  .modal {
+    padding: 80px 32px 66px 32px;
+  }
+}

@@ -1,0 +1,46 @@
+.input {
+  position: relative;
+  &__element {
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color-input-border;
+    line-height: 22px;
+    padding: 8px 16px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: background-color 5000s;
+    width: 100%;
+    font-size: 0.875rem;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: inherit;
+      box-shadow: 0 0 0px 1000px #fff inset;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+    &::placeholder {
+      color: $color-text-muted;
+      transition: opacity $trs1;
+    }
+    &:focus {
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+    &_textarea {
+      min-height: 96px;
+      resize: none;
+    }
+  }
+}

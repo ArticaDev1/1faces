@@ -1,0 +1,52 @@
+.button {
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.125rem;
+  transition: color $trs1, border-color $trs1, background-color $trs1;
+  height: 62px;
+  line-height: 60px;
+  padding: 0 15px;
+  width: 100%;
+  font-weight: 500;
+  .icon {
+    height: 18px;
+    width: 18px;
+    color: inherit;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+  &_style-1 {
+    border: 1px solid var(--color-accent);
+    color: #fff;
+    background-color: var(--color-accent);
+    &.touch,
+    &.hover {
+      color: #fff;
+      background-color: var(--color-accent-darker);
+      border-color: var(--color-accent-darker);
+    }
+  }
+  &_style-2 {
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: transparent;
+    &.touch,
+    &.hover {
+      color: var(--color-text);
+      background-color: #fff;
+      border-color: #fff;
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    height: 52px;
+    line-height: 50px;
+    font-size: 1rem;
+  }
+}
