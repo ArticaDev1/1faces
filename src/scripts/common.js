@@ -17,23 +17,51 @@ import device from "current-device";
 window.onload = function(){
   pageLoaded();
 }
-function pageLoaded() {
-  let loading_time_limit = 1.5;  //seconds
 
+const brakepoints = {
+  sm: 576,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  xxl: 1440
+}
+const $wrapper = document.querySelector('.wrapper');
+const preloader_time_limit = 0;
+const youtubeApi = {
+  state: false
+}
+
+const app = {
+  init: function() {
+    //home
+    if(window.innerWidth>=brakepoints.md) {
+      bgVideo.init();
+    }
+    Home.init();
+
+    TouchHoverEvents.init();
+    Video.init();
+    scrollItemsEvents();
+    //
+    helper();
+  }
+}
+
+function pageLoaded() {
   //отключить прелоадер если 0
-  if(loading_time_limit==0) {
-    app.init();
+  if(preloader_time_limit==0) {
     clearInterval(preloader_interval);
     $preloader.remove();
+    app.init();
     gsap.set($wrapper, {autoAlpha:1})
   }
 
   //если загрузились раньше
-  else if(loading_duration < loading_time_limit) {
+  else if(loading_duration < preloader_time_limit) {
     setTimeout(()=>{
       clearInterval(preloader_interval);
       finish();
-    }, (loading_time_limit - loading_duration) * 1000)
+    }, (preloader_time_limit - loading_duration) * 1000)
   }
   //если загрузились позже 
   else {
@@ -44,50 +72,22 @@ function pageLoaded() {
   }
 
   let finish = ()=>{
-    app.init();
     $preloader_icon.style.transition = 'none';
     $preloader_mask.style.transition = 'none';
-    gsap.timeline({onComplete:()=>{$preloader.remove();}})
-      .to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'}) //1
-      .to($preloader_mask, {attr:{y:0}, duration:1, ease:'power2.inOut'}, '-=1') //1
-      .to($preloader_icon, {scale:0.9, duration:1.5, ease:'power2.inOut'}, '-=1') //1.5
+    gsap.timeline({onComplete:()=>{
+      $preloader.remove();
+      app.init();
+      gsap.to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+    }})
+      .to($preloader_mask, {attr:{y:0}, duration:1, ease:'power2.inOut'}) //1
+      .to($preloader_icon, {scale:0.9, duration:1, ease:'power2.inOut'}, '-=1')
       .to($preloader, {autoAlpha:0, duration:1, ease:'power2.inOut'}, '-=1')
   }
 }
 
-const brakepoints = {
-  sm: 576,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  xxl: 1440
-}
-const $wrapper = document.querySelector('.wrapper');
-const youtubeApi = {
-  state: false
-}
-
-
-const app = {
-  init: function() {
-    //home
-    if(device.desktop()) {
-      bgVideo.init();
-    }
-    //
-
-    Home.init();
-    TouchHoverEvents.init();
-    Video.init();
-    //
-    helper();
-  }
-}
-
-
 //hover/touch custom events
 const TouchHoverEvents = {
-  targets: 'a, button, label, tr, .jsTouchHover, .js-3d-object',
+  targets: 'a, button, label, tr, .jsTouchHover',
   touched: false,
   touchEndDelay: 100, //ms
   init: function() {
@@ -163,7 +163,6 @@ window.bgVideo = {
     this.wrapper = document.querySelector('.home-background-video');
     this.video = document.querySelector('.home-background-video__wrap');
     this.loaded = false;
-    this.flag = true;
     this.$loader = document.querySelector('.home-logo__circle path');
     this.loader_width = this.$loader.getTotalLength();
 
@@ -183,8 +182,8 @@ window.bgVideo = {
         this.animation_timeline = gsap.timeline({paused:true})
           .fromTo([this.$loader, this.video], {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
           .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {duration:this.player.getDuration(), css:{'stroke-dashoffset':0}, ease:'linear'}, '-=1')
-          .to(this.$loader, {autoAlpha:0, duration:2, ease:'power2.inOut'}, '-=2')
-          .to(this.video, {autoAlpha:0, duration:2, ease:'power2.inOut'}, '-=2')
+          .to(this.video, {autoAlpha:0, duration:4, ease:'power2.in'}, '-=4')
+          .to(this.$loader, {autoAlpha:0, duration:2, ease:'power2.in'}, '-=2')
         
         this.animation_timeline.duration(this.player.getDuration()-this.player.getCurrentTime()).play();
       }
@@ -218,7 +217,6 @@ window.bgVideo = {
         ratio = 0.5625;
 
     if(value<ratio) {
-      console.log(this.video)
       this.video.style.width = `${w}px`;
       this.video.style.height = `${w*ratio}px`;
     } else {
@@ -231,7 +229,6 @@ window.bgVideo = {
     this.player = new YT.Player('bg-player', {
       videoId: '0zxNqsKiQxE',
       playerVars: {
-        'autoplay':1, 
         'controls': 0,
         'disablekb': 1,
         'showinfo': 0,
@@ -245,21 +242,38 @@ window.bgVideo = {
   	});
   },
   playerReady: function(event) {
+    this.player.playVideo();
     this.player.mute();
     event.target.setPlaybackQuality('hd720');
+
+    let checkVisible = ()=>{
+      let position = this.video.getBoundingClientRect().y + this.video.getBoundingClientRect().height;
+      if(position<=0 && !this.flag) {
+        this.flag = true;
+        this.player.pauseVideo();
+      } else if(position>0 && this.flag) {
+        this.flag = false;
+        this.player.playVideo();
+      }
+    }
+    checkVisible();
+    window.addEventListener('scroll', ()=>{
+      checkVisible();
+    })
+
   },
   playerStateChange: function(event) {
     if (event.data === YT.PlayerState.ENDED) {
-      this.animation_timeline.pause();
+      if(this.animation_timeline) this.animation_timeline.pause();
       gsap.set(this.$loader, {css:{opacity:'0'}});
       this.player.playVideo();
     } 
     else if(event.data === YT.PlayerState.BUFFERING) {
-      this.animation_timeline.pause();
+      if(this.animation_timeline) this.animation_timeline.pause();
       event.target.setPlaybackQuality('hd720');
     } 
     else if(event.data === YT.PlayerState.PAUSED) {
-      this.animation_timeline.pause();
+      if(this.animation_timeline) this.animation_timeline.pause();
     }
     else if(event.data === YT.PlayerState.PLAYING) {
       if(!this.visible) {
@@ -363,7 +377,8 @@ const Video = {
 
 const Home = {
   init: function() {
-    let $homeitems = document.querySelectorAll('.home__item'),  
+    let $homeitems = document.querySelectorAll('.home__item'),
+        $line = document.querySelectorAll('.home__vertical-line'),
         $dots = document.querySelectorAll('.home-dots__link');
     this.dots();
 
@@ -372,11 +387,13 @@ const Home = {
       .fromTo($homeitems, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
       .fromTo($dots, {x:20}, {x:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}}, '-=2')
       .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
+      .fromTo($line, {yPercent:-100}, {yPercent:0, duration:2, ease:'power2.inOut'}, '-=1.5')
 
   },
   dots: function() {
     let $buttons = document.querySelectorAll('.home-dots__link'),
-        $sections = document.querySelectorAll('.section'),
+        $sections = document.querySelectorAll('[data-scroll-block]'),
+        $dark_sections = document.querySelectorAll('[data-dark]'),
         inscroll = false,
         animation,
         $oldLink = false;
@@ -384,7 +401,6 @@ const Home = {
     //click
     $buttons.forEach(($this)=>{
       $this.addEventListener('click', (event)=>{
-        console.log('click')
         event.preventDefault();
         let $block = document.querySelector(`${$this.getAttribute('href')}`);
         if($block) {
@@ -403,14 +419,14 @@ const Home = {
     })
 
     let check = ()=> {
+      let position = window.pageYOffset;
+
       if(!inscroll) {
-        let position = window.pageYOffset;
         $sections.forEach(($section)=>{
           let top = $section.getBoundingClientRect().y + position,
               bottom = top + $section.getBoundingClientRect().height;
-          if($section.getAttribute('id')=='about') {
-            console.log(position, top, bottom)
-          }
+
+              
           if (position >= top && position <= bottom) {
 
             $buttons.forEach(($button)=>{
@@ -425,6 +441,33 @@ const Home = {
           }
         })
       }
+
+      let $dots = document.querySelectorAll('.home-dots__link');
+      $dots.forEach(($dot, index)=>{
+        let y = $dot.getBoundingClientRect().top, 
+            h = $dot.getBoundingClientRect().height/2,
+            pos = y+h;
+
+        let flag = false;
+
+        for(let index = 0; index<$dark_sections.length; index++) {
+          let h = $dark_sections[index].getBoundingClientRect().height,
+              top = $dark_sections[index].getBoundingClientRect().y,
+              bottom = $dark_sections[index].getBoundingClientRect().y + h;
+          
+          if(pos>top && pos<bottom) {
+            flag = true;
+          }
+        }
+
+        if(!$dot.classList.contains('reversed') && flag) {
+          $dot.classList.add('reversed');
+        } else if(!flag) {
+          $dot.classList.remove('reversed');
+        }
+        
+      })
+
     }
 
     check();
@@ -435,14 +478,29 @@ const Home = {
   }
 }
 
+function scrollItemsEvents() {
+  let check = ()=>{
+    let $items = document.querySelectorAll('.js-scroll-animated'),
+        position = window.pageYOffset;
 
+    $items.forEach(($item)=>{
+      let top = $item.getBoundingClientRect().y + position - window.innerHeight;
+      if(position>top && !$item.classList.contains('animated')) {
+        $item.classList.add('animated');
+      }
+    })
+    
+  }
+  check();
+  window.addEventListener('scroll', ()=>{
+    check();
+  })
+}
 
 function helper() {
   let $toggle = document.querySelector('.helper__trigger'),
       $block = document.querySelector('.helper'),
       state = false;
-
-  console.log($toggle, $block)
 
   $toggle.addEventListener('click', ()=>{
     if(!state) {

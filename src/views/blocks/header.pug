@@ -1,6 +1,14 @@
-header.header
-  .container.header__container
-    .header__phones
-      svg.icon
-        use(xlink:href='./img/icons/icons-sprite.svg#phone')
-      a(href='tel:+74732602367') +7 (473) 260-23-67
+header.header(class=header_type)
+  .container.header__container  
+    .header__left
+      .logo
+        a(href="index.html").logo__link
+          img(src="./img/logos/main_logo.svg", alt="logo").logo__image
+      a.header__phone(href='tel:+74732602367') 
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#phone')
+        | +7 (473) 260-23-67
+    a(href="javascript:void(0);").nav-toggle 
+      span
+      span
+      span
