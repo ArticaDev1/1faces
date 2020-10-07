@@ -5,6 +5,7 @@ block title
   title #{title} - Организация мероприятий
 block content 
 
+
   .home-dots
     a(href="#home").home-dots__link 
       span Главная
@@ -14,7 +15,7 @@ block content
       span за 90 миунт о 1 лицах
     a(href="#organization").home-dots__link
       span Организация
-    a(href="#team").home-dots__link
+    //a(href="#team").home-dots__link
       span Команда
     a(href="#services").home-dots__link
       span Услуги
@@ -25,7 +26,7 @@ block content
     a(href="#footer").home-dots__link
       span Контакты
       
-  section.section.desktop-background-wrapper(data-dark)
+  section.section.section_mb2.desktop-background-wrapper(data-dark)
     .desktop-background-wrapper__background.parralax-bg(style='background-image:url("./img/iStock-613111906.jpg");')
     
     section.section.home#home(data-scroll-block)
@@ -76,7 +77,7 @@ block content
             h2.about__title ВЫ получаете
             p.about__text Команду с 10-ти летним опытом организации мероприятий, прозрачность на всех этапах подготовки, оптимальный бюджет,  внимательность к деталям, отсутствие стресса в день события.
     
-    section.section.section_top-pd.video-section#video(data-scroll-block data-black)
+    section.section.section_mb.video-section#video(data-scroll-block data-black)
       .container
         .row.justify-content-center
           .col-lg-10
@@ -90,31 +91,32 @@ block content
 
   include blocks/services
 
-  section.section.section_top-pd.clients#clients(data-scroll-block)
-    .container.clients__container
-      h2.section__title Наши клиенты
-      .row.grid
-        mixin block(href, adress)
-          .clients-block.grid__block.col-xl-20pc  
-            a(href=adress target='_blank' rel='nofollow').clients-block__image.image.image_contain.jsTouchHover
-              img(data-src=href, alt="clients").lazyload
-        +block('./img/ra.png', 'https://www.rosatom.ru/')
-        +block('./img/nlmk.png', 'https://nlmk.com/ru/')
-        +block('./img/vtb.png', 'https://www.vtb.ru/')
-        +block('./img/m.png', 'https://www.molvest.ru/')
-        +block('./img/gz.png', 'https://www.gazprom.ru/')
-        +block('./img/pi.png', 'https://www.pirelli.ru/')
-        +block('./img/sib.png', 'https://www.sibur.ru/')
-        +block('./img/mrsk-1.png', 'https://www.mrsk-1.ru/')
-        +block('./img/rzd.png', 'https://www.rzd.ru/')
-        +block('./img/rvk.png', 'https://voronezh-rvk.ru/')
-        +block('./img/kuhn.png', 'https://www.kuhn.ru/')
-        +block('./img/sch.png', 'https://www.slb.ru/')
-        +block('./img/agro.png', 'https://agroeco.ru/')
-        +block('./img/v.png', 'https://www.vaderstad.com/ru/')
-        +block('./img/lid.png', 'https://agro-lider.ru/')
+  section.section.clients#clients(data-scroll-block)
+    .clients__container
+      .container
+        h2.section__title Наши клиенты
+        .row.grid
+          mixin block(href, adress)
+            .clients-block.grid__block.col-xl-20pc.col-lg-3.col-md-4.col-6
+              a(href=adress target='_blank' rel='nofollow').clients-block__image.image.image_contain.jsTouchHover
+                img(data-src=href, alt="clients").lazyload
+          +block('./img/ra.png', 'https://www.rosatom.ru/')
+          +block('./img/nlmk.png', 'https://nlmk.com/ru/')
+          +block('./img/vtb.png', 'https://www.vtb.ru/')
+          +block('./img/m.png', 'https://www.molvest.ru/')
+          +block('./img/gz.png', 'https://www.gazprom.ru/')
+          +block('./img/pi.png', 'https://www.pirelli.ru/')
+          +block('./img/sib.png', 'https://www.sibur.ru/')
+          +block('./img/mrsk-1.png', 'https://www.mrsk-1.ru/')
+          +block('./img/rzd.png', 'https://www.rzd.ru/')
+          +block('./img/rvk.png', 'https://voronezh-rvk.ru/')
+          +block('./img/kuhn.png', 'https://www.kuhn.ru/')
+          +block('./img/sch.png', 'https://www.slb.ru/')
+          +block('./img/agro.png', 'https://agroeco.ru/')
+          +block('./img/v.png', 'https://www.vaderstad.com/ru/')
+          +block('./img/lid.png', 'https://agro-lider.ru/')
 
-  section.section.section_top-pd.documents
+  section.section.section_mb2.documents
     .container
       h2.section__title Отзывы и благодарности
       .row  

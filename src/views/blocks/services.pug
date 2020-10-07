@@ -1,3 +1,71 @@
-section.section.section_top-pd.services#services(data-scroll-block)
+section.section.services#services(data-scroll-block)
+  .services__background.lazyload(data-src='./img/background2.png')
   .container
     h2.section__title Наши услуги
+  .services__container
+    .container
+      .row.justify-content-center
+        .col-xl-5.col-md-8
+          .row.grid
+            //block
+            .services-block.col-md-6.grid__block
+              .services-block__container.jsTouchHover
+                .services-block__front
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#ico-service1')
+                  h5.services-block__front-title Мероприятия<br> для АПК<br><br>
+                .services-block__back
+                  .services-block__back-content
+                    .services-block__back-top
+                      h4.services-block__back-title Мероприятия для АПК
+                      p.services-block__back-text Организация мероприятий формата «День поля» и событий для агропромышленного комплекса (АПК)
+                    .services-block__back-bottom
+                      a(href="javascript:void(0);").button.button_style-2 Подробности
+                      a(href='tel:+74732602367').button.button_style-1 Позвонить нам
+
+            //block
+            .services-block.col-md-6.grid__block
+              .services-block__container.jsTouchHover
+                .services-block__front
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#ico-service2')
+                  h5.services-block__front-title Юбилеи<br> и торжественные<br> открытия
+                .services-block__back
+                  .services-block__back-content
+                    .services-block__back-top
+                      h4.services-block__back-title Юбилеи и торжестванные открытия
+                      p.services-block__back-text Организация и проведение юбилейных мероприятий и торжественных открытий
+                    .services-block__back-bottom
+                      a(href="javascript:void(0);").button.button_style-2 Подробности
+                      a(href='tel:+74732602367').button.button_style-1 Позвонить нам
+            //block
+            .services-block.col-md-6.grid__block
+              .services-block__container.jsTouchHover
+                .services-block__front
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#ico-service3')
+                  h5.services-block__front-title Онлайн<br> мероприятия<br><br>
+                .services-block__back
+                  .services-block__back-content
+                    .services-block__back-top
+                      h4.services-block__back-title Онлайн мероприятия
+                      p.services-block__back-text Уникальное онлайн-мероприятие для ваших коллег, партнеров и клиентов
+                    .services-block__back-bottom
+                      a(href="javascript:void(0);").button.button_style-2 Подробности
+                      a(href='tel:+74732602367').button.button_style-1 Позвонить нам
+            //block
+            .services-block.col-md-6.grid__block
+              .services-block__container.jsTouchHover
+                .services-block__front
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#ico-service4')
+                  h5.services-block__front-title Обучающий<br> тренинг<br><br>
+                .services-block__back
+                  .services-block__back-content
+                    .services-block__back-top
+                      h4.services-block__back-title Обучающий тренинг
+                      p.services-block__back-text Тонкости организации мероприятий с участием иностранных делегаций и представителей власти
+                    .services-block__back-bottom
+                      a(href="javascript:void(0);").button.button_style-2 Подробности
+                      a(href='tel:+74732602367').button.button_style-1 Позвонить нам
+

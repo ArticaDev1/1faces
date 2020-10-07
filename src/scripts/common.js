@@ -27,16 +27,11 @@ const brakepoints = {
 }
 const $wrapper = document.querySelector('.wrapper');
 const preloader_time_limit = 1;
-const youtubeApi = {
-  state: false
-}
+const youtubeApi = {state: false}
 
 const app = {
   init: function() {
     //home
-    if(window.innerWidth>=brakepoints.md) {
-      bgVideo.init();
-    }
     Home.init();
 
     TouchHoverEvents.init();
@@ -44,44 +39,6 @@ const app = {
     scrollItemsEvents();
     //
     helper();
-  }
-}
-
-function pageLoaded() {
-  //отключить прелоадер если 0
-  if(preloader_time_limit==0) {
-    clearInterval(preloader_interval);
-    $preloader.remove();
-    app.init();
-    gsap.set($wrapper, {autoAlpha:1})
-  }
-
-  //если загрузились раньше
-  else if(loading_duration < preloader_time_limit) {
-    setTimeout(()=>{
-      clearInterval(preloader_interval);
-      finish();
-    }, (preloader_time_limit - loading_duration) * 1000)
-  }
-  //если загрузились позже 
-  else {
-    setTimeout(()=>{
-      clearInterval(preloader_interval);
-      finish();
-    })
-  }
-
-  let finish = ()=>{
-    $preloader_icon.style.transition = 'none';
-    $preloader_mask.style.transition = 'none';
-    gsap.timeline({onComplete:()=>{
-      $preloader.remove();
-      app.init();
-      gsap.to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'})
-    }})
-      .to($preloader_mask, {attr:{y:0}, duration:1, ease:'power2.inOut'}) //1
-      .to($preloader_icon, {scale:0.9, duration:1, ease:'power2.inOut'}, '-=1')
-      .to($preloader, {autoAlpha:0, duration:1, ease:'power2.inOut'}, '-=1')
   }
 }
 
@@ -156,6 +113,355 @@ const TouchHoverEvents = {
       $targets[0].classList.remove('focus');
     }
   }
+}
+
+
+const Home = {
+  init: function() {
+    let $homeitems = document.querySelectorAll('.home__item'),
+        $line = document.querySelectorAll('.home__vertical-line'),
+        $dots = document.querySelectorAll('.home-dots__link');
+
+    gsap.timeline()
+      .fromTo($homeitems, {y:50}, {y:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}})
+      .fromTo($homeitems, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
+      .fromTo($dots, {x:20}, {x:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}}, '-=2')
+      .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
+      .fromTo($line, {yPercent:-100}, {yPercent:0, duration:2, ease:'power2.inOut'}, '-=1.5')
+
+
+
+    this.dots();
+    this.organization();
+    this.services();
+    if(window.innerWidth>=brakepoints.md) {
+      bgVideo.init();
+    }
+
+  },
+  dots: function() {
+    let $buttons = document.querySelectorAll('.home-dots__link'),
+        $sections = document.querySelectorAll('[data-scroll-block]'),
+        $dark_sections = document.querySelectorAll('[data-dark]'),
+        inscroll = false,
+        animation,
+        $oldLink = false;
+
+    //click
+    $buttons.forEach(($this)=>{
+      $this.addEventListener('click', (event)=>{
+        event.preventDefault();
+        let $block = document.querySelector(`${$this.getAttribute('href')}`);
+        if($block) {
+          inscroll = true;
+          if($oldLink) $oldLink.classList.remove('active');
+          $this.classList.add('active');
+          $oldLink = $this;
+          if(animation!==undefined) {
+            animation.pause();
+          }
+          animation = gsap.to(window, {duration: 1, scrollTo:{y:$block}, ease:'power2.inOut', onComplete: function() {
+            inscroll = false;
+          }});
+        }
+      })
+    })
+
+    let check = ()=> {
+      let position = window.pageYOffset,
+          $active = false;
+
+      if(!inscroll) {
+
+        $sections.forEach(($section)=>{
+          let top = $section.getBoundingClientRect().y + position,
+              bottom = top + $section.getBoundingClientRect().height;
+
+          if (position >= top && position <= bottom) {
+            
+            $buttons.forEach(($button)=>{
+              let attr = $button.getAttribute('href'),
+                  id = '#'+$section.getAttribute('id');
+              if(attr==id) {
+                $active = $button;
+                console.log('++')
+              }
+            })
+          } 
+        })
+        
+        if($active && $active!==$oldLink) {
+          if($oldLink) $oldLink.classList.remove('active');
+          $active.classList.add('active');
+          $oldLink = $active;
+        } else if(!$active) {
+          if($oldLink) $oldLink.classList.remove('active');
+          $oldLink = false;
+        }
+      }
+
+      let $dots = document.querySelectorAll('.home-dots__link');
+      $dots.forEach(($dot, index)=>{
+        let y = $dot.getBoundingClientRect().top, 
+            h = $dot.getBoundingClientRect().height/2,
+            pos = y+h;
+
+        let flag = false;
+
+        for(let index = 0; index<$dark_sections.length; index++) {
+          let h = $dark_sections[index].getBoundingClientRect().height,
+              top = $dark_sections[index].getBoundingClientRect().y,
+              bottom = $dark_sections[index].getBoundingClientRect().y + h;
+          
+          if(pos>top && pos<bottom) {
+            flag = true;
+          }
+        }
+
+        if(!$dot.classList.contains('reversed') && flag) {
+          $dot.classList.add('reversed');
+        } else if(!flag) {
+          $dot.classList.remove('reversed');
+        }
+        
+      })
+
+    }
+
+    check();
+    window.addEventListener('scroll', ()=>{
+      check();
+    })
+
+  },
+  organization: function() {
+    let $items = document.querySelectorAll('.organization-block__item'),
+        $images = document.querySelectorAll('.organization-block__image'),
+        $titles = document.querySelectorAll('.organization-block__item-title'),
+        $loader = document.querySelector('.organization-block__loader path'),
+        loader_width = $loader.getTotalLength(),
+        index = 0,
+        slides_count = $items.length,
+        index_old,
+        interval = 30, //seconds
+        animations = [];
+
+    //autoslide
+
+    let intervalAnimation = gsap.timeline({paused:true, onComplete:()=>{
+        index++;
+        if(index>slides_count-1) {
+          index = 0;
+        }
+        check();
+      }})
+        .set($loader, {css:{'stroke-dasharray':loader_width}})
+        .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
+        .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
+
+    let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
+          intervalAnimation.duration(interval-0.5).play(0);
+        }});
+
+
+    $items.forEach(($item, index)=>{
+      let $container = $item.querySelector('.organization-block__item-content'),
+          $text = $item.querySelector('.organization-block__item-text'),
+          $title = $titles[index],
+          $image = $images[index],
+          h = $text.getBoundingClientRect().height;
+
+      animations[index] = gsap.timeline({paused:true})
+        .fromTo($container, {css:{height:0}}, {css:{height:h}, duration:1, ease:'power2.inOut'})
+        .fromTo($text, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo($title, {scale:0.75}, {scale:1, duration:1, ease:'power2.inOut'}, '-=1')
+        //image
+        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo($image, {scale:0.5}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
+    })
+
+    let check = ()=> {
+      if(index_old!==undefined) {
+        animations[index_old].reverse();
+        $items[index_old].classList.remove('active');
+        hideAnimation.play(0);
+      } else {
+        intervalAnimation.play(0);
+      }
+
+      animations[index].play(0);
+      $items[index].classList.add('active');
+      index_old = index;
+    }
+    check();
+
+    $titles.forEach(($title, i)=>{
+      $title.addEventListener('click', ()=>{
+        index = i;
+        check();
+      })
+    })
+
+  },
+  services: function() {
+    let $blocks = document.querySelectorAll('.services-block'),
+        animations = [];
+
+    $blocks.forEach(($block, index)=>{
+      let $button = $block.querySelector('.services-block__container'),
+          $front =  $block.querySelector('.services-block__front'),
+          $back =   $block.querySelector('.services-block__back'),
+          $content = $block.querySelector('.services-block__back-content');
+
+      let w1 = $button.getBoundingClientRect().width,
+          w2 = $back.getBoundingClientRect().width,
+          scale = w1/w2;
+
+      animations[index] = gsap.timeline({paused:true})
+        .to($front, {autoAlpha:0, duration:0.5, ease:'power2.inOut'})
+        .set($back, {autoAlpha:1, 
+          onComplete:()=>{
+            $block.classList.add('active')
+          }
+        })
+        .fromTo($back, {scale:1}, {scale:scale, duration:0})
+        .fromTo($back, {scale:scale}, {scale:1, duration:1, ease:'power2.out',
+          onReverseComplete:()=>{
+            $block.classList.remove('active')
+          }
+        })
+        .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'}, '-=0.5')
+
+      $button.addEventListener('click',      (event)=>{check(event)})
+      $button.addEventListener('mouseenter', (event)=>{check(event)})
+      $button.addEventListener('mouseleave', (event)=>{check(event)})
+      
+      let check = (event)=> {
+        
+        if((TouchHoverEvents.touched && event.type=='click') || (!TouchHoverEvents.touched && event.type!=='click')) {
+          if(event.type=='click' || event.type=='mouseenter') {
+            animations[index].play()
+          } else {
+            animations[index].reverse()
+          }
+        } 
+      }
+
+    })
+
+  }
+}
+
+
+
+
+
+const Video = {
+  init: function() {
+    this.$openBtn = '[data-video]';
+    this.$closeBtn = '[data-video-close]';
+    this.initialized = false;
+    //triggers click
+    document.addEventListener('click', function(event){
+      let $open = event.target.closest(Video.$openBtn),
+          $close = event.target.closest(Video.$closeBtn);
+      if($open!==null) {
+        event.preventDefault();
+        Video.href = $open.getAttribute('href');
+        let array = Video.href.split('/');
+        Video.id = array[array.length-1];
+        Video.openModal();
+      } else if($close!==null) {
+        Video.closeModal();
+      }
+    })
+  },
+  setVideoSize: function(callback) {
+    let style = window.getComputedStyle(Video.$modal),
+        pt = parseFloat(style.getPropertyValue("padding-top")),
+        pb = parseFloat(style.getPropertyValue("padding-bottom")),
+        pl = parseFloat(style.getPropertyValue("padding-left")),
+        pr = parseFloat(style.getPropertyValue("padding-right")),
+        h = Video.$modal.getBoundingClientRect().height - pt - pb,
+        w = Video.$modal.getBoundingClientRect().width - pl - pr;
+
+    if(w/h > 16/9) {
+      Video.$container.style.height = `${h}px`;
+      Video.$container.style.width = `${h*1.77}px`;
+    } else {
+      Video.$container.style.height = `${w*0.5625}px`;
+      Video.$container.style.width = `${w}px`;
+    }
+
+    typeof callback === 'function' && callback()
+  },
+  openModal: function() {
+    Video.initialized = true;
+    //create modal
+    $wrapper.insertAdjacentHTML('beforeEnd', `<div class="modal video-modal"><a href="javascript:void(0);" data-video-close data-cursor="white" class="modal__overlay"></a><div class="modal-close" href="javascript:void(0);"><span></span><span></span></div><div class="modal__video"><div id="video-player"></div></div></div>`);
+    Video.$modal = document.querySelector('.video-modal');
+    Video.$close = Video.$modal.querySelector('[data-video-close]');
+    Video.$container = Video.$modal.querySelector('.modal__video');
+
+    window.addEventListener('resize', Video.setVideoSize);
+    Video.setVideoSize(()=>{
+      Video.animation = gsap.timeline()
+        .fromTo(Video.$modal, {autoAlpha:0}, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+        .fromTo(Video.$container, {yPercent:20}, {duration:1, yPercent:0, ease:'power2.out'}, '-=0.5')
+    })
+
+    if(!youtubeApi.state) {
+      youtubeApi.state = true;
+      let tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.insertAdjacentElement('beforeEnd', tag);
+      window.onYouTubeIframeAPIReady=()=>{
+        this.initPlayer();
+      };
+    } else {
+      this.initPlayer();
+    }
+  },
+  closeModal: function() {
+    Video.initialized = false;
+    window.removeEventListener('resize', Video.setVideoSize);
+    Video.animation = gsap.timeline()
+      .to(Video.$modal, {duration:0.5, autoAlpha:0, ease:'power2.in'})
+      .to(Video.$container, {duration:0.5, yPercent:20, ease:'power2.in'}, '-=0.5')
+    Video.animation.eventCallback('onComplete',()=>{
+      Video.$modal.remove();
+    })
+  },
+  initPlayer: function() {
+    Video.player = new YT.Player('video-player', {
+      videoId: Video.id,
+      events: {
+        'onReady': function(event) {
+          event.target.playVideo();
+          document.querySelector('#video-player').classList.add('ready');
+        }
+      }
+    });
+  }
+}
+
+function scrollItemsEvents() {
+  let check = ()=>{
+    let $items = document.querySelectorAll('.js-scroll-animated'),
+        position = window.pageYOffset;
+
+    $items.forEach(($item)=>{
+      let top = $item.getBoundingClientRect().y + position - window.innerHeight;
+      if(position>top && !$item.classList.contains('animated')) {
+        $item.classList.add('animated');
+      }
+    })
+    
+  }
+  check();
+  window.addEventListener('scroll', ()=>{
+    check();
+  })
 }
 
 window.bgVideo = {
@@ -286,215 +592,43 @@ window.bgVideo = {
   }
 }
 
-const Video = {
-  init: function() {
-    this.$openBtn = '[data-video]';
-    this.$closeBtn = '[data-video-close]';
-    this.initialized = false;
-    //triggers click
-    document.addEventListener('click', function(event){
-      let $open = event.target.closest(Video.$openBtn),
-          $close = event.target.closest(Video.$closeBtn);
-      if($open!==null) {
-        event.preventDefault();
-        Video.href = $open.getAttribute('href');
-        let array = Video.href.split('/');
-        Video.id = array[array.length-1];
-        Video.openModal();
-      } else if($close!==null) {
-        Video.closeModal();
-      }
-    })
-  },
-  setVideoSize: function(callback) {
-    let style = window.getComputedStyle(Video.$modal),
-        pt = parseFloat(style.getPropertyValue("padding-top")),
-        pb = parseFloat(style.getPropertyValue("padding-bottom")),
-        pl = parseFloat(style.getPropertyValue("padding-left")),
-        pr = parseFloat(style.getPropertyValue("padding-right")),
-        h = Video.$modal.getBoundingClientRect().height - pt - pb,
-        w = Video.$modal.getBoundingClientRect().width - pl - pr;
 
-    if(w/h > 16/9) {
-      Video.$container.style.height = `${h}px`;
-      Video.$container.style.width = `${h*1.77}px`;
-    } else {
-      Video.$container.style.height = `${w*0.5625}px`;
-      Video.$container.style.width = `${w}px`;
-    }
-
-    typeof callback === 'function' && callback()
-  },
-  openModal: function() {
-    Video.initialized = true;
-    //create modal
-    $wrapper.insertAdjacentHTML('beforeEnd', `<div class="modal video-modal"><a href="javascript:void(0);" data-video-close data-cursor="white" class="modal__overlay"></a><div class="modal-close" href="javascript:void(0);"><span></span><span></span></div><div class="modal__video"><div id="video-player"></div></div></div>`);
-    Video.$modal = document.querySelector('.video-modal');
-    Video.$close = Video.$modal.querySelector('[data-video-close]');
-    Video.$container = Video.$modal.querySelector('.modal__video');
-
-    window.addEventListener('resize', Video.setVideoSize);
-    Video.setVideoSize(()=>{
-      Video.animation = gsap.timeline()
-        .fromTo(Video.$modal, {autoAlpha:0}, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-        .fromTo(Video.$container, {yPercent:20}, {duration:1, yPercent:0, ease:'power2.out'}, '-=0.5')
-    })
-
-    if(!youtubeApi.state) {
-      youtubeApi.state = true;
-      let tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.insertAdjacentElement('beforeEnd', tag);
-      window.onYouTubeIframeAPIReady=()=>{
-        this.initPlayer();
-      };
-    } else {
-      this.initPlayer();
-    }
-  },
-  closeModal: function() {
-    Video.initialized = false;
-    window.removeEventListener('resize', Video.setVideoSize);
-    Video.animation = gsap.timeline()
-      .to(Video.$modal, {duration:0.5, autoAlpha:0, ease:'power2.in'})
-      .to(Video.$container, {duration:0.5, yPercent:20, ease:'power2.in'}, '-=0.5')
-    Video.animation.eventCallback('onComplete',()=>{
-      Video.$modal.remove();
-    })
-  },
-  initPlayer: function() {
-    Video.player = new YT.Player('video-player', {
-      videoId: Video.id,
-      events: {
-        'onReady': function(event) {
-          event.target.playVideo();
-          document.querySelector('#video-player').classList.add('ready');
-        }
-      }
-    });
+function pageLoaded() {
+  //отключить прелоадер если 0
+  if(preloader_time_limit==0) {
+    clearInterval(preloader_interval);
+    $preloader.remove();
+    app.init();
+    gsap.set($wrapper, {autoAlpha:1})
   }
-}
 
-const Home = {
-  init: function() {
-    let $homeitems = document.querySelectorAll('.home__item'),
-        $line = document.querySelectorAll('.home__vertical-line'),
-        $dots = document.querySelectorAll('.home-dots__link');
-    this.dots();
-
-    gsap.timeline()
-      .fromTo($homeitems, {y:50}, {y:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}})
-      .fromTo($homeitems, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
-      .fromTo($dots, {x:20}, {x:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}}, '-=2')
-      .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
-      .fromTo($line, {yPercent:-100}, {yPercent:0, duration:2, ease:'power2.inOut'}, '-=1.5')
-
-  },
-  dots: function() {
-    let $buttons = document.querySelectorAll('.home-dots__link'),
-        $sections = document.querySelectorAll('[data-scroll-block]'),
-        $dark_sections = document.querySelectorAll('[data-dark]'),
-        inscroll = false,
-        animation,
-        $oldLink = false;
-
-    //click
-    $buttons.forEach(($this)=>{
-      $this.addEventListener('click', (event)=>{
-        event.preventDefault();
-        let $block = document.querySelector(`${$this.getAttribute('href')}`);
-        if($block) {
-          inscroll = true;
-          if($oldLink) $oldLink.classList.remove('active');
-          $this.classList.add('active');
-          $oldLink = $this;
-          if(animation!==undefined) {
-            animation.pause();
-          }
-          animation = gsap.to(window, {duration: 1, scrollTo:{y:$block}, ease:'power2.inOut', onComplete: function() {
-            inscroll = false;
-          }});
-        }
-      })
-    })
-
-    let check = ()=> {
-      let position = window.pageYOffset;
-
-      if(!inscroll) {
-        $sections.forEach(($section)=>{
-          let top = $section.getBoundingClientRect().y + position,
-              bottom = top + $section.getBoundingClientRect().height;
-
-              
-          if (position >= top && position <= bottom) {
-
-            $buttons.forEach(($button)=>{
-              let attr = $button.getAttribute('href'),
-                  id = '#'+$section.getAttribute('id');
-              if(attr==id && $button!==$oldLink) {
-                if($oldLink) $oldLink.classList.remove('active');
-                $button.classList.add('active');
-                $oldLink = $button;
-              }
-            })
-          }
-        })
-      }
-
-      let $dots = document.querySelectorAll('.home-dots__link');
-      $dots.forEach(($dot, index)=>{
-        let y = $dot.getBoundingClientRect().top, 
-            h = $dot.getBoundingClientRect().height/2,
-            pos = y+h;
-
-        let flag = false;
-
-        for(let index = 0; index<$dark_sections.length; index++) {
-          let h = $dark_sections[index].getBoundingClientRect().height,
-              top = $dark_sections[index].getBoundingClientRect().y,
-              bottom = $dark_sections[index].getBoundingClientRect().y + h;
-          
-          if(pos>top && pos<bottom) {
-            flag = true;
-          }
-        }
-
-        if(!$dot.classList.contains('reversed') && flag) {
-          $dot.classList.add('reversed');
-        } else if(!flag) {
-          $dot.classList.remove('reversed');
-        }
-        
-      })
-
-    }
-
-    check();
-    window.addEventListener('scroll', ()=>{
-      check();
-    })
-
+  //если загрузились раньше
+  else if(loading_duration < preloader_time_limit) {
+    setTimeout(()=>{
+      clearInterval(preloader_interval);
+      finish();
+    }, (preloader_time_limit - loading_duration) * 1000)
   }
-}
-
-function scrollItemsEvents() {
-  let check = ()=>{
-    let $items = document.querySelectorAll('.js-scroll-animated'),
-        position = window.pageYOffset;
-
-    $items.forEach(($item)=>{
-      let top = $item.getBoundingClientRect().y + position - window.innerHeight;
-      if(position>top && !$item.classList.contains('animated')) {
-        $item.classList.add('animated');
-      }
+  //если загрузились позже 
+  else {
+    setTimeout(()=>{
+      clearInterval(preloader_interval);
+      finish();
     })
-    
   }
-  check();
-  window.addEventListener('scroll', ()=>{
-    check();
-  })
+
+  let finish = ()=>{
+    $preloader_icon.style.transition = 'none';
+    $preloader_mask.style.transition = 'none';
+    gsap.timeline({onComplete:()=>{
+      $preloader.remove();
+      app.init();
+      gsap.to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+    }})
+      .to($preloader_mask, {attr:{y:0}, duration:1, ease:'power2.inOut'}) //1
+      .to($preloader_icon, {scale:0.9, duration:1, ease:'power2.inOut'}, '-=1')
+      .to($preloader, {autoAlpha:0, duration:1, ease:'power2.inOut'}, '-=1')
+  }
 }
 
 function helper() {

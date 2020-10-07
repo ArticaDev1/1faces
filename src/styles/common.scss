@@ -2,8 +2,86 @@
 @import "./components/variables";
 //normalize.css
 @import "../../node_modules/normalize.css/normalize";
+
 //bootstrap-grid
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 @import "../../node_modules/bootstrap/scss/bootstrap-grid";
+//поддержка 5 колонок
+.col-20pc {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+.col-80pc {
+  flex: 0 0 80%;
+  max-width: 80%;
+}
+@include media-breakpoint-up(sm) {
+  .col-sm-20pc {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-sm-80pc {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+@include media-breakpoint-up(md) {
+  .col-md-20pc {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-md-80pc {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .col-lg-20pc {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-lg-80pc {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+@include media-breakpoint-up(xl) {
+  .col-xl-20pc {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-xl-80pc {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+@include media-breakpoint-up(xxl) {
+  .col-xl-20pc {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-xl-80pc {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .row {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  .row > * {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
 
 /*========== Form ==========*/
 @import "./components/helper";
