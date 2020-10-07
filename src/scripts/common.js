@@ -26,7 +26,7 @@ const brakepoints = {
   xxl: 1440
 }
 const $wrapper = document.querySelector('.wrapper');
-const preloader_time_limit = 0;
+const preloader_time_limit = 1;
 const youtubeApi = {
   state: false
 }
