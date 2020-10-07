@@ -27,24 +27,30 @@ block content
       span Контакты
       
   section.section.section_mb2.desktop-background-wrapper(data-dark)
-    .desktop-background-wrapper__background.parralax-bg(style='background-image:url("./img/iStock-613111906.jpg");')
+    .desktop-background-wrapper__background(style='background-image:url("./img/iStock-613111906.jpg");')
     
     section.section.home#home(data-scroll-block)
+      .home__mobile-background(style='background-image:url("./img/mobile-home-bg.jpg");')
       span.home__vertical-line
       .home-background-video
         .home-background-video__wrap
           #bg-player.home-background-video__element
       .container.home__container
-        .home-logo.home__item
-          svg(viewBox='0 0 340 340').home-logo__circle
-            path(d='M335,170c0,91.1-73.9,165-165,165C78.9,335,5,261.1,5,170c0-42.7,16.2-81.6,42.9-110.9C78,25.8,121.6,5,170,5C261.1,5,335,78.9,335,170z')
+        a(href="https://youtu.be/OCYLrB_KrSM" data-video).home-mobile-play.home__item
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#play')
+        .home__items
+          .home-logo.home__item
+            svg(viewBox='0 0 340 340').home-logo__circle
+              path(d='M335,170c0,91.1-73.9,165-165,165C78.9,335,5,261.1,5,170c0-42.7,16.2-81.6,42.9-110.9C78,25.8,121.6,5,170,5C261.1,5,335,78.9,335,170z')
 
-          img(src="./img/logos/logo.svg", alt="logo").home-logo__image
-          h2.home-logo__title Первые лица
-          span.home-logo__text Организация мероприятий
-        h1.home__title.home__item Организация и проведение<br> мероприятий
-        p.home__text.home__item Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
-        a(href="javascript:void(0);").button.button_style-1.home__button.home__item Свяжитесь с нами
+            img(src="./img/logos/logo.svg", alt="logo").home-logo__image
+            h2.home-logo__title Первые лица
+            span.home-logo__text Организация мероприятий
+          h1.home__title.home__item Организация и проведение<br> мероприятий
+          p.home__text.home__text_desktop.home__item Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
+          p.home__text.home__text_mobile.home__item Концепт мероприятия<br> под ключ за 24 часа!
+          a(href="javascript:void(0);").button.button_style-1.home__button.home__item Свяжитесь с нами
 
     section.section.about#about(data-scroll-block)
       .container
@@ -119,9 +125,9 @@ block content
   section.section.section_mb2.documents
     .container
       h2.section__title Отзывы и благодарности
-      .row  
+      .row.grid
         mixin doc(href)
-          .documents-item.col-xl-20pc
+          .documents-item.col-xl-20pc.col-lg-3.col-md-4.col-6.grid__block
             .documents-item__image.jsTouchHover.image.image_cover
               img(data-src=href, alt="document").lazyload
         +doc('./img/document1.png')

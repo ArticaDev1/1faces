@@ -304,47 +304,70 @@ const Home = {
   },
   services: function() {
     let $blocks = document.querySelectorAll('.services-block'),
-        animations = [];
+        animations = [],
+        oldIndex = false;
 
     $blocks.forEach(($block, index)=>{
       let $button = $block.querySelector('.services-block__container'),
           $front =  $block.querySelector('.services-block__front'),
           $back =   $block.querySelector('.services-block__back'),
-          $content = $block.querySelector('.services-block__back-content');
+          $content = $block.querySelector('.services-block__back-content'),
+          $close = $block.querySelector('.services-block__close');
 
       let w1 = $button.getBoundingClientRect().width,
           w2 = $back.getBoundingClientRect().width,
           scale = w1/w2;
 
       animations[index] = gsap.timeline({paused:true})
-        .to($front, {autoAlpha:0, duration:0.5, ease:'power2.inOut'})
-        .set($back, {autoAlpha:1, 
+        .set($back, {scale:scale})
+        .to($front, {autoAlpha:0, duration:0.33, ease:'power2.inOut',
           onComplete:()=>{
-            $block.classList.add('active')
-          }
+            $block.classList.add('active');
+          }})
+        .to($back, {scale:1, duration:0.66, ease:'power2.inOut'
         })
-        .fromTo($back, {scale:1}, {scale:scale, duration:0})
-        .fromTo($back, {scale:scale}, {scale:1, duration:1, ease:'power2.out',
+        .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:0.66, ease:'power2.inOut',
           onReverseComplete:()=>{
-            $block.classList.remove('active')
+            $block.classList.remove('active');
           }
-        })
-        .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'}, '-=0.5')
+        }, '-=0.66')
 
-      $button.addEventListener('click',      (event)=>{check(event)})
+
       $button.addEventListener('mouseenter', (event)=>{check(event)})
       $button.addEventListener('mouseleave', (event)=>{check(event)})
-      
       let check = (event)=> {
-        
-        if((TouchHoverEvents.touched && event.type=='click') || (!TouchHoverEvents.touched && event.type!=='click')) {
-          if(event.type=='click' || event.type=='mouseenter') {
-            animations[index].play()
+        if(!TouchHoverEvents.touched) {
+          if(event.type=='mouseenter') {
+            console.log('play')
+            animations[index].timeScale(1).play();
+            oldIndex = index;
           } else {
-            animations[index].reverse()
+            animations[index].timeScale(1.5).reverse();
+            oldIndex = false;
           }
         } 
       }
+
+      $front.addEventListener('click', ()=>{
+        if(TouchHoverEvents.touched) {
+          if(oldIndex!==false) {
+            animations[oldIndex].reverse();
+            animations[index].eventCallback('onReverseComplete', ()=>{
+              gsap.set($close, {autoAlpha:0})
+            })
+          }
+          gsap.set($close, {autoAlpha:1})
+          animations[index].play();
+          oldIndex = index;
+        }
+      })
+      $close.addEventListener('click', ()=>{
+        animations[index].reverse();
+        animations[index].eventCallback('onReverseComplete', ()=>{
+          gsap.set($close, {autoAlpha:0})
+        })
+        oldIndex = false;
+      })
 
     })
 

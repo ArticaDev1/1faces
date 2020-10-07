@@ -25,6 +25,12 @@
       background-color: rgba(0, 0, 0, 0.9);
     }
   }
+  @include media-breakpoint-down(md) {
+    border-radius: 0 0 24px 24px;
+    &__background {
+      display: none;
+    }
+  }
 }
 
 .home {
@@ -34,6 +40,12 @@
   color: #fff;
   overflow: hidden;
   padding: 0;
+  &-mobile-play {
+    display: none;
+  }
+  &__mobile-background {
+    display: none;
+  }
   &-background-video {
     z-index: 1;
     position: absolute;
@@ -82,13 +94,20 @@
     height: calc(100vh + 1px);
     min-height: 820px;
     max-height: 1100px;
-    text-align: center;
     position: relative;
     z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__items {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    flex: 0 0 auto;
   }
   &-logo {
     width: 310px;
@@ -161,6 +180,9 @@
     font-size: 1.125rem;
     font-weight: 700;
     margin: 0;
+    &_mobile {
+      display: none;
+    }
   }
   &__button {
     width: 286px;
@@ -202,8 +224,111 @@
       }
     }
   }
-  @include media-breakpoint-down(lg) {
-    
+  @include media-breakpoint-down(md) {
+    border-bottom: none;
+    &__container {
+      padding-top: 80px;
+      padding-bottom: 60px;
+      min-height: 660px;
+    }
+    &-logo, 
+    &-background-video,
+    &__vertical-line {
+      display: none;
+    }
+    &-mobile-play {
+      display: block;
+      width: 200px;
+      height: 200px;
+      border-radius: 200px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      margin-bottom: 45px;
+      display: flex;
+      position: relative;
+      margin: auto;
+      &.touch, &.hover {
+        &:before {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 184px;
+        height: 184px;
+        border-radius: 184px;
+        top: 7px;
+        left: 7px;
+        transition: background-color $trs1;
+        border: inherit;
+      }
+      .icon {
+        width: 45px;
+        height: 45px;
+        margin: auto;
+        color: #fff;
+        transform: translateX(4px);
+      }
+    }
+    &__button {
+      width: 260px;
+      margin-top: 45px;
+    }
+    &__text {
+      &_desktop {
+        display: none;
+      }
+      &_mobile {
+        display: block;
+      }
+    }
+    &__mobile-background {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+      border-radius: 0 0 24px 24px;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(180deg, #343434 47.4%, rgba(52, 52, 52, 0) 124.85%);
+        opacity: 0.65;
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__container {
+      padding-bottom: 40px;
+      min-height: 620px;
+    }
+    &__button {
+      width: 100%;
+      max-width: calc(100% - 48px);
+    }
+    &-mobile-play {
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+      &:before {
+        width: 134px;
+        height: 134px;
+        border-radius: 134px;
+      }
+      .icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 }
 
@@ -293,6 +418,21 @@
         transform: scale(1.25);
       }
     }
+  }
+  @include media-breakpoint-down(lg) {
+    right: 24px;
+    &__link {
+      width: 24px;
+      height: 24px;
+      span {
+        line-height: 24px;
+        font-size: 0.875rem;
+        padding-right: 10px;
+      }
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    display: none;
   }
 }
 
@@ -416,6 +556,16 @@
       }
     }
   }
+  @include media-breakpoint-down(lg) {
+    &__text-image {
+      &_1 {
+        left: 30px;
+      }
+      &_2 {
+        right: 30px;
+      }
+    }
+  }
 }
 
 .video-section {
@@ -453,6 +603,20 @@
       }
       img {
         transform: scale(1.01) rotate(0.15deg);
+      }
+    }
+
+    
+  }
+  @include media-breakpoint-down(xl) {
+    &__video {
+      &-text {
+        line-height: 60px;
+        .icon {
+          width: 24px;
+          height: 24px;
+          margin-left: 20px;
+        }
       }
     }
   }
@@ -494,6 +658,13 @@
   }
   @include media-breakpoint-down(xxl) {
     padding: 160px 0;
+  }
+  @include media-breakpoint-down(lg) {
+    &-block {
+      &__text {
+        font-size: 1.25rem;
+      }
+    }
   }
 }
 
@@ -646,6 +817,17 @@
       padding-top: 20px;
     }
   }
+  @include media-breakpoint-down(lg) {
+    &-block {
+      &__images {
+        height: auto;
+      }
+      &__content {
+        margin-bottom: 80px;
+        height: auto;
+      }
+    }
+  }
 }
 
 .services {
@@ -689,10 +871,12 @@
 
 .services-block {
   position: relative;
+  z-index: 1;
   &.active {
-    z-index: 3;
+    z-index: 2;
     .services-block__back {
-      box-shadow: 0px 19px 50px rgba(28, 27, 27, 0.65);
+      opacity: 1;
+      visibility: visible;
     }
   }
   &__container {
@@ -750,6 +934,7 @@
       justify-content: space-between;
       align-items: flex-start;
       padding: 40px;
+      box-shadow: 0px 19px 50px rgba(28, 27, 27, 0.65);
     }
     &-title {
       margin: 0 0 20px 0;
@@ -764,10 +949,46 @@
       }
     }
   }
+  &__close {
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    visibility: hidden;
+    &::before, &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 1px;
+      top: 50%;
+      left: 50%;
+      background-color: #fff;
+      opacity: 0.5;
+      transition: opacity $trs1;
+    }
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    &::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &.touch, &.hover {
+      &::before, &:after {
+        opacity: 1;
+      }
+    }
+  }
   @include media-breakpoint-down(xxl) {
     &__back {
-      width: 400px;
-      height: 400px;
+      width: 380px;
+      height: 380px;
+      &-content {
+        padding: 30px;
+      }
       &-text {
         font-size: 1.125rem;
       }
