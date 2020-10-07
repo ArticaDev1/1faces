@@ -130,7 +130,6 @@ const Home = {
       .fromTo($line, {yPercent:-100}, {yPercent:0, duration:2, ease:'power2.inOut'}, '-=1.5')
 
 
-
     this.dots();
     this.organization();
     this.services();
@@ -243,7 +242,7 @@ const Home = {
         index = 0,
         slides_count = $items.length,
         index_old,
-        interval = 30, //seconds
+        interval = 10, //seconds
         animations = [];
 
     //autoslide
