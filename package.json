@@ -38,7 +38,9 @@
 		"current-device": "^0.10.1",
 		"device": "^0.3.11",
 		"gsap": "^3.5.1",
+		"inputmask": "^5.0.5",
 		"lazysizes": "^5.2.2",
-		"normalize.css": "^8.0.1"
+		"normalize.css": "^8.0.1",
+		"validate.js": "^0.13.1"
 	}
 }

@@ -13,6 +13,9 @@ import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollToPlugin);
 import device from "current-device";
+//form
+import Inputmask from "inputmask";
+let validate = require("validate.js");
 
 window.onload = function(){
   pageLoaded();
@@ -26,14 +29,19 @@ const brakepoints = {
   xxl: 1440
 }
 const $wrapper = document.querySelector('.wrapper');
+const $header = document.querySelector('.header');
+
+const speed = 1;
 const preloader_time_limit = 1;
-const youtubeApi = {state: false}
+const youtubeApi = {state: false};
+
 
 const app = {
   init: function() {
     //home
     Home.init();
 
+    inputs();
     TouchHoverEvents.init();
     Video.init();
     scrollItemsEvents();
@@ -132,6 +140,7 @@ const Home = {
 
     this.dots();
     this.organization();
+    this.team();
     this.services();
     if(window.innerWidth>=brakepoints.md) {
       bgVideo.init();
@@ -268,12 +277,13 @@ const Home = {
           $text = $item.querySelector('.organization-block__item-text'),
           $title = $titles[index],
           $image = $images[index],
-          h = $text.getBoundingClientRect().height;
+          h = $text.getBoundingClientRect().height,
+          w_var = window.innerWidth<brakepoints.sm ? -12.5 : 0;
 
       animations[index] = gsap.timeline({paused:true})
         .fromTo($container, {css:{height:0}}, {css:{height:h}, duration:1, ease:'power2.inOut'})
         .fromTo($text, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
-        .fromTo($title, {scale:0.75}, {scale:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo($title, {scale:0.75, xPercent:w_var}, {xPercent:0, scale:1, duration:1, ease:'power2.inOut'}, '-=1')
         //image
         .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
         .fromTo($image, {scale:0.5}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
@@ -316,15 +326,37 @@ const Home = {
 
       let w1 = $button.getBoundingClientRect().width,
           w2 = $back.getBoundingClientRect().width,
-          scale = w1/w2;
+          scale = w1/w2,
+          offsetX = -50,
+          offsetY = -50,
+          offset = -50;
+
+      if(window.innerWidth<brakepoints.md) {
+        offset = 0;
+        if(index==0) {
+          offsetX = -((1-scale)/2)*100;
+          offsetY = -((1-scale)/2)*100;
+        } else if(index==1) {
+          offsetX = ((1-scale)/2)*100;
+          offsetY = -((1-scale)/2)*100;
+        } else if(index==2) {
+          offsetX = -((1-scale)/2)*100;
+          offsetY = ((1-scale)/2)*100;
+        } else {
+          offsetX = ((1-scale)/2)*100;
+          offsetY = ((1-scale)/2)*100;
+        }
+        
+      }
+      
 
       animations[index] = gsap.timeline({paused:true})
-        .set($back, {scale:scale})
+        .set($back, {scale:scale, yPercent:offsetY, xPercent:offsetX})
         .to($front, {autoAlpha:0, duration:0.33, ease:'power2.inOut',
           onComplete:()=>{
             $block.classList.add('active');
           }})
-        .to($back, {scale:1, duration:0.66, ease:'power2.inOut'
+        .to($back, {scale:1, yPercent:offset, xPercent:offset, duration:0.66, ease:'power2.inOut'
         })
         .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:0.66, ease:'power2.inOut',
           onReverseComplete:()=>{
@@ -371,12 +403,118 @@ const Home = {
 
     })
 
+  },
+  team: function() {
+    let $images = document.querySelectorAll('.team-slider__image'),
+        $items = document.querySelectorAll('.team-slider__info'),
+        $numbers = document.querySelectorAll('.team-slider__button-index'),
+        $loader = document.querySelector('.team-slider__loader-item'),
+        $next = document.querySelector('.team-slider__button'),
+        index = 0,
+        slides_count = $images.length,
+        index_old,
+        interval = 10, //seconds
+        animations = [];
+
+
+    //autoslide
+    let intervalAnimation = gsap.timeline({paused:true, onComplete:()=>{
+      index++;
+      if(index>slides_count-1) {
+        index = 0;
+      }
+      check();
+    }})
+      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
+      .fromTo($loader, {scaleX:0, xPercent:-50}, {duration:interval, scaleX:1, xPercent:0, ease:'linear'}, '-=0.5')
+
+    let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
+          intervalAnimation.duration(interval-0.5).play(0);
+        }});
+
+    $images.forEach(($image, index)=>{
+      let $item = $items[index],
+          $number = $numbers[index];
+      animations[index] = gsap.timeline({paused:true})
+        .fromTo([$image, $item, $number], {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+        .fromTo($image, {scale:1.25}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
+    })
+
+    $next.addEventListener('click', ()=>{
+      index++;
+      if(index>slides_count-1) {
+        index = 0;
+      }
+      check();
+    })
+
+    let check = ()=> {
+      if(index_old!==undefined) {
+        animations[index_old].reverse();
+        hideAnimation.play(0);
+      } else {
+        intervalAnimation.play(0);
+      }
+      animations[index].play(0);
+      index_old = index;
+    }
+    check();
+
+    
+
+
   }
 }
 
 
+const Header = {
+  init: function() {
+    this.isVisible = true;
+    this.animation = gsap.timeline({paused:true})
+      .to($header, {yPercent:-100, duration:speed/2, ease:'power2.in'})
+    this.y = window.pageYOffset;
 
+    window.addEventListener('scroll', ()=>{
+      this.check();
+    })
 
+  },
+  check: function() {
+    let y = window.pageYOffset,
+        h = $header.getBoundingClientRect().height;
+    
+    if(y>0 && !this.isBackground) {
+      this.isBackground = true;
+      $header.classList.add('header_bg');
+    } else if(y==0 && this.isBackground) {
+      this.isBackground = false;
+      $header.classList.remove('header_bg');
+    }
+
+    //bottom
+    if(y>this.y && y>window.innerHeight) {
+      this.hide();
+    } 
+    //top
+    else {
+      this.show();
+    }
+    this.y = y;
+
+  },
+  hide: function() {
+    if(this.isVisible) {
+      this.isVisible=false;
+      this.animation.play();
+    }
+  },
+  show: function() {
+    if(!this.isVisible) {
+      this.isVisible=true;
+      this.animation.reverse();
+    }
+  }
+}
 
 const Video = {
   init: function() {
@@ -668,4 +806,31 @@ function helper() {
     }
   })
 
+}
+
+function inputs() {
+  let mask = Inputmask({
+      mask: "+7 999 999-9999",
+      showMaskOnHover: false,
+      clearIncomplete: false
+    }).mask('[data-mask]');
+
+  let $inputs = document.querySelectorAll('input, textarea');
+
+  $inputs.forEach(($input)=>{
+
+    $input.addEventListener('focus', ()=>{
+      $input.parentNode.classList.add('focused');
+    })
+
+    $input.addEventListener('blur', ()=>{
+      let value = $input.value;
+      if(validate.single(value, {presence: {allowEmpty: false}})!==undefined) {
+        $input.value = '';
+        $input.parentNode.classList.remove('focused');
+      }
+    })
+
+  })
+  
 }

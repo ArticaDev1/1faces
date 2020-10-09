@@ -1,5 +1,5 @@
 .footer {
-  height: 100vh;
+  min-height: calc(100vh + 2px);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -50,9 +50,9 @@
       }
     }
   }
-  @include media-breakpoint-down(xxl) {
-    &__content {
-      padding: 50px 0;
+  @include media-breakpoint-down(sm) {
+    &__container {
+      flex-direction: column;
     }
   }
 }
@@ -80,6 +80,18 @@
     &.touch, &.hover {
       background-color: #fff;
       color: #000;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    margin-top: 40px;
+    &__list {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    &__item {
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
     }
   }
 }

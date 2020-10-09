@@ -29,4 +29,7 @@
     <path d="M23.4 13.8c-.4-.2-.4-.8 0-.9l6.8-2.5 6.6 2.5c.4.2.4.7 0 .9l-6.6 3.3-6.8-3.3zm-9 7.6v14.7c.8 1.8 5 5.5 15.8 5.5s15.4-3.7 16.3-5.5V21.4"></path>
     <path d="M56.6 15.9v13.8" stroke-linecap="round"></path>
   </symbol>
+  <symbol viewBox="0 0 54 8" stroke='currentColor' xmlns="http://www.w3.org/2000/svg" id="arrow-right">
+    <path d="M53.353 4.354a.5.5 0 0 0 0-.708L50.172.464a.5.5 0 1 0-.707.708L52.293 4l-2.828 2.828a.5.5 0 1 0 .707.708l3.181-3.182zM0 4.5h53v-1H0v1z"></path>
+  </symbol>
 </svg>

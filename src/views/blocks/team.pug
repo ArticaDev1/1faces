@@ -1,0 +1,62 @@
+section.section.team#team(data-scroll-block)
+  .container
+    .row
+      .team-slider.col-xl-9
+        .team-slider__container
+          .team-slider__slides
+            mixin image(href)
+              .team-slider__image.image.image_cover
+                img(src=href, alt="photo").lazyload
+            +image('./img/Сластенко Виктор.jpg')
+            +image('./img/Федунов Денис.jpg')
+            +image('./img/Овсянникова Анжелика.jpg')
+            +image('./img/Козявин Александр.jpg')
+            +image('./img/Гончарук Сергей.jpg')
+          .team-slider__nav
+            mixin text(name, position)
+              .team-slider__info
+                h4.team-slider__info-name=name
+                span.team-slider__info-position=position
+            +text('Виктор Сластенко', 'Руководитель компании')
+            +text('Денис Федунов', 'Управляющий партнер')
+            +text('Анжелика Овсянникова', 'Управляющий партнер') 
+            +text('Александр Козявин', 'Руководитель креативного отдела')
+            +text('Сергей Гончарук', 'Руководитель отдела реализации')
+
+            .team-slider__loader
+              .team-slider__loader-item
+
+            a(href="javascript:void(0);").team-slider__button
+              span.team-slider__button-index 01
+              span.team-slider__button-index 02
+              span.team-slider__button-index 03
+              span.team-slider__button-index 04
+              span.team-slider__button-index 05
+
+              svg.icon
+                use(xlink:href='./img/icons/icons-sprite.svg#arrow-right')
+
+      .form-block.col-auto
+        .form-block__container
+          .form-block__head
+            h4.form-block__title Концепт вашего<br> мероприятия за 24 часа!
+            p.form-block__text Напишите несколько слов о ваших задачах, оставьте свои контакты, и мы бесплатно предложим варианты решений уже через сутки.
+          form(action="#").form-block__form.js-validation
+            .row.form-block__row
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="phone").input__label Введите телефон
+                  input(type="text" name='phone' id='phone' data-mask).input__element
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="email").input__label Введите e-mail
+                  input(type="text" name='email' id='email').input__element
+              .form-block__item.col-12
+                .input.form-block__input
+                  label(for="text").input__label Оставьте комментарий
+                  textarea(type="text" name='text' id='text').input__element
+              .form-block__item.col-sm-6
+                a(href="javascript:void(0);").button.button_style-1.form-block__button Отправить
+
+          p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
+                

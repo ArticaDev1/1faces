@@ -4,6 +4,7 @@ block variables
 block title
   title #{title} - Организация мероприятий
 block content 
+  .background.lazyload.main-bg(data-src='./img/background2.png')
 
 
   .home-dots
@@ -15,7 +16,7 @@ block content
       span за 90 миунт о 1 лицах
     a(href="#organization").home-dots__link
       span Организация
-    //a(href="#team").home-dots__link
+    a(href="#team").home-dots__link
       span Команда
     a(href="#services").home-dots__link
       span Услуги
@@ -36,7 +37,7 @@ block content
         .home-background-video__wrap
           #bg-player.home-background-video__element
       .container.home__container
-        a(href="https://youtu.be/OCYLrB_KrSM" data-video).home-mobile-play.home__item
+        a(href="https://youtu.be/0zxNqsKiQxE" data-video).home-mobile-play.home__item
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#play')
         .home__items
@@ -50,9 +51,9 @@ block content
           h1.home__title.home__item Организация и проведение<br> мероприятий
           p.home__text.home__text_desktop.home__item Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
           p.home__text.home__text_mobile.home__item Концепт мероприятия<br> под ключ за 24 часа!
-          a(href="javascript:void(0);").button.button_style-1.home__button.home__item Свяжитесь с нами
+          a(href="mailto:info@1faces.com").button.button_style-1.home__button.home__item Свяжитесь с нами
 
-    section.section.about#about(data-scroll-block)
+    section.section.section_pt.about#about(data-scroll-block)
       .container
         svg(viewBox='0 0 678 106' fill='currentColor').about__text-image.about__text-image_1.js-scroll-animated
           path(d='M0.698131 89.7408C-0.139626 89.0686 -0.223402 88.1863 0.446804 87.0939L6.35299 78.5232C6.93942 77.4308 7.77718 77.2628 8.86626 78.019C14.9819 82.4725 21.9353 84.6992 29.7264 84.6992C35.842 84.6992 40.5754 83.1027 43.9264 79.9096C47.3612 76.6326 49.0786 72.1371 49.0786 66.4233V59.6171H20.0503C18.7937 59.6171 18.1654 59.0289 18.1654 57.8526V47.5172C18.1654 46.3409 18.7937 45.7527 20.0503 45.7527H49.0786V38.1903C49.0786 32.5604 47.3612 28.149 43.9264 24.956C40.5754 21.763 35.8839 20.1665 29.8521 20.1665C22.8149 20.1665 16.5736 22.0571 11.1282 25.8383C9.95534 26.5105 9.0757 26.3425 8.48927 25.3341L2.58308 16.7634C1.91288 15.7551 2.03854 14.9148 2.96007 14.2426C11.0025 8.61276 19.9665 5.79786 29.8521 5.79786C39.7376 5.79786 47.9476 8.57075 54.4821 14.1165C61.0166 19.5783 64.2839 27.5608 64.2839 38.0642V66.8014C64.2839 77.3888 61.0166 85.4134 54.4821 90.8752C47.9476 96.3369 39.6538 99.0678 29.6007 99.0678C18.291 99.0678 8.65682 95.9588 0.698131 89.7408Z')
@@ -83,17 +84,20 @@ block content
             h2.about__title ВЫ получаете
             p.about__text Команду с 10-ти летним опытом организации мероприятий, прозрачность на всех этапах подготовки, оптимальный бюджет,  внимательность к деталям, отсутствие стресса в день события.
     
-    section.section.section_mb.video-section#video(data-scroll-block data-black)
+    section.section.section_pb.video-section#video(data-scroll-block data-black)
       .container
         .row.justify-content-center
           .col-lg-10
             a(href="https://youtu.be/OCYLrB_KrSM" data-video).video-section__video.image.image_cover
               img(data-src="./img/2I5A5799 2.jpg", alt="image").lazyload
-              .video-section__video-text За 90 секунд о первых лицах 
+              .video-section__video-text 
+                span За 90 секунд о первых лицах 
                 svg.icon
                   use(xlink:href='./img/icons/icons-sprite.svg#play')
         
   include blocks/organization
+
+  include blocks/team
 
   include blocks/services
 

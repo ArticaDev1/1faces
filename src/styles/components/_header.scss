@@ -5,6 +5,11 @@
   top: 0;
   left: 0;
   z-index: 100;
+  transition: background-color $trs2;
+  &_bg {
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  }
   &_type-home {
     @include media-breakpoint-up(md) {
       .logo {
@@ -15,6 +20,7 @@
   &__left {
     display: flex;
     align-items: center;
+    
   }
   &__container {
     display: flex;

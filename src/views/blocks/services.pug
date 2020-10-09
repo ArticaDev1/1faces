@@ -1,5 +1,4 @@
 section.section.services#services(data-scroll-block)
-  .services__background.lazyload(data-src='./img/background2.png')
   .container
     h2.section__title Наши услуги
   .services__container
@@ -10,7 +9,7 @@ section.section.services#services(data-scroll-block)
             //block
             .services-block.col-6.grid__block
               .services-block__container.jsTouchHover
-                .services-block__front
+                .services-block__front.jsTouchHover
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#ico-service1')
                   h5.services-block__front-title Мероприятия<br> для АПК<br><br>
@@ -27,7 +26,7 @@ section.section.services#services(data-scroll-block)
             //block
             .services-block.col-6.grid__block
               .services-block__container.jsTouchHover
-                .services-block__front
+                .services-block__front.jsTouchHover
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#ico-service2')
                   h5.services-block__front-title Юбилеи<br> и торжественные<br> открытия
@@ -35,7 +34,9 @@ section.section.services#services(data-scroll-block)
                   .services-block__back-content
                     a(href="javascript:void(0);").services-block__close
                     .services-block__back-top
-                      h4.services-block__back-title Юбилеи и торжестванные открытия
+                      h4.services-block__back-title Юбилеи и 
+                        span.d-none.d-sm-inline торжестванные 
+                        | открытия
                       p.services-block__back-text Организация и проведение юбилейных мероприятий и торжественных открытий
                     .services-block__back-bottom
                       a(href="javascript:void(0);").button.button_style-2 Подробности
@@ -43,7 +44,7 @@ section.section.services#services(data-scroll-block)
             //block
             .services-block.col-6.grid__block
               .services-block__container.jsTouchHover
-                .services-block__front
+                .services-block__front.jsTouchHover
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#ico-service3')
                   h5.services-block__front-title Онлайн<br> мероприятия<br><br>
@@ -59,7 +60,7 @@ section.section.services#services(data-scroll-block)
             //block
             .services-block.col-6.grid__block
               .services-block__container.jsTouchHover
-                .services-block__front
+                .services-block__front.jsTouchHover
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#ico-service4')
                   h5.services-block__front-title Обучающий<br> тренинг<br><br>

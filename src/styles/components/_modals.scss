@@ -5,7 +5,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  padding: 110px 32px 76px 32px;
+  padding: 100px 24px;
   opacity: 0;
   visibility: hidden;
   display: flex;
@@ -61,7 +61,22 @@
     margin: auto;
     background-color: #000;
   }
+  @include media-breakpoint-down(lg) {
+    padding: 90px 24px;
+    &-close {
+      top: 20px;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    padding: 80px 16px;
+    &-close {
+      top: 15px;
+      right: 9px;
+    }
+  }
 }
+
+
 #video-player {
   opacity: 0;
   visibility: hidden;
@@ -73,11 +88,5 @@
   &.ready {
     opacity: 1;
     visibility: visible;
-  }
-}
-
-@media screen and(max-width:1440px) {
-  .modal {
-    padding: 80px 32px 66px 32px;
   }
 }
