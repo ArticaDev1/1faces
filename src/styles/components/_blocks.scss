@@ -655,9 +655,11 @@
     }
   }
   @include media-breakpoint-up(sm) {
-    &.touch, &.hover {
-      .video-section__video-text {
-        background-color: var(--color-accent-darker);
+    &__video {
+      &.touch, &.hover {
+        .video-section__video-text {
+          background-color: var(--color-accent-darker);
+        }
       }
     }
   }

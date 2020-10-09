@@ -71,6 +71,26 @@
       text-decoration: none;
     }
   }
+  &__accent {
+    margin: 0 5px 5px 0;
+    width: 25px;
+    height: 25px;
+    display: block;
+    border-radius: 2px;
+    transform: scale(0.75);
+    transition: transform $trs1;
+
+    &_1 {
+      background-color: #E61515;
+    }
+    &_2 {
+      background-color: #792DA7;
+    }
+    &.active {
+      transform: scale(1);
+      pointer-events: none;
+    }
+  }
   &.active {
     transform: translate(0, -50%);
     .helper__trigger {

@@ -791,23 +791,6 @@ function pageLoaded() {
   }
 }
 
-function helper() {
-  let $toggle = document.querySelector('.helper__trigger'),
-      $block = document.querySelector('.helper'),
-      state = false;
-
-  $toggle.addEventListener('click', ()=>{
-    if(!state) {
-      state = true;
-      $block.classList.add('active');
-    } else {
-      state = false;
-      $block.classList.remove('active');
-    }
-  })
-
-}
-
 function inputs() {
   let mask = Inputmask({
       mask: "+7 999 999-9999",
@@ -833,4 +816,41 @@ function inputs() {
 
   })
   
+}
+
+
+function helper() {
+  let $toggle = document.querySelector('.helper__trigger'),
+      $block = document.querySelector('.helper'),
+      $themes = document.querySelectorAll('.helper__accent'),
+      state = false;
+
+  $toggle.addEventListener('click', ()=>{
+    if(!state) {
+      state = true;
+      $block.classList.add('active');
+    } else {
+      state = false;
+      $block.classList.remove('active');
+    }
+  })
+
+  $themes.forEach(($btn, index)=>{
+    $btn.addEventListener('click', ()=>{
+      let theme = document.getElementById("theme");
+      $themes.forEach(($this)=>{
+        $this.classList.remove('active');
+      })
+      $btn.classList.add('active');
+
+      if(index==0) {
+        theme.href = "./styles/theme.css";
+      } else {
+        theme.href = "./styles/theme2.css";
+      }
+    })  
+  })
+
+
+
 }

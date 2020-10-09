@@ -3245,6 +3245,21 @@ template {
     padding: 0 10px;
     border-radius: 2px;
     text-decoration: none; }
+  .helper__accent {
+    margin: 0 5px 5px 0;
+    width: 25px;
+    height: 25px;
+    display: block;
+    border-radius: 2px;
+    transform: scale(0.75);
+    transition: transform 0.3s ease-in-out; }
+    .helper__accent_1 {
+      background-color: #E61515; }
+    .helper__accent_2 {
+      background-color: #792DA7; }
+    .helper__accent.active {
+      transform: scale(1);
+      pointer-events: none; }
   .helper.active {
     transform: translate(0, -50%); }
     .helper.active .helper__trigger .icon {
@@ -4329,7 +4344,7 @@ textarea {
       margin-left: 20px; } }
 
 @media (min-width: 576px) {
-  .video-section.touch .video-section__video-text, .video-section.hover .video-section__video-text {
+  .video-section__video.touch .video-section__video-text, .video-section__video.hover .video-section__video-text {
     background-color: var(--color-accent-darker); } }
 
 @media (max-width: 575.98px) {
