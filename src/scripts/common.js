@@ -18,7 +18,7 @@ import Inputmask from "inputmask";
 let validate = require("validate.js");
 
 window.onload = function(){
-  pageLoaded();
+  preloader();
 }
 
 const brakepoints = {
@@ -31,8 +31,8 @@ const brakepoints = {
 const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 
-const speed = 1;
-const preloader_time_limit = 1;
+const speed = 1; //animations
+const preloader_delay = 1.5; //seconds
 const youtubeApi = {state: false};
 
 
@@ -122,7 +122,6 @@ const TouchHoverEvents = {
     }
   }
 }
-
 
 const Home = {
   init: function() {
@@ -466,7 +465,6 @@ const Home = {
   }
 }
 
-
 const Header = {
   init: function() {
     this.isVisible = true;
@@ -751,7 +749,23 @@ window.bgVideo = {
     }
   }
 }
+function preloader() {
+  let $preloader = document.querySelector('.preloader')
 
+  if(preloader_delay==0) {
+    app.init();
+    $preloader.remove();
+    gsap.set($wrapper, {autoAlpha:1});
+  } 
+  else {
+    gsap.timeline({onComplete:()=>{
+      app.init();
+      $preloader.remove();
+      gsap.to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+    }})
+      .to($preloader, {autoAlpha:0, duration:1, ease:'power2.inOut'}, `+=${preloader_delay}`)
+  }
+}
 
 function pageLoaded() {
   //отключить прелоадер если 0
