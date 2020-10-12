@@ -25,12 +25,10 @@ html(lang='ru')
     link(rel="apple-touch-icon" sizes="167x167" href="img/favicons/apple-touch-icon-167x167.png")
     link(rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png")
     link(rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png")
-    //theme
-    link(rel="stylesheet" id='theme' href="./styles/theme.css")
     
 
   body
-    include ../blocks/preloader2
+    include ../blocks/preloader
     .wrapper(style='opacity:0;')
       include ../blocks/header
       main.main
@@ -40,8 +38,13 @@ html(lang='ru')
       include ../blocks/helper
 
 
-
+    //themes
+    link.theme(rel="stylesheet" data-href="./styles/theme.css")
+    link.theme(rel="stylesheet" data-href="./styles/theme2.css")
     //styles
     link(rel="stylesheet" href="./styles/common.css")
-    //js
+    //scripts
     script(src="./scripts/common.js")
+    //preview
+    link(rel="stylesheet" href="./styles/helper.css")
+    script(src="./scripts/helper.js")

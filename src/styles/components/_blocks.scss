@@ -614,6 +614,10 @@
       display: block;
       padding-top: 56.25%;
     }
+    img {
+      filter: grayscale(80%);
+      transition: filter $trs1, opacity $trs3, visibility $trs3, transform $trs1;
+    }
     &-text {
       background-color: var(--color-accent);
       line-height: 80px;
@@ -636,6 +640,7 @@
     }
     &.touch, &.hover {
       img {
+        filter: grayscale(0);
         transform: scale(1.01) rotate(0.15deg);
       }
     }
@@ -701,7 +706,6 @@
     }
   }
 }
-
 
 .feedback {
   color: #fff;
@@ -956,9 +960,6 @@
 .services {
   position: relative;
   &__container {
-    border-width: 1px 0 1px 0;
-    border-style: solid;
-    border-color: #C2C2C2;
     position: relative;
     z-index: 2;
   }
@@ -1073,12 +1074,13 @@
   &__close {
     display: block;
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 0;
+    top: 0;
     width: 40px;
     height: 40px;
     opacity: 0;
     visibility: hidden;
+    z-index: 2;
     &::before, &:after {
       content: '';
       display: block;
@@ -1157,10 +1159,32 @@
   @include media-breakpoint-down(sm) { 
     &__back {
       width: calc(100vw - 32px);
+      &-top {
+        margin-bottom: 15px;
+      }
+      &-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      &-content {
+        padding: 40px 20px 24px 20px;
+        text-align: center;
+        justify-content: space-around;
+        align-items: center;
+      }
+      &-text {
+        font-size: 0.875rem;
+        max-width: 300px;
+      }
+      &-title {
+        margin: 0 0 15px 0;
+      }
       .button {
         line-height: 38px;
         height: 40px;
-        width: 180px;
+        width: 200px;
+        font-size: 0.875rem;
         &:not(:last-child) {
           margin-bottom: 15px;
         }
@@ -1168,23 +1192,13 @@
     }
     &__front {
       padding: 0;
+      &-title {
+        display: none;
+      }
       .icon {
         width: 25%;
         height: 25%;
       }
-    }
-    &__back-content {
-      padding: 20px;
-    }
-    &__back-title {
-      padding-right: 25px;
-      margin: 0 0 15px 0;
-    }
-    &__back-text {
-      font-size: 0.875rem;
-    }
-    &__front-title {
-      display: none;
     }
   }
 }

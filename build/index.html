@@ -1,69 +1,551 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>Первые лица - Организация мероприятий</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><!--color--><meta name="theme-color" content="#141418"><!--favicons--><link rel="shortcut icon" href="img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" sizes="16x16" href="img/favicons/favicon-16x16.png" type="image/png"><link rel="icon" sizes="32x32" href="img/favicons/favicon-32x32.png" type="image/png"><link rel="apple-touch-icon-precomposed" href="img/favicons/apple-touch-icon-precomposed.png"><link rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="img/favicons/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png"><!--theme--><link rel="stylesheet" id="theme" href="./styles/theme.min.css"></head><body><div class="preloader"><div class="preloader__container"><svg class="preloader__icon" viewBox="0 0 120 91"><defs><mask id="mask" x="0" y="0" width="100" height="100"><rect x="0" y="0" width="100%" height="100%" fill="#000"></rect><path fill="#fff" d="M91.0829 41.3262C101.176 40.3158 109.176 37.5758 111.687 36.6401C116.227 28.6103 118.966 19.4282 119.341 9.63672C113.293 17.1255 105.865 23.4516 97.4411 28.228C92.238 31.1782 86.6574 33.5392 80.787 35.2155C76.5091 36.437 72.0746 37.2839 67.5258 37.7437C65.4677 37.0247 65.2174 29.824 65.6916 28.2832C65.7898 27.9637 65.846 27.5186 65.8392 27.0131C67.4583 26.9841 69.3407 27.0296 69.9454 27.3618C69.8812 24.2119 66.3624 23.7418 64.765 23.6905C63.9813 22.6431 62.702 21.8488 60.68 21.8488C51.7515 21.8488 55.1492 31.0003 51.5284 37.709C47.1192 37.2424 42.8195 36.4091 38.6662 35.2252C32.793 33.551 27.2098 31.1907 22.0041 28.2417C13.5701 23.4636 6.13368 17.1326 0.0800781 9.63672C0.454572 19.4204 3.18919 28.5961 7.72282 36.6214C10.1748 37.5385 18.2147 40.309 28.3767 41.3262C23.3958 42.4131 16.4445 42.1661 10.5637 41.1548C11.1781 42.0452 11.8076 42.9246 12.4683 43.7794C13.6572 45.3173 14.9238 46.7917 16.2544 48.2049C20.2195 48.3253 27.0896 48.0988 34.8027 45.9258C30.9002 48.4032 25.0981 50.4089 19.6735 51.5603C21.8386 53.5206 24.1486 55.3229 26.585 56.952C30.4332 55.603 36.0466 53.1881 41.772 49.1581C39.0461 52.624 34.5472 56.2566 30.0296 59.0916C31.1229 59.7197 32.236 60.3178 33.3718 60.8772C34.883 61.6219 36.4332 62.2991 38.0133 62.9162C40.922 60.6833 44.9489 57.1485 49.1043 52.1031C47.4212 56.1072 44.8252 60.4649 41.6882 64.2111C44.8946 65.2257 48.2148 65.9846 51.6304 66.4469C48.9111 71.2564 45.6873 75.7419 42.0301 79.8328C43.7791 81.8803 45.742 83.7386 47.8837 85.3748C50.1482 80.9183 52.5683 76.4971 55.3829 72.7759C53.117 78.6923 51.5957 83.6951 50.6285 87.281C52.931 88.7386 55.4002 89.9547 58.0037 90.8933C58.2386 86.9762 58.829 78.3249 59.7204 73.2442V73.1344C59.7237 73.1523 59.7265 73.1715 59.7298 73.1893C59.7329 73.1715 59.7359 73.1523 59.739 73.1344V73.2442C60.6306 78.3249 61.2209 86.9762 61.4557 90.8933C64.0592 89.9547 66.5286 88.7391 68.8311 87.2818C67.8639 83.6956 66.3426 78.6928 64.0765 72.7759C66.8911 76.4968 69.3109 80.918 71.5754 85.3743C73.7598 83.7058 75.7591 81.8073 77.5341 79.712C73.9133 75.6442 70.7197 71.1887 68.0233 66.4144C71.3678 65.9483 74.6207 65.1985 77.7639 64.2023C74.6302 60.4581 72.037 56.1038 70.3554 52.1031C74.5041 57.1404 78.5246 60.672 81.4323 62.9055C83.0182 62.2854 84.5738 61.6054 86.0904 60.8569C87.2187 60.2998 88.3249 59.7048 89.4116 59.08C84.9001 56.2467 80.4094 52.6193 77.6873 49.1581C83.4002 53.1794 89.0016 55.5922 92.8489 56.9428C95.2829 55.3145 97.5908 53.513 99.754 51.5539C94.3386 50.4014 88.5516 48.3983 84.6566 45.9258C92.3438 48.0915 99.1939 48.3237 103.165 48.2063C104.506 46.7818 105.782 45.2956 106.979 43.7444C107.629 42.9034 108.248 42.0382 108.852 41.1624C102.98 42.1673 96.0513 42.4105 91.0829 41.3262ZM62.9206 25.8162C62.3532 25.8162 61.8935 25.3562 61.8935 24.789C61.8935 24.6646 61.9237 24.5486 61.9641 24.4382H63.8769C63.9175 24.5486 63.9478 24.6646 63.9478 24.789C63.9478 25.3562 63.4878 25.8162 62.9206 25.8162Z"></path><path fill="#fff" d="M59.9041 18.1665C63.8989 18.0912 65.3461 20.014 65.3461 20.014L68.8044 8.24225L63.8554 13.5212C63.8554 16.1599 61.4885 15.8779 61.4885 14.0581C61.4885 12.2383 62.5428 11.847 62.5428 9.39033C62.5428 6.93367 60.7078 5.7625 59.9041 0.576172C59.1005 5.7625 57.2656 6.93367 57.2656 9.39033C57.2656 11.847 58.3199 12.2383 58.3199 14.0581C58.3199 15.8779 55.9529 16.1599 55.9529 13.5212L51.0039 8.24225L54.4622 20.014C54.4622 20.014 55.9095 18.0912 59.9041 18.1665Z"></path></mask></defs><image width="100%" height="100%" y="0" x="0" xlink:href="./img/mask.png" mask="url(#mask)"></image></svg></div><style>.preloader {
-  display: flex;
-  position: fixed;
-  z-index:1000;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.preloader__container {
-  width: 180px;
-  height: 180px;
-  margin: auto;
-  animation: rotation 2s linear infinite;
-  position:relative;
-}
-.preloader__ratation {
-  width: 100%;
-  height: 100%;
-  position:relative;
-  
-}
-@keyframes rotation {
-  0% {
-    transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
-  }
-  50% {
-    transform: perspective(1000px) rotate3d(0, 1, 0, 180deg);
-  }
-  100% {
-    transform: perspective(1000px) rotate3d(0, 1, 0, 360deg);
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity:0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity:1;
-    transform: scale(1);
-  }
-}
-.preloader__icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  animation: fadeIn 1s ease-in-out;
-}
-
-@media(max-width:575px) {
-   .preloader__container {
-     width: 140px;
-     height: 140px;
-   }
-}
-.preloader__container.fadeIn {
-  transform: scale(1);
-  opacity: 1;
-}
-.preloader__bg {
-  fill: #AFB3BD;
-}
-.preloader__mask {
-  fill: #E61515;
-  transition: .05s linear;
-}</style></div><div class="wrapper" style="opacity:0;"><header class="header header_type-home"><div class="container header__container"> <div class="header__left"><div class="logo"><a class="logo__link" href="index.html"><img class="logo__image" src="./img/logos/main_logo.svg" alt="logo"></a></div><a class="header__phone" href="tel:+74732602367"> <svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#phone"></use></svg>+7 (473) 260-23-67</a></div><a class="nav-toggle" href="javascript:void(0);"> <span></span><span></span><span></span></a></div></header><main class="main"><div class="background lazyload main-bg" data-src="./img/background2.png"></div><div class="home-dots"><a class="home-dots__link" href="#home"> <span>Главная</span></a><a class="home-dots__link" href="#about"><span>Эффектно эффективно</span></a><a class="home-dots__link" href="#video"><span>за 90 миунт о 1 лицах</span></a><a class="home-dots__link" href="#organization"><span>Организация</span></a><a class="home-dots__link" href="#team"><span>Команда</span></a><a class="home-dots__link" href="#services"><span>Услуги</span></a><a class="home-dots__link" href="#clients"><span>Клиенты</span></a><a class="home-dots__link" href="#feedback"><span>Обратная связь</span></a><a class="home-dots__link" href="#footer"><span>Контакты</span></a></div><section class="section section_mb2 desktop-background-wrapper" data-dark><div class="desktop-background-wrapper__background" style="background-image:url(&quot;./img/iStock-613111906.jpg&quot;);"></div><section class="section home" id="home" data-scroll-block><div class="home__mobile-background" style="background-image:url(&quot;./img/mobile-home-bg.jpg&quot;);"></div><span class="home__vertical-line"></span><div class="home-background-video"><div class="home-background-video__wrap"><div class="home-background-video__element" id="bg-player"></div></div></div><div class="container home__container"><a class="home-mobile-play home__item" href="https://youtu.be/0zxNqsKiQxE" data-video><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#play"></use></svg></a><div class="home__items"><div class="home-logo home__item"><svg class="home-logo__circle" viewBox="0 0 340 340"><path d="M335,170c0,91.1-73.9,165-165,165C78.9,335,5,261.1,5,170c0-42.7,16.2-81.6,42.9-110.9C78,25.8,121.6,5,170,5C261.1,5,335,78.9,335,170z"></path></svg><img class="home-logo__image" src="./img/logos/logo.svg" alt="logo"><h2 class="home-logo__title">Первые лица</h2><span class="home-logo__text">Организация мероприятий</span></div><h1 class="home__title home__item">Организация и проведение<br> мероприятий</h1><p class="home__text home__text_desktop home__item">Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!</p><p class="home__text home__text_mobile home__item">Концепт мероприятия<br> под ключ за 24 часа!</p><a class="button button_style-1 home__button home__item" href="mailto:info@1faces.com">Свяжитесь с нами</a></div></div></section><section class="section section_pt about" id="about" data-scroll-block><div class="container"><svg class="about__text-image about__text-image_1 js-scroll-animated" viewBox="0 0 678 106" fill="currentColor"><path d="M0.698131 89.7408C-0.139626 89.0686 -0.223402 88.1863 0.446804 87.0939L6.35299 78.5232C6.93942 77.4308 7.77718 77.2628 8.86626 78.019C14.9819 82.4725 21.9353 84.6992 29.7264 84.6992C35.842 84.6992 40.5754 83.1027 43.9264 79.9096C47.3612 76.6326 49.0786 72.1371 49.0786 66.4233V59.6171H20.0503C18.7937 59.6171 18.1654 59.0289 18.1654 57.8526V47.5172C18.1654 46.3409 18.7937 45.7527 20.0503 45.7527H49.0786V38.1903C49.0786 32.5604 47.3612 28.149 43.9264 24.956C40.5754 21.763 35.8839 20.1665 29.8521 20.1665C22.8149 20.1665 16.5736 22.0571 11.1282 25.8383C9.95534 26.5105 9.0757 26.3425 8.48927 25.3341L2.58308 16.7634C1.91288 15.7551 2.03854 14.9148 2.96007 14.2426C11.0025 8.61276 19.9665 5.79786 29.8521 5.79786C39.7376 5.79786 47.9476 8.57075 54.4821 14.1165C61.0166 19.5783 64.2839 27.5608 64.2839 38.0642V66.8014C64.2839 77.3888 61.0166 85.4134 54.4821 90.8752C47.9476 96.3369 39.6538 99.0678 29.6007 99.0678C18.291 99.0678 8.65682 95.9588 0.698131 89.7408Z"></path><path d="M131.854 106H120.418C119.245 106 118.659 105.37 118.659 104.109V95.2866H112.753C103.118 95.2866 95.076 92.3876 88.6253 86.5898C82.1746 80.7919 78.9492 72.1792 78.9492 60.7515V44.3662C78.9492 33.0226 82.1327 24.4939 88.4996 18.78C94.9504 12.9822 103.035 10.0832 112.753 10.0832H118.659V1.76457C118.659 0.588189 119.245 0 120.418 0H131.854C133.11 0 133.738 0.588189 133.738 1.76457V10.0832H139.645C149.363 10.0832 157.405 12.9822 163.772 18.78C170.223 24.4939 173.448 33.0226 173.448 44.3662V60.7515C173.448 72.1792 170.223 80.7919 163.772 86.5898C157.321 92.3876 149.279 95.2866 139.645 95.2866H133.738V104.109C133.738 105.37 133.11 106 131.854 106ZM94.5315 61.0036C94.5315 67.8938 96.2908 72.9354 99.8093 76.1284C103.328 79.3214 107.894 80.918 113.507 80.918H118.659V24.3258H113.507C100.857 24.3258 94.5315 30.9639 94.5315 44.2402V61.0036ZM133.738 24.3258V80.918H138.891C144.504 80.918 149.069 79.3214 152.588 76.1284C156.107 72.9354 157.866 67.8938 157.866 61.0036V44.2402C157.866 30.9639 151.541 24.3258 138.891 24.3258H133.738Z"></path><path d="M240.705 106H229.269C228.096 106 227.51 105.37 227.51 104.109V95.2866H221.604C211.97 95.2866 203.927 92.3876 197.476 86.5898C191.026 80.7919 187.8 72.1792 187.8 60.7515V44.3662C187.8 33.0226 190.984 24.4939 197.351 18.78C203.801 12.9822 211.886 10.0832 221.604 10.0832H227.51V1.76457C227.51 0.588189 228.096 0 229.269 0H240.705C241.961 0 242.59 0.588189 242.59 1.76457V10.0832H248.496C258.214 10.0832 266.256 12.9822 272.623 18.78C279.074 24.4939 282.299 33.0226 282.299 44.3662V60.7515C282.299 72.1792 279.074 80.7919 272.623 86.5898C266.172 92.3876 258.13 95.2866 248.496 95.2866H242.59V104.109C242.59 105.37 241.961 106 240.705 106ZM203.383 61.0036C203.383 67.8938 205.142 72.9354 208.66 76.1284C212.179 79.3214 216.745 80.918 222.358 80.918H227.51V24.3258H222.358C209.708 24.3258 203.383 30.9639 203.383 44.2402V61.0036ZM242.59 24.3258V80.918H247.742C253.355 80.918 257.921 79.3214 261.439 76.1284C264.958 72.9354 266.717 67.8938 266.717 61.0036V44.2402C266.717 30.9639 260.392 24.3258 247.742 24.3258H242.59Z"></path><path d="M314.998 58.6088V83.5648H355.336C356.593 83.5648 357.221 84.153 357.221 85.3294V95.5386C357.221 96.799 356.593 97.4293 355.336 97.4293H301.552C300.379 97.4293 299.793 96.799 299.793 95.5386V9.20095C299.793 7.94055 300.379 7.31035 301.552 7.31035H353.577C354.834 7.31035 355.462 7.94055 355.462 9.20095V19.4102C355.462 20.5866 354.834 21.1748 353.577 21.1748H314.998V44.7444H350.31C351.566 44.7444 352.195 45.3746 352.195 46.635V56.7182C352.195 57.9786 351.566 58.6088 350.31 58.6088H314.998Z"></path><path d="M386.744 97.4293H375.183C374.01 97.4293 373.424 96.799 373.424 95.5386V9.20095C373.424 7.94055 374.01 7.31035 375.183 7.31035H386.744C387.917 7.31035 388.504 7.94055 388.504 9.20095V45.7527L419.919 8.44471C420.673 7.68847 421.427 7.31035 422.181 7.31035H436.884C437.722 7.31035 438.224 7.56243 438.392 8.06659C438.643 8.48672 438.518 8.99089 438.015 9.57908L404.714 47.5172L440.78 95.1605C441.282 95.8327 441.408 96.3789 441.157 96.799C440.905 97.2192 440.403 97.4293 439.649 97.4293H424.946C423.857 97.4293 423.103 97.0511 422.684 96.2949L394.787 58.6088L388.504 65.415V95.5386C388.504 96.799 387.917 97.4293 386.744 97.4293Z"></path><path d="M444.807 7.31035H510.529C511.785 7.31035 512.414 7.94055 512.414 9.20095V19.5363C512.414 20.7126 511.785 21.3008 510.529 21.3008H485.27V95.5386C485.27 96.799 484.684 97.4293 483.511 97.4293H471.95C470.777 97.4293 470.191 96.799 470.191 95.5386V21.3008H444.807C443.55 21.3008 442.922 20.7126 442.922 19.5363V9.20095C442.922 7.94055 443.55 7.31035 444.807 7.31035Z"></path><path d="M574.761 44.8704V9.20095C574.761 7.94055 575.348 7.31035 576.521 7.31035H588.082C589.255 7.31035 589.841 7.94055 589.841 9.20095V95.5386C589.841 96.799 589.255 97.4293 588.082 97.4293H576.521C575.348 97.4293 574.761 96.799 574.761 95.5386V58.8609H539.324V95.5386C539.324 96.799 538.738 97.4293 537.565 97.4293H526.004C524.831 97.4293 524.245 96.799 524.245 95.5386V9.20095C524.245 7.94055 524.831 7.31035 526.004 7.31035H537.565C538.738 7.31035 539.324 7.94055 539.324 9.20095V44.8704H574.761Z"></path><path d="M678 63.9025C678 74.91 674.9 83.5228 668.701 89.7408C662.501 95.8748 653.831 98.9417 642.688 98.9417C631.546 98.9417 622.876 95.8748 616.676 89.7408C610.477 83.5228 607.377 74.91 607.377 63.9025V40.7111C607.377 29.7035 610.477 21.1328 616.676 14.9988C622.876 8.86484 631.546 5.79786 642.688 5.79786C653.831 5.79786 662.501 8.86484 668.701 14.9988C674.9 21.1328 678 29.7035 678 40.7111V63.9025ZM622.834 63.9025C622.834 70.6247 624.509 75.7503 627.86 79.2794C631.211 82.8086 636.154 84.5731 642.688 84.5731C649.223 84.5731 654.166 82.8086 657.517 79.2794C660.868 75.7503 662.543 70.6247 662.543 63.9025V40.8371C662.543 26.9727 655.925 20.0404 642.688 20.0404C629.452 20.0404 622.834 26.9727 622.834 40.8371V63.9025Z"></path></svg><svg class="about__text-image about__text-image_2 js-scroll-animated" viewBox="0 0 846 108" fill="currentColor"><path d="M0.696715 91.434C-0.139343 90.7491 -0.222949 89.8502 0.445897 88.7372L6.3401 80.0048C6.92534 78.8918 7.7614 78.7206 8.84828 79.4911C14.9515 84.0285 21.8908 86.2973 29.6661 86.2973C35.7693 86.2973 40.4931 84.6706 43.8373 81.4174C47.2651 78.0785 48.979 73.4982 48.979 67.6766V60.742H20.0096C18.7556 60.742 18.1285 60.1427 18.1285 58.9441V48.4138C18.1285 47.2152 18.7556 46.6159 20.0096 46.6159H48.979V38.9108C48.979 33.1748 47.2651 28.6801 43.8373 25.4269C40.4931 22.1736 35.8111 20.547 29.7915 20.547C22.7686 20.547 16.54 22.4733 11.1056 26.3258C9.93515 27.0107 9.05729 26.8395 8.47205 25.8121L2.57784 17.0797C1.909 16.0523 2.03441 15.1962 2.95407 14.5113C10.9802 8.77527 19.926 5.90725 29.7915 5.90725C39.657 5.90725 47.8504 8.73246 54.3716 14.3829C60.8929 19.9477 64.1535 28.0809 64.1535 38.7824V68.0618C64.1535 78.849 60.8929 87.025 54.3716 92.5898C47.8504 98.1546 39.5734 100.937 29.5407 100.937C18.2539 100.937 8.63926 97.7693 0.696715 91.434Z"></path><path d="M131.586 108H120.174C119.003 108 118.418 107.358 118.418 106.074V97.0844H112.524C102.909 97.0844 94.8832 94.1308 88.4455 88.2235C82.0079 82.3163 78.7891 73.541 78.7891 61.8977V45.2033C78.7891 33.6457 81.9661 24.956 88.3201 19.1344C94.7578 13.2271 102.826 10.2735 112.524 10.2735H118.418V1.79786C118.418 0.599286 119.003 0 120.174 0H131.586C132.84 0 133.467 0.599286 133.467 1.79786V10.2735H139.361C149.06 10.2735 157.086 13.2271 163.44 19.1344C169.878 24.956 173.096 33.6457 173.096 45.2033V61.8977C173.096 73.541 169.878 82.3163 163.44 88.2235C157.002 94.1308 148.976 97.0844 139.361 97.0844H133.467V106.074C133.467 107.358 132.84 108 131.586 108ZM94.3398 62.1546C94.3398 69.1748 96.0955 74.3115 99.6069 77.5648C103.118 80.8181 107.675 82.4447 113.276 82.4447H118.418V24.7848H113.276C100.652 24.7848 94.3398 31.5482 94.3398 45.0749V62.1546ZM133.467 24.7848V82.4447H138.609C144.211 82.4447 148.767 80.8181 152.279 77.5648C155.79 74.3115 157.546 69.1748 157.546 62.1546V45.0749C157.546 31.5482 151.233 24.7848 138.609 24.7848H133.467Z"></path><path d="M240.216 108H228.804C227.634 108 227.049 107.358 227.049 106.074V97.0844H221.154C211.54 97.0844 203.514 94.1308 197.076 88.2235C190.638 82.3163 187.419 73.541 187.419 61.8977V45.2033C187.419 33.6457 190.596 24.956 196.95 19.1344C203.388 13.2271 211.456 10.2735 221.154 10.2735H227.049V1.79786C227.049 0.599286 227.634 0 228.804 0H240.216C241.471 0 242.098 0.599286 242.098 1.79786V10.2735H247.992C257.69 10.2735 265.716 13.2271 272.07 19.1344C278.508 24.956 281.727 33.6457 281.727 45.2033V61.8977C281.727 73.541 278.508 82.3163 272.07 88.2235C265.633 94.1308 257.606 97.0844 247.992 97.0844H242.098V106.074C242.098 107.358 241.471 108 240.216 108ZM202.97 62.1546C202.97 69.1748 204.726 74.3115 208.237 77.5648C211.749 80.8181 216.305 82.4447 221.907 82.4447H227.049V24.7848H221.907C209.282 24.7848 202.97 31.5482 202.97 45.0749V62.1546ZM242.098 24.7848V82.4447H247.239C252.841 82.4447 257.397 80.8181 260.909 77.5648C264.42 74.3115 266.176 69.1748 266.176 62.1546V45.0749C266.176 31.5482 259.864 24.7848 247.239 24.7848H242.098Z"></path><path d="M314.359 59.7146V85.1415H354.616C355.87 85.1415 356.497 85.7408 356.497 86.9394V97.3413C356.497 98.6255 355.87 99.2675 354.616 99.2675H300.941C299.77 99.2675 299.185 98.6255 299.185 97.3413V9.37456C299.185 8.09037 299.77 7.44828 300.941 7.44828H352.86C354.114 7.44828 354.741 8.09037 354.741 9.37456V19.7765C354.741 20.975 354.114 21.5743 352.86 21.5743H314.359V45.5886H349.599C350.853 45.5886 351.48 46.2307 351.48 47.5149V57.7883C351.48 59.0725 350.853 59.7146 349.599 59.7146H314.359Z"></path><path d="M385.96 99.2675H374.422C373.252 99.2675 372.667 98.6255 372.667 97.3413V9.37456C372.667 8.09037 373.252 7.44828 374.422 7.44828H385.96C387.13 7.44828 387.716 8.09037 387.716 9.37456V46.6159L419.068 8.60405C419.82 7.83353 420.573 7.44828 421.325 7.44828H435.998C436.834 7.44828 437.336 7.70512 437.503 8.21879C437.754 8.64685 437.628 9.16053 437.127 9.75981L403.893 48.4138L439.886 96.956C440.387 97.6409 440.513 98.1974 440.262 98.6254C440.011 99.0535 439.509 99.2675 438.757 99.2675H424.084C422.997 99.2675 422.245 98.8823 421.827 98.1118L393.986 59.7146L387.716 66.6492V97.3413C387.716 98.6255 387.13 99.2675 385.96 99.2675Z"></path><path d="M443.905 7.44828H509.493C510.747 7.44828 511.374 8.09037 511.374 9.37456V19.9049C511.374 21.1035 510.747 21.7027 509.493 21.7027H484.286V97.3413C484.286 98.6255 483.701 99.2675 482.53 99.2675H470.993C469.822 99.2675 469.237 98.6255 469.237 97.3413V21.7027H443.905C442.651 21.7027 442.023 21.1035 442.023 19.9049V9.37456C442.023 8.09037 442.651 7.44828 443.905 7.44828Z"></path><path d="M589.397 99.2675H577.985C576.815 99.2675 576.229 98.6255 576.229 97.3413V67.9334C576.229 57.6599 576.606 45.8882 577.358 32.6183L576.982 32.4899C572.969 41.2224 568.496 49.6552 563.563 57.7883L539.861 97.9834C539.359 98.8395 538.649 99.2675 537.729 99.2675H525.063C523.809 99.2675 523.182 98.6255 523.182 97.3413V9.37456C523.182 8.09037 523.809 7.44828 525.063 7.44828H536.349C537.603 7.44828 538.23 8.09037 538.23 9.37456V40.7087C538.23 53.0369 537.854 64.6373 537.102 75.5101L537.478 75.6385C539.819 71.1011 543.999 63.3532 550.019 52.3948L574.474 8.73246C575.059 7.87634 575.811 7.44828 576.731 7.44828H589.397C590.568 7.44828 591.153 8.09037 591.153 9.37456V97.3413C591.153 98.6255 590.568 99.2675 589.397 99.2675Z"></path><path d="M672.926 32.6183C672.926 40.9227 669.958 46.9156 664.022 50.5969C672.55 54.3639 676.814 61.4269 676.814 71.786C676.814 80.4328 674.097 87.1962 668.662 92.0761C663.228 96.8704 655.703 99.2675 646.089 99.2675H613.483C612.312 99.2675 611.727 98.6255 611.727 97.3413V9.37456C611.727 8.09037 612.312 7.44828 613.483 7.44828H646.089C654.533 7.44828 661.096 9.6742 665.778 14.126C670.544 18.4923 672.926 24.6564 672.926 32.6183ZM626.776 85.3983H645.963C656.247 85.3983 661.389 80.8181 661.389 71.6576C661.389 67.4626 660.093 64.1665 657.501 61.7693C654.909 59.2866 651.022 58.0452 645.838 58.0452H626.776V85.3983ZM657.626 32.8751C657.626 29.1082 656.498 26.2402 654.24 24.2711C652.067 22.302 649.182 21.3175 645.587 21.3175H626.776V44.5612H645.587C649.266 44.5612 652.192 43.5767 654.366 41.6076C656.54 39.6385 657.626 36.7277 657.626 32.8751Z"></path><path d="M742.971 45.717V9.37456C742.971 8.09037 743.556 7.44828 744.727 7.44828H756.264C757.435 7.44828 758.02 8.09037 758.02 9.37456V97.3413C758.02 98.6255 757.435 99.2675 756.264 99.2675H744.727C743.556 99.2675 742.971 98.6255 742.971 97.3413V59.9715H707.606V97.3413C707.606 98.6255 707.02 99.2675 705.85 99.2675H694.312C693.142 99.2675 692.557 98.6255 692.557 97.3413V9.37456C692.557 8.09037 693.142 7.44828 694.312 7.44828H705.85C707.02 7.44828 707.606 8.09037 707.606 9.37456V45.717H742.971Z"></path><path d="M846 65.1082C846 76.3234 842.907 85.0987 836.72 91.434C830.533 97.6837 821.88 100.809 810.76 100.809C799.641 100.809 790.987 97.6837 784.801 91.434C778.614 85.0987 775.52 76.3234 775.52 65.1082V41.4792C775.52 30.264 778.614 21.5315 784.801 15.2818C790.987 9.03211 799.641 5.90725 810.76 5.90725C821.88 5.90725 830.533 9.03211 836.72 15.2818C842.907 21.5315 846 30.264 846 41.4792V65.1082ZM790.946 65.1082C790.946 71.9572 792.618 77.1796 795.962 80.7753C799.306 84.371 804.239 86.1689 810.76 86.1689C817.281 86.1689 822.214 84.371 825.558 80.7753C828.903 77.1796 830.575 71.9572 830.575 65.1082V41.6076C830.575 27.4816 823.97 20.4186 810.76 20.4186C797.55 20.4186 790.946 27.4816 790.946 41.6076V65.1082Z"></path></svg><img class="about__logo js-scroll-animated" src="./img/logos/logo.svg" alt="logo"><div class="about__container"><div class="about__text-section js-scroll-animated"><h2 class="about__title">Мы решаем</h2><p class="about__text">Бизнес-задачи, создавая неповторимые и эффектные события с учетом специфики вашей отрасли и всех тонкостей вашей деятельности. Мы полностью берем на себя все вопросы по организации и проведению мероприятий — от концепции до менеджмента на площадке. </p></div><div class="about__text-section js-scroll-animated"><h2 class="about__title">ВЫ получаете</h2><p class="about__text">Команду с 10-ти летним опытом организации мероприятий, прозрачность на всех этапах подготовки, оптимальный бюджет,  внимательность к деталям, отсутствие стресса в день события.</p></div></div></div></section><section class="section section_pb video-section" id="video" data-scroll-block data-black><div class="container"><div class="row justify-content-center"><div class="col-lg-10"><a class="video-section__video image image_cover" href="https://youtu.be/OCYLrB_KrSM" data-video><img class="lazyload" data-src="./img/2I5A5799 2.jpg" alt="image"><div class="video-section__video-text"> <span>За 90 секунд о первых лицах </span><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#play"></use></svg></div></a></div></div></div></section></section><section class="section organization" id="organization" data-scroll-block><div class="container"><h3 class="section__title organization__title">Берем на себя все<br> организационные задачи:</h3><div class="organization__container row justify-content-center"><div class="col-xl-10 col-lg-12 col-md-10"><div class="organization-block row"> <div class="col-lg-6 order-lg-2"><div class="organization-block__content"><div class="organization-block__item"><h3 class="organization-block__item-title jsTouchHover">Концепция </h3><div class="organization-block__item-content"><p class="organization-block__item-text">Разработаем концепцию и напишем<br> подробный сценарий мероприятия<br> в соответствии с вашими задачами.</p></div></div><div class="organization-block__item"><h3 class="organization-block__item-title jsTouchHover">Площадка</h3><div class="organization-block__item-content"> <p class="organization-block__item-text">Подберем и зарезервируем площадку,<br> обеспечим полное техническое оснащение,<br> оформление и брендирование.</p></div></div><div class="organization-block__item"><h3 class="organization-block__item-title jsTouchHover">Кейтеринг</h3><div class="organization-block__item-content"><p class="organization-block__item-text">Организуем профессиональное<br> ресторанное обслуживание, банкеты<br> и фуршеты на любой площадке.</p></div></div><div class="organization-block__item"><h3 class="organization-block__item-title jsTouchHover">Протокол и СМИ </h3><div class="organization-block__item-content"><p class="organization-block__item-text">Обеспечим комфортное присутствие первых<br> лиц, делегаций и прессы, проведем<br> мероприятие с соблюдением протокола.</p></div></div></div></div><div class="col-lg-6 order-lg-1"><div class="organization-block__images"><svg class="organization-block__loader" viewBox="0 0 608 608" fill="none" stroke="currentColor"><path d="M607.5 607.5L0.499973 607.5L0.5 0.499973L348.846 0.499989L607.5 0.5L607.5 607.5Z"></path></svg><div class="organization-block__images-content"><div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service1.png" alt="service"></div><div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service2.png" alt="service"></div><div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service3.png" alt="service"></div><div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service4.png" alt="service"></div></div></div></div></div></div></div></div></section><section class="section team" id="team" data-scroll-block><div class="container"><div class="row"><div class="team-slider col-xl-9"><div class="team-slider__container"><div class="team-slider__slides"><div class="team-slider__image image image_cover"><img class="lazyload" src="./img/slastenko.jpg" alt="photo"></div><div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Fedunov.jpg" alt="photo"></div><div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Ovsyannikova.jpg" alt="photo"></div><div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Kozyavin.jpg" alt="photo"></div><div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Goncharuk.jpg" alt="photo"></div></div><div class="team-slider__nav"><div class="team-slider__info"><h4 class="team-slider__info-name">Виктор Сластенко</h4><span class="team-slider__info-position">Руководитель компании</span></div><div class="team-slider__info"><h4 class="team-slider__info-name">Денис Федунов</h4><span class="team-slider__info-position">Управляющий партнер</span></div><div class="team-slider__info"><h4 class="team-slider__info-name">Анжелика Овсянникова</h4><span class="team-slider__info-position">Управляющий партнер</span></div><div class="team-slider__info"><h4 class="team-slider__info-name">Александр Козявин</h4><span class="team-slider__info-position">Руководитель креативного отдела</span></div><div class="team-slider__info"><h4 class="team-slider__info-name">Сергей Гончарук</h4><span class="team-slider__info-position">Руководитель отдела реализации</span></div><div class="team-slider__loader"><div class="team-slider__loader-item"></div></div><a class="team-slider__button" href="javascript:void(0);"><span class="team-slider__button-index">01</span><span class="team-slider__button-index">02</span><span class="team-slider__button-index">03</span><span class="team-slider__button-index">04</span><span class="team-slider__button-index">05</span><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#arrow-right"></use></svg></a></div></div></div><div class="form-block col-auto"><div class="form-block__container"><div class="form-block__head"><h4 class="form-block__title">Концепт вашего<br> мероприятия за 24 часа!</h4><p class="form-block__text">Напишите несколько слов о ваших задачах, оставьте свои контакты, и мы бесплатно предложим варианты решений уже через сутки.</p></div><form class="form-block__form js-validation" action="#"><div class="row form-block__row"><div class="form-block__item col-sm-6"><div class="input form-block__input"><label class="input__label" for="phone">Введите телефон</label><input class="input__element" type="text" name="phone" id="phone" data-mask></div></div><div class="form-block__item col-sm-6"><div class="input form-block__input"><label class="input__label" for="email">Введите e-mail</label><input class="input__element" type="text" name="email" id="email"></div></div><div class="form-block__item col-12"><div class="input form-block__input"><label class="input__label" for="text">Оставьте комментарий</label><textarea class="input__element" type="text" name="text" id="text"></textarea></div></div><div class="form-block__item col-sm-6"><a class="button button_style-1 form-block__button" href="javascript:void(0);">Отправить</a></div></div></form><p class="form-block__alert">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p></div></div></div></div></section><section class="section services" id="services" data-scroll-block><div class="container"><h2 class="section__title">Наши услуги</h2></div><div class="services__container"><div class="container"><div class="row justify-content-center"><div class="col-xl-5 col-lg-8 col-md-10"><div class="row grid"><!--block--><div class="services-block col-6 grid__block"><div class="services-block__container jsTouchHover"><div class="services-block__front jsTouchHover"><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#ico-service1"></use></svg><h5 class="services-block__front-title">Мероприятия<br> для АПК<br><br></h5></div><div class="services-block__back"><div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a><div class="services-block__back-top"><h4 class="services-block__back-title">Мероприятия для АПК</h4><p class="services-block__back-text">Организация мероприятий формата «День поля» и событий для агропромышленного комплекса (АПК)</p></div><div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div></div></div></div></div><!--block--><div class="services-block col-6 grid__block"><div class="services-block__container jsTouchHover"><div class="services-block__front jsTouchHover"><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#ico-service2"></use></svg><h5 class="services-block__front-title">Юбилеи<br> и торжественные<br> открытия</h5></div><div class="services-block__back"><div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a><div class="services-block__back-top"><h4 class="services-block__back-title">Юбилеи и <span class="d-none d-sm-inline">торжестванные </span>открытия</h4><p class="services-block__back-text">Организация и проведение юбилейных мероприятий и торжественных открытий</p></div><div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div></div></div></div></div><!--block--><div class="services-block col-6 grid__block"><div class="services-block__container jsTouchHover"><div class="services-block__front jsTouchHover"><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#ico-service3"></use></svg><h5 class="services-block__front-title">Онлайн<br> мероприятия<br><br></h5></div><div class="services-block__back"><div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a><div class="services-block__back-top"><h4 class="services-block__back-title">Онлайн мероприятия</h4><p class="services-block__back-text">Уникальное онлайн-мероприятие для ваших коллег, партнеров и клиентов</p></div><div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div></div></div></div></div><!--block--><div class="services-block col-6 grid__block"><div class="services-block__container jsTouchHover"><div class="services-block__front jsTouchHover"><svg class="icon"><use xlink:href="./img/icons/icons-sprite.svg#ico-service4"></use></svg><h5 class="services-block__front-title">Обучающий<br> тренинг<br><br></h5></div><div class="services-block__back"><div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a><div class="services-block__back-top"><h4 class="services-block__back-title">Обучающий тренинг</h4><p class="services-block__back-text">Тонкости организации мероприятий с участием иностранных делегаций и представителей власти</p></div><div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div></div></div></div></div></div></div></div></div></div></section><section class="section clients" id="clients" data-scroll-block><div class="clients__container"><div class="container"><h2 class="section__title">Наши клиенты</h2><div class="row grid"><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.rosatom.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/ra.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://nlmk.com/ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/nlmk.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.vtb.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/vtb.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.molvest.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/m.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.gazprom.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/gz.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.pirelli.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/pi.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.sibur.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/sib.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.mrsk-1.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/mrsk-1.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.rzd.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/rzd.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://voronezh-rvk.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/rvk.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.kuhn.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/kuhn.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.slb.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/sch.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://agroeco.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/agro.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.vaderstad.com/ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/v.png" alt="clients"></a></div><div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://agro-lider.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/lid.png" alt="clients"></a></div></div></div></div></section><section class="section section_mb2 documents"><div class="container"><h2 class="section__title">Отзывы и благодарности</h2><div class="row grid"><div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block"><div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document1.png" alt="document"></div></div><div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block"><div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document2.jpg" alt="document"></div></div><div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block"><div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document3.jpg" alt="document"></div></div><div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block"><div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document4.jpg" alt="document"></div></div><div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block"><div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document5.jpg" alt="document"></div></div></div></div></section><section class="section section_pt section_pb feedback" id="feedback" data-scroll-block data-dark><div class="container"><div class="feedback-block"><h2 class="section__title feedback__title">Планируете провести мероприятие?</h2><p class="feedback-block__text">Обсудим оптимальный для ваших задач формат и подготовим проект мероприятия за 24 часа.</p><div class="feedback-block__buttons"><div class="row grid"><div class="col-sm-6 grid__block"><a class="button button_style-2" href="mailto:info@1faces.com">Написать нам</a></div><div class="col-sm-6 grid__block"><a class="button button_style-1" href="tel:+79103433330">Позвонить нам</a></div></div></div><p class="feedback-block__message">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p></div></div></section></main><footer class="footer" id="footer" data-scroll-block data-dark><div class="footer__map"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1237.436169187519!2d39.1985954!3d51.6621737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x413b2f3118f502b7%3A0x85a07b631eefa457!2zRXZlbnQt0LDQs9C10L3RgtGB0YLQstC-INCf0LXRgNCy0YvQtSDQm9C40YbQsA!5e0!3m2!1sru!2sde!4v1602224905382!5m2!1sru!2sde"></iframe></div><div class="footer__content"><div class="container footer__container"><div class="footer__contacts"><h4 class="footer__contacts-title">Контактная инфоромация</h4><ul class="footer__contacts-list"><li>Event-агентство «Первые Лица»</li><li>Россия, Воронеж</li><li>Плехановская улица, 9, оф. 308</li><li> <a href="tel:+74732602367">+7 (473) 2602367</a></li><li> <a href="tel:+79103433330">+7 (910) 3433330</a></li><li> <a href="mailto:info@1faces.com">info@1faces.com</a></li><li>©Event-агентство «Первые Лица» 2020</li></ul></div><div class="footer-socials"><ul class="footer-socials__list"><li class="footer-socials__item"><a class="footer-socials__link" href="https://vk.com/1facesvrn" rel="noffolow" target="_blank"><svg class="icon"><use xlink:href="./img/icons/socials-sprite.svg#vk"></use></svg></a></li><li class="footer-socials__item"><a class="footer-socials__link" href="https://www.facebook.com/1facesvrn" rel="noffolow" target="_blank"><svg class="icon"><use xlink:href="./img/icons/socials-sprite.svg#facebook"></use></svg></a></li><li class="footer-socials__item"><a class="footer-socials__link" href="https://www.youtube.com/channel/UCfUhPGTkoNZ6mqAAwUyyq9w?view_as=subscriber" rel="noffolow" target="_blank"><svg class="icon"><use xlink:href="./img/icons/socials-sprite.svg#youtube"></use></svg></a></li><li class="footer-socials__item"><a class="footer-socials__link" href="https://www.instagram.com/viktorslastenko/" rel="noffolow" target="_blank"><svg class="icon"><use xlink:href="./img/icons/socials-sprite.svg#insta"></use></svg></a></li></ul></div></div></div></footer><div class="helper"><a class="helper__trigger" href="javascript:void(0);"> <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20"><path d="M2.18 19.05L.77 17.64 8.4 10 .77 2.36 2.18.95 11.23 10l-9.05 9.05z"></path></svg></a><div class="helper__container"><!--section--><div class="helper__section"><span class="helper__section-title">Акцентные цвета:</span><div class="helper__section-content"><a class="helper__accent helper__accent_1 active" href="javascript:void(0);"></a><a class="helper__accent helper__accent_2" href="javascript:void(0);"></a></div></div><!--section--><div class="helper__section"><span class="helper__section-title">Страницы:</span><div class="helper__section-content"><a class="helper__section-button" href="index.html">Главная</a></div></div></div></div></div><!--styles--><link rel="stylesheet" href="./styles/common.min.css"><!--js--><script src="./scripts/common.min.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Первые лица - Организация мероприятий</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--color-->
+    <meta name="theme-color" content="#141418">
+    <!--favicons-->
+    <link rel="shortcut icon" href="img/favicons/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="img/favicons/favicon-16x16.png" type="image/png">
+    <link rel="icon" sizes="32x32" href="img/favicons/favicon-32x32.png" type="image/png">
+    <link rel="apple-touch-icon-precomposed" href="img/favicons/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="img/favicons/apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png">
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="preloader__container">
+        <svg class="preloader__icon" viewBox="0 0 120 91">
+          <defs>
+            <mask id="mask" x="0" y="0" width="100" height="100">
+              <rect x="0" y="0" width="100%" height="100%" fill="#000"></rect>
+              <path fill="#fff" d="M91.0829 41.3262C101.176 40.3158 109.176 37.5758 111.687 36.6401C116.227 28.6103 118.966 19.4282 119.341 9.63672C113.293 17.1255 105.865 23.4516 97.4411 28.228C92.238 31.1782 86.6574 33.5392 80.787 35.2155C76.5091 36.437 72.0746 37.2839 67.5258 37.7437C65.4677 37.0247 65.2174 29.824 65.6916 28.2832C65.7898 27.9637 65.846 27.5186 65.8392 27.0131C67.4583 26.9841 69.3407 27.0296 69.9454 27.3618C69.8812 24.2119 66.3624 23.7418 64.765 23.6905C63.9813 22.6431 62.702 21.8488 60.68 21.8488C51.7515 21.8488 55.1492 31.0003 51.5284 37.709C47.1192 37.2424 42.8195 36.4091 38.6662 35.2252C32.793 33.551 27.2098 31.1907 22.0041 28.2417C13.5701 23.4636 6.13368 17.1326 0.0800781 9.63672C0.454572 19.4204 3.18919 28.5961 7.72282 36.6214C10.1748 37.5385 18.2147 40.309 28.3767 41.3262C23.3958 42.4131 16.4445 42.1661 10.5637 41.1548C11.1781 42.0452 11.8076 42.9246 12.4683 43.7794C13.6572 45.3173 14.9238 46.7917 16.2544 48.2049C20.2195 48.3253 27.0896 48.0988 34.8027 45.9258C30.9002 48.4032 25.0981 50.4089 19.6735 51.5603C21.8386 53.5206 24.1486 55.3229 26.585 56.952C30.4332 55.603 36.0466 53.1881 41.772 49.1581C39.0461 52.624 34.5472 56.2566 30.0296 59.0916C31.1229 59.7197 32.236 60.3178 33.3718 60.8772C34.883 61.6219 36.4332 62.2991 38.0133 62.9162C40.922 60.6833 44.9489 57.1485 49.1043 52.1031C47.4212 56.1072 44.8252 60.4649 41.6882 64.2111C44.8946 65.2257 48.2148 65.9846 51.6304 66.4469C48.9111 71.2564 45.6873 75.7419 42.0301 79.8328C43.7791 81.8803 45.742 83.7386 47.8837 85.3748C50.1482 80.9183 52.5683 76.4971 55.3829 72.7759C53.117 78.6923 51.5957 83.6951 50.6285 87.281C52.931 88.7386 55.4002 89.9547 58.0037 90.8933C58.2386 86.9762 58.829 78.3249 59.7204 73.2442V73.1344C59.7237 73.1523 59.7265 73.1715 59.7298 73.1893C59.7329 73.1715 59.7359 73.1523 59.739 73.1344V73.2442C60.6306 78.3249 61.2209 86.9762 61.4557 90.8933C64.0592 89.9547 66.5286 88.7391 68.8311 87.2818C67.8639 83.6956 66.3426 78.6928 64.0765 72.7759C66.8911 76.4968 69.3109 80.918 71.5754 85.3743C73.7598 83.7058 75.7591 81.8073 77.5341 79.712C73.9133 75.6442 70.7197 71.1887 68.0233 66.4144C71.3678 65.9483 74.6207 65.1985 77.7639 64.2023C74.6302 60.4581 72.037 56.1038 70.3554 52.1031C74.5041 57.1404 78.5246 60.672 81.4323 62.9055C83.0182 62.2854 84.5738 61.6054 86.0904 60.8569C87.2187 60.2998 88.3249 59.7048 89.4116 59.08C84.9001 56.2467 80.4094 52.6193 77.6873 49.1581C83.4002 53.1794 89.0016 55.5922 92.8489 56.9428C95.2829 55.3145 97.5908 53.513 99.754 51.5539C94.3386 50.4014 88.5516 48.3983 84.6566 45.9258C92.3438 48.0915 99.1939 48.3237 103.165 48.2063C104.506 46.7818 105.782 45.2956 106.979 43.7444C107.629 42.9034 108.248 42.0382 108.852 41.1624C102.98 42.1673 96.0513 42.4105 91.0829 41.3262ZM62.9206 25.8162C62.3532 25.8162 61.8935 25.3562 61.8935 24.789C61.8935 24.6646 61.9237 24.5486 61.9641 24.4382H63.8769C63.9175 24.5486 63.9478 24.6646 63.9478 24.789C63.9478 25.3562 63.4878 25.8162 62.9206 25.8162Z"></path>
+              <path fill="#fff" d="M59.9041 18.1665C63.8989 18.0912 65.3461 20.014 65.3461 20.014L68.8044 8.24225L63.8554 13.5212C63.8554 16.1599 61.4885 15.8779 61.4885 14.0581C61.4885 12.2383 62.5428 11.847 62.5428 9.39033C62.5428 6.93367 60.7078 5.7625 59.9041 0.576172C59.1005 5.7625 57.2656 6.93367 57.2656 9.39033C57.2656 11.847 58.3199 12.2383 58.3199 14.0581C58.3199 15.8779 55.9529 16.1599 55.9529 13.5212L51.0039 8.24225L54.4622 20.014C54.4622 20.014 55.9095 18.0912 59.9041 18.1665Z"></path>
+            </mask>
+          </defs>
+          <image width="100%" height="100%" y="0" x="0" xlink:href="./img/mask.png" mask="url(#mask)"></image>
+        </svg>
+      </div>
+      <style>
+        .preloader {
+          display: flex;
+          position: fixed;
+          z-index:1000;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+        .preloader__container {
+          width: 180px;
+          height: 180px;
+          margin: auto;
+          animation: rotation 2s linear infinite;
+          position:relative;
+        }
+        .preloader__ratation {
+          width: 100%;
+          height: 100%;
+          position:relative;
+          
+        }
+        @keyframes rotation {
+          0% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
+          }
+          50% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 180deg);
+          }
+          100% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 360deg);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity:0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity:1;
+            transform: scale(1);
+          }
+        }
+        .preloader__icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          animation: fadeIn 1s ease-in-out;
+        }
+        
+        @media(max-width:575px) {
+           .preloader__container {
+             width: 140px;
+             height: 140px;
+           }
+        }
+        .preloader__container.fadeIn {
+          transform: scale(1);
+          opacity: 1;
+        }
+        .preloader__bg {
+          fill: #AFB3BD;
+        }
+        .preloader__mask {
+          fill: #E61515;
+          transition: .05s linear;
+        }
+      </style>
+    </div>
+    <div class="wrapper" style="opacity:0;">
+      <header class="header header_type-home">
+        <div class="container header__container"> 
+          <div class="header__left">
+            <div class="logo"><a class="logo__link" href="index.html"><img class="logo__image" src="./img/logos/main_logo.svg" alt="logo"></a></div><a class="header__phone" href="tel:+74732602367"> 
+              <svg class="icon">
+                <use xlink:href="./img/icons/icons-sprite.svg#phone"></use>
+              </svg>+7 (473) 260-23-67</a>
+          </div><a class="nav-toggle" href="javascript:void(0);"> <span></span><span></span><span></span></a>
+        </div>
+      </header>
+      <main class="main">
+        <div class="background lazyload main-bg" data-src="./img/background2.png"></div>
+        <div class="home-dots"><a class="home-dots__link" href="#home"> <span>Главная</span></a><a class="home-dots__link" href="#about"><span>Эффектно эффективно</span></a><a class="home-dots__link" href="#video"><span>за 90 миунт о 1 лицах</span></a><a class="home-dots__link" href="#organization"><span>Организация</span></a><a class="home-dots__link" href="#team"><span>Команда</span></a><a class="home-dots__link" href="#services"><span>Услуги</span></a><a class="home-dots__link" href="#clients"><span>Клиенты</span></a><a class="home-dots__link" href="#feedback"><span>Обратная связь</span></a><a class="home-dots__link" href="#footer"><span>Контакты</span></a></div>
+        <section class="section section_mb2 desktop-background-wrapper" data-dark>
+          <div class="desktop-background-wrapper__background" style="background-image:url(&quot;./img/iStock-613111906.jpg&quot;);"></div>
+          <section class="section home" id="home" data-scroll-block>
+            <div class="home__mobile-background" style="background-image:url(&quot;./img/mobile-home-bg.jpg&quot;);"></div><span class="home__vertical-line"></span>
+            <div class="home-background-video">
+              <div class="home-background-video__wrap">
+                <div class="home-background-video__element" id="bg-player"></div>
+              </div>
+            </div>
+            <div class="container home__container"><a class="home-mobile-play home__item" href="https://youtu.be/0zxNqsKiQxE" data-video>
+                <svg class="icon">
+                  <use xlink:href="./img/icons/icons-sprite.svg#play"></use>
+                </svg></a>
+              <div class="home__items">
+                <div class="home-logo home__item">
+                  <svg class="home-logo__circle" viewBox="0 0 340 340">
+                    <path d="M335,170c0,91.1-73.9,165-165,165C78.9,335,5,261.1,5,170c0-42.7,16.2-81.6,42.9-110.9C78,25.8,121.6,5,170,5C261.1,5,335,78.9,335,170z"></path>
+                  </svg><img class="home-logo__image" src="./img/logos/logo.svg" alt="logo">
+                  <h2 class="home-logo__title">Первые лица</h2><span class="home-logo__text">Организация мероприятий</span>
+                </div>
+                <h1 class="home__title home__item">Организация и проведение<br> мероприятий</h1>
+                <p class="home__text home__text_desktop home__item">Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!</p>
+                <p class="home__text home__text_mobile home__item">Концепт мероприятия<br> под ключ за 24 часа!</p><a class="button button_style-1 home__button home__item" href="mailto:info@1faces.com">Свяжитесь с нами</a>
+              </div>
+            </div>
+          </section>
+          <section class="section section_pt about" id="about" data-scroll-block>
+            <div class="container">
+              <svg class="about__text-image about__text-image_1 js-scroll-animated" viewBox="0 0 678 106" fill="currentColor">
+                <path d="M0.698131 89.7408C-0.139626 89.0686 -0.223402 88.1863 0.446804 87.0939L6.35299 78.5232C6.93942 77.4308 7.77718 77.2628 8.86626 78.019C14.9819 82.4725 21.9353 84.6992 29.7264 84.6992C35.842 84.6992 40.5754 83.1027 43.9264 79.9096C47.3612 76.6326 49.0786 72.1371 49.0786 66.4233V59.6171H20.0503C18.7937 59.6171 18.1654 59.0289 18.1654 57.8526V47.5172C18.1654 46.3409 18.7937 45.7527 20.0503 45.7527H49.0786V38.1903C49.0786 32.5604 47.3612 28.149 43.9264 24.956C40.5754 21.763 35.8839 20.1665 29.8521 20.1665C22.8149 20.1665 16.5736 22.0571 11.1282 25.8383C9.95534 26.5105 9.0757 26.3425 8.48927 25.3341L2.58308 16.7634C1.91288 15.7551 2.03854 14.9148 2.96007 14.2426C11.0025 8.61276 19.9665 5.79786 29.8521 5.79786C39.7376 5.79786 47.9476 8.57075 54.4821 14.1165C61.0166 19.5783 64.2839 27.5608 64.2839 38.0642V66.8014C64.2839 77.3888 61.0166 85.4134 54.4821 90.8752C47.9476 96.3369 39.6538 99.0678 29.6007 99.0678C18.291 99.0678 8.65682 95.9588 0.698131 89.7408Z"></path>
+                <path d="M131.854 106H120.418C119.245 106 118.659 105.37 118.659 104.109V95.2866H112.753C103.118 95.2866 95.076 92.3876 88.6253 86.5898C82.1746 80.7919 78.9492 72.1792 78.9492 60.7515V44.3662C78.9492 33.0226 82.1327 24.4939 88.4996 18.78C94.9504 12.9822 103.035 10.0832 112.753 10.0832H118.659V1.76457C118.659 0.588189 119.245 0 120.418 0H131.854C133.11 0 133.738 0.588189 133.738 1.76457V10.0832H139.645C149.363 10.0832 157.405 12.9822 163.772 18.78C170.223 24.4939 173.448 33.0226 173.448 44.3662V60.7515C173.448 72.1792 170.223 80.7919 163.772 86.5898C157.321 92.3876 149.279 95.2866 139.645 95.2866H133.738V104.109C133.738 105.37 133.11 106 131.854 106ZM94.5315 61.0036C94.5315 67.8938 96.2908 72.9354 99.8093 76.1284C103.328 79.3214 107.894 80.918 113.507 80.918H118.659V24.3258H113.507C100.857 24.3258 94.5315 30.9639 94.5315 44.2402V61.0036ZM133.738 24.3258V80.918H138.891C144.504 80.918 149.069 79.3214 152.588 76.1284C156.107 72.9354 157.866 67.8938 157.866 61.0036V44.2402C157.866 30.9639 151.541 24.3258 138.891 24.3258H133.738Z"></path>
+                <path d="M240.705 106H229.269C228.096 106 227.51 105.37 227.51 104.109V95.2866H221.604C211.97 95.2866 203.927 92.3876 197.476 86.5898C191.026 80.7919 187.8 72.1792 187.8 60.7515V44.3662C187.8 33.0226 190.984 24.4939 197.351 18.78C203.801 12.9822 211.886 10.0832 221.604 10.0832H227.51V1.76457C227.51 0.588189 228.096 0 229.269 0H240.705C241.961 0 242.59 0.588189 242.59 1.76457V10.0832H248.496C258.214 10.0832 266.256 12.9822 272.623 18.78C279.074 24.4939 282.299 33.0226 282.299 44.3662V60.7515C282.299 72.1792 279.074 80.7919 272.623 86.5898C266.172 92.3876 258.13 95.2866 248.496 95.2866H242.59V104.109C242.59 105.37 241.961 106 240.705 106ZM203.383 61.0036C203.383 67.8938 205.142 72.9354 208.66 76.1284C212.179 79.3214 216.745 80.918 222.358 80.918H227.51V24.3258H222.358C209.708 24.3258 203.383 30.9639 203.383 44.2402V61.0036ZM242.59 24.3258V80.918H247.742C253.355 80.918 257.921 79.3214 261.439 76.1284C264.958 72.9354 266.717 67.8938 266.717 61.0036V44.2402C266.717 30.9639 260.392 24.3258 247.742 24.3258H242.59Z"></path>
+                <path d="M314.998 58.6088V83.5648H355.336C356.593 83.5648 357.221 84.153 357.221 85.3294V95.5386C357.221 96.799 356.593 97.4293 355.336 97.4293H301.552C300.379 97.4293 299.793 96.799 299.793 95.5386V9.20095C299.793 7.94055 300.379 7.31035 301.552 7.31035H353.577C354.834 7.31035 355.462 7.94055 355.462 9.20095V19.4102C355.462 20.5866 354.834 21.1748 353.577 21.1748H314.998V44.7444H350.31C351.566 44.7444 352.195 45.3746 352.195 46.635V56.7182C352.195 57.9786 351.566 58.6088 350.31 58.6088H314.998Z"></path>
+                <path d="M386.744 97.4293H375.183C374.01 97.4293 373.424 96.799 373.424 95.5386V9.20095C373.424 7.94055 374.01 7.31035 375.183 7.31035H386.744C387.917 7.31035 388.504 7.94055 388.504 9.20095V45.7527L419.919 8.44471C420.673 7.68847 421.427 7.31035 422.181 7.31035H436.884C437.722 7.31035 438.224 7.56243 438.392 8.06659C438.643 8.48672 438.518 8.99089 438.015 9.57908L404.714 47.5172L440.78 95.1605C441.282 95.8327 441.408 96.3789 441.157 96.799C440.905 97.2192 440.403 97.4293 439.649 97.4293H424.946C423.857 97.4293 423.103 97.0511 422.684 96.2949L394.787 58.6088L388.504 65.415V95.5386C388.504 96.799 387.917 97.4293 386.744 97.4293Z"></path>
+                <path d="M444.807 7.31035H510.529C511.785 7.31035 512.414 7.94055 512.414 9.20095V19.5363C512.414 20.7126 511.785 21.3008 510.529 21.3008H485.27V95.5386C485.27 96.799 484.684 97.4293 483.511 97.4293H471.95C470.777 97.4293 470.191 96.799 470.191 95.5386V21.3008H444.807C443.55 21.3008 442.922 20.7126 442.922 19.5363V9.20095C442.922 7.94055 443.55 7.31035 444.807 7.31035Z"></path>
+                <path d="M574.761 44.8704V9.20095C574.761 7.94055 575.348 7.31035 576.521 7.31035H588.082C589.255 7.31035 589.841 7.94055 589.841 9.20095V95.5386C589.841 96.799 589.255 97.4293 588.082 97.4293H576.521C575.348 97.4293 574.761 96.799 574.761 95.5386V58.8609H539.324V95.5386C539.324 96.799 538.738 97.4293 537.565 97.4293H526.004C524.831 97.4293 524.245 96.799 524.245 95.5386V9.20095C524.245 7.94055 524.831 7.31035 526.004 7.31035H537.565C538.738 7.31035 539.324 7.94055 539.324 9.20095V44.8704H574.761Z"></path>
+                <path d="M678 63.9025C678 74.91 674.9 83.5228 668.701 89.7408C662.501 95.8748 653.831 98.9417 642.688 98.9417C631.546 98.9417 622.876 95.8748 616.676 89.7408C610.477 83.5228 607.377 74.91 607.377 63.9025V40.7111C607.377 29.7035 610.477 21.1328 616.676 14.9988C622.876 8.86484 631.546 5.79786 642.688 5.79786C653.831 5.79786 662.501 8.86484 668.701 14.9988C674.9 21.1328 678 29.7035 678 40.7111V63.9025ZM622.834 63.9025C622.834 70.6247 624.509 75.7503 627.86 79.2794C631.211 82.8086 636.154 84.5731 642.688 84.5731C649.223 84.5731 654.166 82.8086 657.517 79.2794C660.868 75.7503 662.543 70.6247 662.543 63.9025V40.8371C662.543 26.9727 655.925 20.0404 642.688 20.0404C629.452 20.0404 622.834 26.9727 622.834 40.8371V63.9025Z"></path>
+              </svg>
+              <svg class="about__text-image about__text-image_2 js-scroll-animated" viewBox="0 0 846 108" fill="currentColor">
+                <path d="M0.696715 91.434C-0.139343 90.7491 -0.222949 89.8502 0.445897 88.7372L6.3401 80.0048C6.92534 78.8918 7.7614 78.7206 8.84828 79.4911C14.9515 84.0285 21.8908 86.2973 29.6661 86.2973C35.7693 86.2973 40.4931 84.6706 43.8373 81.4174C47.2651 78.0785 48.979 73.4982 48.979 67.6766V60.742H20.0096C18.7556 60.742 18.1285 60.1427 18.1285 58.9441V48.4138C18.1285 47.2152 18.7556 46.6159 20.0096 46.6159H48.979V38.9108C48.979 33.1748 47.2651 28.6801 43.8373 25.4269C40.4931 22.1736 35.8111 20.547 29.7915 20.547C22.7686 20.547 16.54 22.4733 11.1056 26.3258C9.93515 27.0107 9.05729 26.8395 8.47205 25.8121L2.57784 17.0797C1.909 16.0523 2.03441 15.1962 2.95407 14.5113C10.9802 8.77527 19.926 5.90725 29.7915 5.90725C39.657 5.90725 47.8504 8.73246 54.3716 14.3829C60.8929 19.9477 64.1535 28.0809 64.1535 38.7824V68.0618C64.1535 78.849 60.8929 87.025 54.3716 92.5898C47.8504 98.1546 39.5734 100.937 29.5407 100.937C18.2539 100.937 8.63926 97.7693 0.696715 91.434Z"></path>
+                <path d="M131.586 108H120.174C119.003 108 118.418 107.358 118.418 106.074V97.0844H112.524C102.909 97.0844 94.8832 94.1308 88.4455 88.2235C82.0079 82.3163 78.7891 73.541 78.7891 61.8977V45.2033C78.7891 33.6457 81.9661 24.956 88.3201 19.1344C94.7578 13.2271 102.826 10.2735 112.524 10.2735H118.418V1.79786C118.418 0.599286 119.003 0 120.174 0H131.586C132.84 0 133.467 0.599286 133.467 1.79786V10.2735H139.361C149.06 10.2735 157.086 13.2271 163.44 19.1344C169.878 24.956 173.096 33.6457 173.096 45.2033V61.8977C173.096 73.541 169.878 82.3163 163.44 88.2235C157.002 94.1308 148.976 97.0844 139.361 97.0844H133.467V106.074C133.467 107.358 132.84 108 131.586 108ZM94.3398 62.1546C94.3398 69.1748 96.0955 74.3115 99.6069 77.5648C103.118 80.8181 107.675 82.4447 113.276 82.4447H118.418V24.7848H113.276C100.652 24.7848 94.3398 31.5482 94.3398 45.0749V62.1546ZM133.467 24.7848V82.4447H138.609C144.211 82.4447 148.767 80.8181 152.279 77.5648C155.79 74.3115 157.546 69.1748 157.546 62.1546V45.0749C157.546 31.5482 151.233 24.7848 138.609 24.7848H133.467Z"></path>
+                <path d="M240.216 108H228.804C227.634 108 227.049 107.358 227.049 106.074V97.0844H221.154C211.54 97.0844 203.514 94.1308 197.076 88.2235C190.638 82.3163 187.419 73.541 187.419 61.8977V45.2033C187.419 33.6457 190.596 24.956 196.95 19.1344C203.388 13.2271 211.456 10.2735 221.154 10.2735H227.049V1.79786C227.049 0.599286 227.634 0 228.804 0H240.216C241.471 0 242.098 0.599286 242.098 1.79786V10.2735H247.992C257.69 10.2735 265.716 13.2271 272.07 19.1344C278.508 24.956 281.727 33.6457 281.727 45.2033V61.8977C281.727 73.541 278.508 82.3163 272.07 88.2235C265.633 94.1308 257.606 97.0844 247.992 97.0844H242.098V106.074C242.098 107.358 241.471 108 240.216 108ZM202.97 62.1546C202.97 69.1748 204.726 74.3115 208.237 77.5648C211.749 80.8181 216.305 82.4447 221.907 82.4447H227.049V24.7848H221.907C209.282 24.7848 202.97 31.5482 202.97 45.0749V62.1546ZM242.098 24.7848V82.4447H247.239C252.841 82.4447 257.397 80.8181 260.909 77.5648C264.42 74.3115 266.176 69.1748 266.176 62.1546V45.0749C266.176 31.5482 259.864 24.7848 247.239 24.7848H242.098Z"></path>
+                <path d="M314.359 59.7146V85.1415H354.616C355.87 85.1415 356.497 85.7408 356.497 86.9394V97.3413C356.497 98.6255 355.87 99.2675 354.616 99.2675H300.941C299.77 99.2675 299.185 98.6255 299.185 97.3413V9.37456C299.185 8.09037 299.77 7.44828 300.941 7.44828H352.86C354.114 7.44828 354.741 8.09037 354.741 9.37456V19.7765C354.741 20.975 354.114 21.5743 352.86 21.5743H314.359V45.5886H349.599C350.853 45.5886 351.48 46.2307 351.48 47.5149V57.7883C351.48 59.0725 350.853 59.7146 349.599 59.7146H314.359Z"></path>
+                <path d="M385.96 99.2675H374.422C373.252 99.2675 372.667 98.6255 372.667 97.3413V9.37456C372.667 8.09037 373.252 7.44828 374.422 7.44828H385.96C387.13 7.44828 387.716 8.09037 387.716 9.37456V46.6159L419.068 8.60405C419.82 7.83353 420.573 7.44828 421.325 7.44828H435.998C436.834 7.44828 437.336 7.70512 437.503 8.21879C437.754 8.64685 437.628 9.16053 437.127 9.75981L403.893 48.4138L439.886 96.956C440.387 97.6409 440.513 98.1974 440.262 98.6254C440.011 99.0535 439.509 99.2675 438.757 99.2675H424.084C422.997 99.2675 422.245 98.8823 421.827 98.1118L393.986 59.7146L387.716 66.6492V97.3413C387.716 98.6255 387.13 99.2675 385.96 99.2675Z"></path>
+                <path d="M443.905 7.44828H509.493C510.747 7.44828 511.374 8.09037 511.374 9.37456V19.9049C511.374 21.1035 510.747 21.7027 509.493 21.7027H484.286V97.3413C484.286 98.6255 483.701 99.2675 482.53 99.2675H470.993C469.822 99.2675 469.237 98.6255 469.237 97.3413V21.7027H443.905C442.651 21.7027 442.023 21.1035 442.023 19.9049V9.37456C442.023 8.09037 442.651 7.44828 443.905 7.44828Z"></path>
+                <path d="M589.397 99.2675H577.985C576.815 99.2675 576.229 98.6255 576.229 97.3413V67.9334C576.229 57.6599 576.606 45.8882 577.358 32.6183L576.982 32.4899C572.969 41.2224 568.496 49.6552 563.563 57.7883L539.861 97.9834C539.359 98.8395 538.649 99.2675 537.729 99.2675H525.063C523.809 99.2675 523.182 98.6255 523.182 97.3413V9.37456C523.182 8.09037 523.809 7.44828 525.063 7.44828H536.349C537.603 7.44828 538.23 8.09037 538.23 9.37456V40.7087C538.23 53.0369 537.854 64.6373 537.102 75.5101L537.478 75.6385C539.819 71.1011 543.999 63.3532 550.019 52.3948L574.474 8.73246C575.059 7.87634 575.811 7.44828 576.731 7.44828H589.397C590.568 7.44828 591.153 8.09037 591.153 9.37456V97.3413C591.153 98.6255 590.568 99.2675 589.397 99.2675Z"></path>
+                <path d="M672.926 32.6183C672.926 40.9227 669.958 46.9156 664.022 50.5969C672.55 54.3639 676.814 61.4269 676.814 71.786C676.814 80.4328 674.097 87.1962 668.662 92.0761C663.228 96.8704 655.703 99.2675 646.089 99.2675H613.483C612.312 99.2675 611.727 98.6255 611.727 97.3413V9.37456C611.727 8.09037 612.312 7.44828 613.483 7.44828H646.089C654.533 7.44828 661.096 9.6742 665.778 14.126C670.544 18.4923 672.926 24.6564 672.926 32.6183ZM626.776 85.3983H645.963C656.247 85.3983 661.389 80.8181 661.389 71.6576C661.389 67.4626 660.093 64.1665 657.501 61.7693C654.909 59.2866 651.022 58.0452 645.838 58.0452H626.776V85.3983ZM657.626 32.8751C657.626 29.1082 656.498 26.2402 654.24 24.2711C652.067 22.302 649.182 21.3175 645.587 21.3175H626.776V44.5612H645.587C649.266 44.5612 652.192 43.5767 654.366 41.6076C656.54 39.6385 657.626 36.7277 657.626 32.8751Z"></path>
+                <path d="M742.971 45.717V9.37456C742.971 8.09037 743.556 7.44828 744.727 7.44828H756.264C757.435 7.44828 758.02 8.09037 758.02 9.37456V97.3413C758.02 98.6255 757.435 99.2675 756.264 99.2675H744.727C743.556 99.2675 742.971 98.6255 742.971 97.3413V59.9715H707.606V97.3413C707.606 98.6255 707.02 99.2675 705.85 99.2675H694.312C693.142 99.2675 692.557 98.6255 692.557 97.3413V9.37456C692.557 8.09037 693.142 7.44828 694.312 7.44828H705.85C707.02 7.44828 707.606 8.09037 707.606 9.37456V45.717H742.971Z"></path>
+                <path d="M846 65.1082C846 76.3234 842.907 85.0987 836.72 91.434C830.533 97.6837 821.88 100.809 810.76 100.809C799.641 100.809 790.987 97.6837 784.801 91.434C778.614 85.0987 775.52 76.3234 775.52 65.1082V41.4792C775.52 30.264 778.614 21.5315 784.801 15.2818C790.987 9.03211 799.641 5.90725 810.76 5.90725C821.88 5.90725 830.533 9.03211 836.72 15.2818C842.907 21.5315 846 30.264 846 41.4792V65.1082ZM790.946 65.1082C790.946 71.9572 792.618 77.1796 795.962 80.7753C799.306 84.371 804.239 86.1689 810.76 86.1689C817.281 86.1689 822.214 84.371 825.558 80.7753C828.903 77.1796 830.575 71.9572 830.575 65.1082V41.6076C830.575 27.4816 823.97 20.4186 810.76 20.4186C797.55 20.4186 790.946 27.4816 790.946 41.6076V65.1082Z"></path>
+              </svg><img class="about__logo js-scroll-animated" src="./img/logos/logo.svg" alt="logo">
+              <div class="about__container">
+                <div class="about__text-section js-scroll-animated">
+                  <h2 class="about__title">Мы решаем</h2>
+                  <p class="about__text">Бизнес-задачи, создавая неповторимые и эффектные события с учетом специфики вашей отрасли и всех тонкостей вашей деятельности. Мы полностью берем на себя все вопросы по организации и проведению мероприятий — от концепции до менеджмента на площадке. </p>
+                </div>
+                <div class="about__text-section js-scroll-animated">
+                  <h2 class="about__title">ВЫ получаете</h2>
+                  <p class="about__text">Команду с 10-ти летним опытом организации мероприятий, прозрачность на всех этапах подготовки, оптимальный бюджет,  внимательность к деталям, отсутствие стресса в день события.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="section section_pb video-section" id="video" data-scroll-block data-black>
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-10"><a class="video-section__video image image_cover" href="https://youtu.be/OCYLrB_KrSM" data-video><img class="lazyload" data-src="./img/2I5A5799 2.jpg" alt="image">
+                    <div class="video-section__video-text"> <span>За 90 секунд о первых лицах </span>
+                      <svg class="icon">
+                        <use xlink:href="./img/icons/icons-sprite.svg#play"></use>
+                      </svg>
+                    </div></a></div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section class="section organization" id="organization" data-scroll-block>
+          <div class="container">
+            <h3 class="section__title organization__title">Берем на себя все<br> организационные задачи:</h3>
+            <div class="organization__container row justify-content-center">
+              <div class="col-xl-10 col-lg-12 col-md-10">
+                <div class="organization-block row"> 
+                  <div class="col-lg-6 order-lg-2">
+                    <div class="organization-block__content">
+                      <div class="organization-block__item">
+                        <h3 class="organization-block__item-title jsTouchHover">Концепция </h3>
+                        <div class="organization-block__item-content">
+                          <p class="organization-block__item-text">Разработаем концепцию и напишем<br> подробный сценарий мероприятия<br> в соответствии с вашими задачами.</p>
+                        </div>
+                      </div>
+                      <div class="organization-block__item">
+                        <h3 class="organization-block__item-title jsTouchHover">Площадка</h3>
+                        <div class="organization-block__item-content"> 
+                          <p class="organization-block__item-text">Подберем и зарезервируем площадку,<br> обеспечим полное техническое оснащение,<br> оформление и брендирование.</p>
+                        </div>
+                      </div>
+                      <div class="organization-block__item">
+                        <h3 class="organization-block__item-title jsTouchHover">Кейтеринг</h3>
+                        <div class="organization-block__item-content">
+                          <p class="organization-block__item-text">Организуем профессиональное<br> ресторанное обслуживание, банкеты<br> и фуршеты на любой площадке.</p>
+                        </div>
+                      </div>
+                      <div class="organization-block__item">
+                        <h3 class="organization-block__item-title jsTouchHover">Протокол и СМИ </h3>
+                        <div class="organization-block__item-content">
+                          <p class="organization-block__item-text">Обеспечим комфортное присутствие первых<br> лиц, делегаций и прессы, проведем<br> мероприятие с соблюдением протокола.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 order-lg-1">
+                    <div class="organization-block__images">
+                      <svg class="organization-block__loader" viewBox="0 0 608 608" fill="none" stroke="currentColor">
+                        <path d="M607.5 607.5L0.499973 607.5L0.5 0.499973L348.846 0.499989L607.5 0.5L607.5 607.5Z"></path>
+                      </svg>
+                      <div class="organization-block__images-content">
+                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service1.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service2.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service3.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service4.png" alt="service"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section team" id="team" data-scroll-block>
+          <div class="container">
+            <div class="row">
+              <div class="team-slider col-xl-9">
+                <div class="team-slider__container">
+                  <div class="team-slider__slides">
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Slastenko.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Fedunov.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Ovsyannikova.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Kozyavin.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Goncharuk.jpg" alt="photo"></div>
+                  </div>
+                  <div class="team-slider__nav">
+                                        <div class="team-slider__info">
+                                          <h4 class="team-slider__info-name">Виктор Сластенко</h4><span class="team-slider__info-position">Руководитель компании</span>
+                                        </div>
+                                        <div class="team-slider__info">
+                                          <h4 class="team-slider__info-name">Денис Федунов</h4><span class="team-slider__info-position">Управляющий партнер</span>
+                                        </div>
+                                        <div class="team-slider__info">
+                                          <h4 class="team-slider__info-name">Анжелика Овсянникова</h4><span class="team-slider__info-position">Управляющий партнер</span>
+                                        </div>
+                                        <div class="team-slider__info">
+                                          <h4 class="team-slider__info-name">Александр Козявин</h4><span class="team-slider__info-position">Руководитель креативного отдела</span>
+                                        </div>
+                                        <div class="team-slider__info">
+                                          <h4 class="team-slider__info-name">Сергей Гончарук</h4><span class="team-slider__info-position">Руководитель отдела реализации</span>
+                                        </div>
+                    <div class="team-slider__loader">
+                      <div class="team-slider__loader-item"></div>
+                    </div><a class="team-slider__button" href="javascript:void(0);"><span class="team-slider__button-index">01</span><span class="team-slider__button-index">02</span><span class="team-slider__button-index">03</span><span class="team-slider__button-index">04</span><span class="team-slider__button-index">05</span>
+                      <svg class="icon">
+                        <use xlink:href="./img/icons/icons-sprite.svg#arrow-right"></use>
+                      </svg></a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-block col-auto">
+                <div class="form-block__container">
+                  <div class="form-block__head">
+                    <h4 class="form-block__title">Концепт вашего<br> мероприятия за 24 часа!</h4>
+                    <p class="form-block__text">Напишите несколько слов о ваших задачах, оставьте свои контакты, и мы бесплатно предложим варианты решений уже через сутки.</p>
+                  </div>
+                  <form class="form-block__form js-validation" action="#">
+                    <div class="row form-block__row">
+                      <div class="form-block__item col-sm-6">
+                        <div class="input form-block__input">
+                          <label class="input__label" for="phone">Введите телефон</label>
+                          <input class="input__element" type="text" name="phone" id="phone" data-mask>
+                        </div>
+                      </div>
+                      <div class="form-block__item col-sm-6">
+                        <div class="input form-block__input">
+                          <label class="input__label" for="email">Введите e-mail</label>
+                          <input class="input__element" type="text" name="email" id="email">
+                        </div>
+                      </div>
+                      <div class="form-block__item col-12">
+                        <div class="input form-block__input">
+                          <label class="input__label" for="text">Оставьте комментарий</label>
+                          <textarea class="input__element" type="text" name="text" id="text"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-block__item col-sm-6"><a class="button button_style-1 form-block__button" href="javascript:void(0);">Отправить</a></div>
+                    </div>
+                  </form>
+                  <p class="form-block__alert">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section services" id="services" data-scroll-block>
+          <div class="container">
+            <h2 class="section__title">Наши услуги</h2>
+          </div>
+          <div class="services__container">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-xl-5 col-lg-8 col-md-10">
+                  <div class="row grid">
+                    <!--block-->
+                    <div class="services-block col-6 grid__block">
+                      <div class="services-block__container jsTouchHover">
+                        <div class="services-block__front jsTouchHover">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#ico-service1"></use>
+                          </svg>
+                          <h5 class="services-block__front-title">Мероприятия<br> для АПК<br><br></h5>
+                        </div>
+                        <div class="services-block__back">
+                          <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
+                            <div class="services-block__back-top">
+                              <h4 class="services-block__back-title">Мероприятия для АПК</h4>
+                              <p class="services-block__back-text">Организация мероприятий формата «День поля» и событий для агропромышленного комплекса (АПК)</p>
+                            </div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--block-->
+                    <div class="services-block col-6 grid__block">
+                      <div class="services-block__container jsTouchHover">
+                        <div class="services-block__front jsTouchHover">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#ico-service2"></use>
+                          </svg>
+                          <h5 class="services-block__front-title">Юбилеи<br> и торжественные<br> открытия</h5>
+                        </div>
+                        <div class="services-block__back">
+                          <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
+                            <div class="services-block__back-top">
+                              <h4 class="services-block__back-title">Юбилеи и <span class="d-none d-sm-inline">торжестванные </span>открытия</h4>
+                              <p class="services-block__back-text">Организация и проведение юбилейных мероприятий и торжественных открытий</p>
+                            </div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--block-->
+                    <div class="services-block col-6 grid__block">
+                      <div class="services-block__container jsTouchHover">
+                        <div class="services-block__front jsTouchHover">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#ico-service3"></use>
+                          </svg>
+                          <h5 class="services-block__front-title">Онлайн<br> мероприятия<br><br></h5>
+                        </div>
+                        <div class="services-block__back">
+                          <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
+                            <div class="services-block__back-top">
+                              <h4 class="services-block__back-title">Онлайн мероприятия</h4>
+                              <p class="services-block__back-text">Уникальное онлайн-мероприятие для ваших коллег, партнеров и клиентов</p>
+                            </div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--block-->
+                    <div class="services-block col-6 grid__block">
+                      <div class="services-block__container jsTouchHover">
+                        <div class="services-block__front jsTouchHover">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#ico-service4"></use>
+                          </svg>
+                          <h5 class="services-block__front-title">Обучающий<br> тренинг<br><br></h5>
+                        </div>
+                        <div class="services-block__back">
+                          <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
+                            <div class="services-block__back-top">
+                              <h4 class="services-block__back-title">Обучающий тренинг</h4>
+                              <p class="services-block__back-text">Тонкости организации мероприятий с участием иностранных делегаций и представителей власти</p>
+                            </div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section clients" id="clients" data-scroll-block>
+          <div class="clients__container">
+            <div class="container">
+              <h2 class="section__title">Наши клиенты</h2>
+              <div class="row grid">
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.rosatom.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/ra.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://nlmk.com/ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/nlmk.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.vtb.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/vtb.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.molvest.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/m.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.gazprom.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/gz.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.pirelli.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/pi.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.sibur.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/sib.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.mrsk-1.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/mrsk-1.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.rzd.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/rzd.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://voronezh-rvk.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/rvk.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.kuhn.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/kuhn.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.slb.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/sch.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://agroeco.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/agro.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://www.vaderstad.com/ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/v.png" alt="clients"></a></div>
+                                <div class="clients-block grid__block col-xl-20pc col-lg-3 col-md-4 col-6"><a class="clients-block__image image image_contain jsTouchHover" href="https://agro-lider.ru/" target="_blank" rel="nofollow"><img class="lazyload" data-src="./img/lid.png" alt="clients"></a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section section_mb2 documents">
+          <div class="container">
+            <h2 class="section__title">Отзывы и благодарности</h2>
+            <div class="row grid">
+                            <div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block">
+                              <div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document1.png" alt="document"></div>
+                            </div>
+                            <div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block">
+                              <div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document2.jpg" alt="document"></div>
+                            </div>
+                            <div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block">
+                              <div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document3.jpg" alt="document"></div>
+                            </div>
+                            <div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block">
+                              <div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document4.jpg" alt="document"></div>
+                            </div>
+                            <div class="documents-item col-xl-20pc col-lg-3 col-md-4 col-6 grid__block">
+                              <div class="documents-item__image jsTouchHover image image_cover"><img class="lazyload" data-src="./img/document5.jpg" alt="document"></div>
+                            </div>
+            </div>
+          </div>
+        </section>
+        <section class="section section_pt section_pb feedback" id="feedback" data-scroll-block data-dark>
+          <div class="container">
+            <div class="feedback-block">
+              <h2 class="section__title feedback__title">Планируете провести мероприятие?</h2>
+              <p class="feedback-block__text">Обсудим оптимальный для ваших задач формат и подготовим проект мероприятия за 24 часа.</p>
+              <div class="feedback-block__buttons">
+                <div class="row grid">
+                  <div class="col-sm-6 grid__block"><a class="button button_style-2" href="mailto:info@1faces.com">Написать нам</a></div>
+                  <div class="col-sm-6 grid__block"><a class="button button_style-1" href="tel:+79103433330">Позвонить нам</a></div>
+                </div>
+              </div>
+              <p class="feedback-block__message">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer" id="footer" data-scroll-block data-dark>
+        <div class="footer__map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1237.436169187519!2d39.1985954!3d51.6621737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x413b2f3118f502b7%3A0x85a07b631eefa457!2zRXZlbnQt0LDQs9C10L3RgtGB0YLQstC-INCf0LXRgNCy0YvQtSDQm9C40YbQsA!5e0!3m2!1sru!2sde!4v1602224905382!5m2!1sru!2sde"></iframe>
+        </div>
+        <div class="footer__content">
+          <div class="container footer__container">
+            <div class="footer__contacts">
+              <h4 class="footer__contacts-title">Контактная инфоромация</h4>
+              <ul class="footer__contacts-list">
+                <li>Event-агентство «Первые Лица»</li>
+                <li>Россия, Воронеж</li>
+                <li>Плехановская улица, 9, оф. 308</li>
+                <li> <a href="tel:+74732602367">+7 (473) 2602367</a></li>
+                <li> <a href="tel:+79103433330">+7 (910) 3433330</a></li>
+                <li> <a href="mailto:info@1faces.com">info@1faces.com</a></li>
+                <li>©Event-агентство «Первые Лица» 2020</li>
+              </ul>
+            </div>
+            <div class="footer-socials">
+              <ul class="footer-socials__list">
+                <li class="footer-socials__item"><a class="footer-socials__link" href="https://vk.com/1facesvrn" rel="noffolow" target="_blank">
+                    <svg class="icon">
+                      <use xlink:href="./img/icons/socials-sprite.svg#vk"></use>
+                    </svg></a></li>
+                <li class="footer-socials__item"><a class="footer-socials__link" href="https://www.facebook.com/1facesvrn" rel="noffolow" target="_blank">
+                    <svg class="icon">
+                      <use xlink:href="./img/icons/socials-sprite.svg#facebook"></use>
+                    </svg></a></li>
+                <li class="footer-socials__item"><a class="footer-socials__link" href="https://www.youtube.com/channel/UCfUhPGTkoNZ6mqAAwUyyq9w?view_as=subscriber" rel="noffolow" target="_blank">
+                    <svg class="icon">
+                      <use xlink:href="./img/icons/socials-sprite.svg#youtube"></use>
+                    </svg></a></li>
+                <li class="footer-socials__item"><a class="footer-socials__link" href="https://www.instagram.com/viktorslastenko/" rel="noffolow" target="_blank">
+                    <svg class="icon">
+                      <use xlink:href="./img/icons/socials-sprite.svg#insta"></use>
+                    </svg></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
+          <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
+            <path d="M2.18 19.05L.77 17.64 8.4 10 .77 2.36 2.18.95 11.23 10l-9.05 9.05z"></path>
+          </svg></a>
+        <div class="helper__container">
+          <!--section-->
+          <div class="helper__section"><span class="helper__section-title">Акцентные цвета:</span>
+            <div class="helper__section-content"><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#E61515;" data-theme=""></a><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#792DA7;" data-theme=""></a></div>
+          </div>
+          <!--section-->
+          <div class="helper__section"><span class="helper__section-title">Страницы:</span>
+            <div class="helper__section-content"><a class="helper__section-button" href="index.html">Главная</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--themes-->
+    <link class="theme" rel="stylesheet" data-href="./styles/theme.min.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme2.min.css">
+    <!--styles-->
+    <link rel="stylesheet" href="./styles/common.min.css">
+    <!--scripts-->
+    <script src="./scripts/common.min.js"></script>
+    <!--preview-->
+    <link rel="stylesheet" href="./styles/helper.min.css">
+    <script src="./scripts/helper.min.js"></script>
+  </body>
+</html>

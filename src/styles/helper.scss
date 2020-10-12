@@ -1,13 +1,19 @@
-//variables
-@import "./components/variables";
+//vars
+$color-accent: #353535;
+$color-active: #ca2323;
+$color-hover: #000;
+$trs: .25s ease-in-out;
 
 .helper {
   position: fixed;
   left: 0;
   top: 50%;
   transform: translate(-100%, -50%);
-  z-index: 3000;
-  transition: transform $trs1;
+  z-index: 1000;
+  transition: transform $trs;
+  width: 100%;
+  max-width: 280px;
+  color: #000;
   &__trigger {
     display: block;
     position: absolute;
@@ -22,13 +28,13 @@
     box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.05);
     display: flex;
     z-index: 2;
-    color: var(--color-accent);
+    color: $color-accent;
     .icon {
       margin: auto;
       width: 15px;
       height: 15px;
       color: inherit;
-      transition: transform $trs1;
+      transition: transform $trs;
     }
   }
   &__container {
@@ -37,7 +43,7 @@
     padding: 20px 15px;
     background-color: #fff;
     box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.05);
-    width: 220px;
+    width: 100%;
     border-radius: 0 0 2px 0;
     border-width: 1px 1px 1px 0;
     border-style: solid;
@@ -48,10 +54,10 @@
       margin-bottom: 15px;
     }
     &-title {
-      font-size: 0.875rem;
+      font-size: 14px;
       font-weight: 500;
       display: block;
-      margin-bottom: 7px;
+      margin: 0 0 10px 0;
     }
     &-content {
       margin: 0 -5px -5px 0;
@@ -60,35 +66,49 @@
     }
     &-button {
       margin: 0 5px 5px 0;
-      font-size: 0.625rem;
+      font-size: 12px;
+      font-weight: 500;
       text-align: center;
-      background-color: var(--color-accent);
+      background-color: $color-accent;
       color: #fff;
-      transition: background-color $trs1;
-      line-height: 25px;
+      transition: background-color $trs;
+      line-height: 32px;
+      min-height: 32px;
+      min-width: 32px;
       padding: 0 10px;
       border-radius: 2px;
       text-decoration: none;
-    }
-  }
-  &__accent {
-    margin: 0 5px 5px 0;
-    width: 25px;
-    height: 25px;
-    display: block;
-    border-radius: 2px;
-    transform: scale(0.75);
-    transition: transform $trs1;
-
-    &_1 {
-      background-color: #E61515;
-    }
-    &_2 {
-      background-color: #792DA7;
-    }
-    &.active {
-      transform: scale(1);
-      pointer-events: none;
+      &.touch, &.hover {
+        background-color: $color-hover;
+      }
+      &.active {
+        pointer-events: none;
+        background-color: $color-active;
+      }
+      &-theme {
+        border: 2px solid transparent;
+        transition: border-color $trs, opacity $trs;
+        position: relative;
+        padding: 0;
+        &:after {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 3px solid transparent;
+          transition: inherit;
+          border-radius: 2px;
+        }
+        &.touch, &.hover {
+          opacity: 0.8;
+        }
+        &.active {
+          border-color: #000;
+          &:after {
+            border-color: #fff;
+          }
+        }
+      }
     }
   }
   &.active {

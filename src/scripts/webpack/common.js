@@ -17,6 +17,7 @@ import device from "current-device";
 import Inputmask from "inputmask";
 let validate = require("validate.js");
 
+
 window.onload = function(){
   preloader();
 }
@@ -32,7 +33,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 
 const speed = 1; //animations
-const preloader_delay = 1.5; //seconds
+const preloader_delay = 1; //seconds
 const youtubeApi = {state: false};
 
 
@@ -45,8 +46,6 @@ const app = {
     TouchHoverEvents.init();
     Video.init();
     scrollItemsEvents();
-    //
-    helper();
   }
 }
 
@@ -767,44 +766,6 @@ function preloader() {
   }
 }
 
-function pageLoaded() {
-  //отключить прелоадер если 0
-  if(preloader_time_limit==0) {
-    clearInterval(preloader_interval);
-    $preloader.remove();
-    app.init();
-    gsap.set($wrapper, {autoAlpha:1})
-  }
-
-  //если загрузились раньше
-  else if(loading_duration < preloader_time_limit) {
-    setTimeout(()=>{
-      clearInterval(preloader_interval);
-      finish();
-    }, (preloader_time_limit - loading_duration) * 1000)
-  }
-  //если загрузились позже 
-  else {
-    setTimeout(()=>{
-      clearInterval(preloader_interval);
-      finish();
-    })
-  }
-
-  let finish = ()=>{
-    $preloader_icon.style.transition = 'none';
-    $preloader_mask.style.transition = 'none';
-    gsap.timeline({onComplete:()=>{
-      $preloader.remove();
-      app.init();
-      gsap.to($wrapper, {autoAlpha:1, duration:1, ease:'power2.inOut'})
-    }})
-      .to($preloader_mask, {attr:{y:0}, duration:1, ease:'power2.inOut'}) //1
-      .to($preloader_icon, {scale:0.9, duration:1, ease:'power2.inOut'}, '-=1')
-      .to($preloader, {autoAlpha:0, duration:1, ease:'power2.inOut'}, '-=1')
-  }
-}
-
 function inputs() {
   let mask = Inputmask({
       mask: "+7 999 999-9999",
@@ -830,41 +791,4 @@ function inputs() {
 
   })
   
-}
-
-
-function helper() {
-  let $toggle = document.querySelector('.helper__trigger'),
-      $block = document.querySelector('.helper'),
-      $themes = document.querySelectorAll('.helper__accent'),
-      state = false;
-
-  $toggle.addEventListener('click', ()=>{
-    if(!state) {
-      state = true;
-      $block.classList.add('active');
-    } else {
-      state = false;
-      $block.classList.remove('active');
-    }
-  })
-
-  $themes.forEach(($btn, index)=>{
-    $btn.addEventListener('click', ()=>{
-      let theme = document.getElementById("theme");
-      $themes.forEach(($this)=>{
-        $this.classList.remove('active');
-      })
-      $btn.classList.add('active');
-
-      if(index==0) {
-        theme.href = "./styles/theme.css";
-      } else {
-        theme.href = "./styles/theme2.css";
-      }
-    })  
-  })
-
-
-
 }

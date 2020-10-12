@@ -69,24 +69,6 @@
   }
 }
 
-@include media-breakpoint-down(md) {
-  .container {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-  .row {
-    margin-left: -8px;
-    margin-right: -8px;
-  }
-  .row > * {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
-
-/*========== Form ==========*/
-@import "./components/helper";
-
 /*========== Fonts ==========*/
 @import "./components/fonts";
 

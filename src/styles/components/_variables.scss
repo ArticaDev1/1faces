@@ -11,11 +11,13 @@ $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 960px,
-  xl: 1200px,
+  xl: 1248px,
   xxl: 1440px
 );
-$container-padding-x: 24px;
-$grid-gutter-width: 24px;
+$container-padding-x:        24px;
+$grid-gutter-width:          24px;
+$mobile-container-padding-x: 16px;
+$mobile-grid-gutter-width:   16px;
 
 $trs1: .3s ease-in-out;
 $trs2: .5s ease-in-out;
@@ -30,28 +32,4 @@ $trs2in: .5s ease-in;
 $trs3in: 1s ease-in;
 $trs4in: 1.5s ease-in;
 
-$trsCustom: 1s cubic-bezier(1.000, 1.450, 0.170, -0.600);
-
 $radius: 120px;
-
-$color-accent: #db211b;
-$color-accent-hover: #c11812;
-$color-accent-focus: #9c0f0a;
-
-$color-link: $color-accent;
-$color-link-hover: $color-accent-hover;
-$color-link-visited: #B46CB8;
-
-$color-text: #26252D;
-$color-text-muted: #767676;
-$color-text-light: #BDBDBD;
-
-$color-blockquote: #E5E5E5;
-$color-table-hover: #F5F5F5;
-$color-table-border: #E5E5E5;
-$color-input-border: #E5E5E5;
-
-$color-sections-bg: #F5F5F5;
-
-$color-border-1: #D9D9DE;
-$color-border-2: #BDBDBD;
