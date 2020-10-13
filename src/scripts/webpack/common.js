@@ -175,15 +175,16 @@ const Home = {
 
     let check = ()=> {
       let position = window.pageYOffset,
+          y = position + window.innerHeight/2,
           $active = false;
 
       if(!inscroll) {
 
-        $sections.forEach(($section)=>{
+        $sections.forEach(($section, index)=>{
           let top = $section.getBoundingClientRect().y + position,
               bottom = top + $section.getBoundingClientRect().height;
-
-          if (position >= top && position <= bottom) {
+          
+          if (y >= top && y <= bottom) {
             
             $buttons.forEach(($button)=>{
               let attr = $button.getAttribute('href'),

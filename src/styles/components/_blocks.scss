@@ -403,6 +403,8 @@
         opacity: 1;
         transform: scale(1);
       }
+    }
+    &.touch, &.hover {
       span {
         opacity: 1;
         visibility: visible;
@@ -615,7 +617,7 @@
       padding-top: 56.25%;
     }
     img {
-      filter: grayscale(80%);
+      filter: grayscale(100%);
       transition: filter $trs1, opacity $trs3, visibility $trs3, transform $trs1;
     }
     &-text {

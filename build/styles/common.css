@@ -4054,7 +4054,7 @@ textarea {
     .home-dots__link.touch:before, .home-dots__link.hover:before, .home-dots__link.active:before {
       opacity: 1;
       transform: scale(1); }
-    .home-dots__link.touch span, .home-dots__link.hover span, .home-dots__link.active span {
+    .home-dots__link.touch span, .home-dots__link.hover span {
       opacity: 1;
       visibility: visible;
       transform: translate(0); }
@@ -4206,7 +4206,7 @@ textarea {
     display: block;
     padding-top: 56.25%; }
   .video-section__video img {
-    filter: grayscale(80%);
+    filter: grayscale(100%);
     transition: filter 0.3s ease-in-out, opacity 1s ease-in-out, visibility 1s ease-in-out, transform 0.3s ease-in-out; }
   .video-section__video-text {
     background-color: var(--color-accent);
