@@ -3752,6 +3752,7 @@ textarea {
       border-radius: 0 0 24px 24px; } }
 
 .home {
+  border-bottom: 1px solid #7C7878;
   position: relative;
   z-index: 2;
   color: #fff;
@@ -3799,8 +3800,7 @@ textarea {
     left: 50%;
     top: 0;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.075);
-    display: none; }
+    background-color: rgba(255, 255, 255, 0.075); }
   .home__container {
     height: calc(100vh + 1px);
     min-height: 820px;
