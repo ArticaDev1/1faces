@@ -1420,8 +1420,12 @@
     &-slider {
       &__slides {
         &::before {
-          padding-top: 130%;
+          padding-top: 150%;
         }
+      }
+      &__loader {
+        height: 2px;
+        bottom: 14px;
       }
       &__button {
         right: 16px;
