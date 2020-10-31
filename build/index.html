@@ -86,7 +86,8 @@
       <script>
         let $preloader = document.querySelector('.preloader');
         setTimeout(()=>{
-          $preloader.style.cssText = 'opacity:1;visibility:visible;'
+          $preloader.style.opacity = '1';
+          $preloader.style.visibility = 'visible';
         }, 500)
       </script>
     </div>
@@ -503,12 +504,12 @@
       </footer>
     </div>
     <!--themes-->
-    <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
-    <link class="theme" rel="stylesheet" data-href="./styles/theme2.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme.min.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme2.min.css">
     <!--styles-->
-    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/common.min.css">
     <!--scripts-->
-    <script src="./scripts/common.js"></script>
+    <script src="./scripts/common.min.js"></script>
     <!--preview-->
     <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
         <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
@@ -525,7 +526,7 @@
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="./styles/helper.css">
-    <script src="./scripts/helper.js"></script>
+    <link rel="stylesheet" href="./styles/helper.min.css">
+    <script src="./scripts/helper.min.js"></script>
   </body>
 </html>

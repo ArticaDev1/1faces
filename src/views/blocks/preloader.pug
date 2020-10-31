@@ -54,6 +54,7 @@
   script.
     let $preloader = document.querySelector('.preloader');
     setTimeout(()=>{
-      $preloader.style.cssText = 'opacity:1;visibility:visible;'
+      $preloader.style.opacity = '1';
+      $preloader.style.visibility = 'visible';
     }, 500)
 //finish preloader
