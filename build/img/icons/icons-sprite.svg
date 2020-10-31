@@ -38,4 +38,7 @@
   <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" id="arrow-back">
     <path d="M.517 4.243a.5.5 0 000 .707L3.7 8.132a.5.5 0 10.707-.707L1.578 4.597l2.828-2.829a.5.5 0 10-.707-.707L.517 4.243zm16.032-.146H.871v1h15.678v-1z"></path>
   </symbol>
+  <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 17" id="double-arrow">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.663 9.708l.337.308.337-.308 9.394-8.574a.5.5 0 10-.674-.739L11 8.662 1.943.395a.5.5 0 00-.674.739l9.394 8.574zm0 6.307l.337.308.337-.308 9.957-9.089a.5.5 0 10-.674-.738L11 14.968l-9.62-8.78a.5.5 0 00-.674.738l9.957 9.089z"></path>
+  </symbol>
 </svg>

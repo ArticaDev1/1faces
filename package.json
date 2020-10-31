@@ -34,6 +34,8 @@
 		"webpack-stream": "^6.1.0"
 	},
 	"dependencies": {
+		"@glidejs/glide": "^3.4.1",
+		"@splidejs/splide": "^2.4.14",
 		"bootstrap": "^5.0.0-alpha1",
 		"current-device": "^0.10.1",
 		"device": "^0.3.11",
@@ -41,6 +43,7 @@
 		"inputmask": "^5.0.5",
 		"lazysizes": "^5.2.2",
 		"normalize.css": "^8.0.1",
+		"swiper": "^6.3.5",
 		"validate.js": "^0.13.1"
 	}
 }

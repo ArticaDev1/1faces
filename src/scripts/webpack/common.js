@@ -18,12 +18,14 @@ import device from "current-device";
 //form
 import Inputmask from "inputmask";
 let validate = require("validate.js");
+// import Swiper JS
+import Splide from '@splidejs/splide'
 
 window.onload = function(){
   App.onLoadEvents();
 }
 
-const brakepoints = {
+const Brakepoints = {
   sm: 576,
   md: 768,
   lg: 1024,
@@ -53,6 +55,7 @@ const App = {
     scrollItemsEvents();
     inputs();
     onExitEvents();
+    hiddenText();
   },
   onLoadEvents: function() {
     let fadInAnimation = gsap.timeline({paused:true})
@@ -175,7 +178,7 @@ const Home = {
     ServicesCards.init();
     Dots.init();
 
-    if(window.innerWidth>=brakepoints.md) {
+    if(window.innerWidth>=Brakepoints.md) {
       BgVideo.init();
     }
 
@@ -192,15 +195,19 @@ const Category = {
       .fromTo($items, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
 
     this.scroll = ()=> {
-      let y = window.pageYOffset;
-      gsap.set($bg, {y:y/3})
+      if(window.innerWidth>Brakepoints.lg) {
+        let y = window.pageYOffset;
+        gsap.set($bg, {y:y/3})
+      }
     }
+
     this.scroll();
     window.addEventListener('scroll', ()=>{
       this.scroll();
     });
 
     BgVideo.init();
+    Cases.init();
     OrganizationSlider.init();
     TeamSlider.init();
     ServicesCards.init();
@@ -382,7 +389,7 @@ const OrganizationSlider = {
           $title = $titles[index],
           $image = $images[index],
           h = $text.getBoundingClientRect().height,
-          w_var = window.innerWidth<brakepoints.sm ? -12.5 : 0;
+          w_var = window.innerWidth<Brakepoints.sm ? -12.5 : 0;
 
       animations[index] = gsap.timeline({paused:true})
         .fromTo($container, {css:{height:0}}, {css:{height:h}, duration:1, ease:'power2.inOut'})
@@ -494,7 +501,7 @@ const ServicesCards = {
           offsetY = -50,
           offset = -50;
 
-      if(window.innerWidth<brakepoints.md) {
+      if(window.innerWidth<Brakepoints.md) {
         offset = 0;
         if(index==0) {
           offsetX = -((1-scale)/2)*100;
@@ -565,6 +572,88 @@ const ServicesCards = {
       })
 
     })
+  }
+}
+
+const Cases = {
+  init: function() {
+    let $slides = document.querySelectorAll('.cases-slider__slide'),
+        $next = document.querySelector('.cases-slider__next'),
+        $prev = document.querySelector('.cases-slider__prev'),
+        slide_current = 0,
+        slide_old,
+        inAnimation = false,
+        animations = [];
+        
+
+    $slides.forEach(($this, index)=>{
+      let $img = $this.querySelector('.background'),
+          $title = $this.querySelector('.cases-slider__slide-title'),
+          $date = $this.querySelector('.cases-slider__slide-date');
+
+      animations[index] = gsap.timeline({paused:true})
+        .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:speed, ease:'power2.inOut'})
+        .fromTo($img, {scale:1.25}, {scale:1, duration:speed, ease:'power2.out'}, `-=${speed}`)
+        .fromTo([$title, $date], {x:50}, {x:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
+    })
+
+    let slider = new Splide('.splide', {
+      type: 'loop',
+      perPage: 3,
+      arrows: false,
+      pagination: false,
+      easing: 'ease-in-out',
+      speed: speed*500,
+      breakpoints: {
+        1023: {
+          perPage: 2
+        }
+      }
+    }).mount();
+
+    slider.on('move', function(newIndex) {
+      slide_current=newIndex-1<0?slider.length-1:newIndex-1;
+      inAnimation = true;
+      if(slide_old!==undefined) {
+        animations[slide_old].timeScale(2).reverse();
+      } 
+      animations[slide_current].timeScale(1).play();
+      slide_old=slide_current;
+    });
+
+    slider.on('moved', function() {
+      inAnimation = false;
+    });
+
+    slider.go('+1', false);
+
+    document.addEventListener('click', (event)=>{
+      let $target = event.target!==document?event.target.closest('.cases-slider__nav-slide-container'):false,
+          slide_index,
+          next_index;
+
+      console.log('click')
+      if($target && !inAnimation) {
+        document.querySelectorAll('.cases-slider__nav-slide-container').forEach(($this, index)=>{
+          if($this.parentNode.classList.contains('is-active')) {
+            slide_index = index;
+          }
+          if($this==$target) {
+            next_index = index;
+          }
+        })
+        let value = next_index-slide_index+1;
+        slider.go(`+${value}`, false)
+      }
+    })
+
+    $next.addEventListener('click', ()=>{
+      if(!inAnimation) slider.go('+1', false)
+    })
+    $prev.addEventListener('click', ()=>{
+      if(!inAnimation) slider.go('-1', false)
+    })
+
   }
 }
 
@@ -771,17 +860,16 @@ window.BgVideo = {
       this.player.playVideo();
       this.player.mute();
       event.target.setPlaybackQuality('hd720');
+      console.log('play')
 
       let checkToPause = ()=>{
         let position = this.$video.getBoundingClientRect().y + this.$video.getBoundingClientRect().height;
         if((position<=0 || document.visibilityState=='hidden') && !this.flag) {
           this.flag = true;
           this.player.pauseVideo();
-          console.log('pause')
         } else if(position>0 && document.visibilityState=='visible' && this.flag) {
           this.flag = false;
           this.player.playVideo();
-          console.log('play')
         }
       }
       checkToPause();
@@ -817,6 +905,7 @@ window.BgVideo = {
       }
     }
     else if(event.data === YT.PlayerState.PLAYING) {
+      console.log('playing')
       if(this.fadeIn.progress()==0) {
         this.fadeIn.play();
       }
@@ -829,6 +918,50 @@ window.BgVideo = {
 }
 
 
+function hiddenText() {
+  let $parent = document.querySelectorAll('.hidden-text');
+  $parent.forEach(($this, index)=>{
+    let $wrapper = $this.querySelector('.hidden-text__wrapper'),
+        $content = $this.querySelector('.hidden-text__content'),
+        $toggle = $this.nextSibling,
+        w, h, state, animation;
+
+    let resize = ()=> {
+      h = $content.getBoundingClientRect().height;
+
+      animation = gsap.timeline({paused:true})
+        .fromTo($wrapper, {css:{height:h}}, {css:{height:0}, duration:speed, ease:'power2.inOut'})
+        .fromTo($content, {autoAlpha:1}, {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+
+      if(!state) {
+        animation.seek(0);
+      } else {
+        animation.seek(speed);
+      }
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    let check = ()=> {
+      if(!state) {
+        $toggle.classList.remove('active');
+        state = true;
+        animation.play();
+      } else {
+        $toggle.classList.add('active');
+        state = false;
+        animation.reverse();
+      }
+    }
+
+    check();
+
+    $toggle.addEventListener('click', ()=>{
+      check();
+    })
+  })
+}
 
 function inputs() {
   let mask = Inputmask({
