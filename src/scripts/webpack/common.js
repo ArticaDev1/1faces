@@ -52,6 +52,8 @@ const App = {
     }
     TouchHoverEvents.init();
     Video.init();
+    Nav.init();
+    Header.init();
     scrollItemsEvents();
     inputs();
     onExitEvents();
@@ -211,55 +213,6 @@ const Category = {
     OrganizationSlider.init();
     TeamSlider.init();
     ServicesCards.init();
-  }
-}
-
-const Header = {
-  init: function() {
-    this.isVisible = true;
-    this.animation = gsap.timeline({paused:true})
-      .to($header, {yPercent:-100, duration:speed/2, ease:'power2.in'})
-    this.y = window.pageYOffset;
-
-    window.addEventListener('scroll', ()=>{
-      this.check();
-    })
-
-  },
-  check: function() {
-    let y = window.pageYOffset,
-        h = $header.getBoundingClientRect().height;
-    
-    if(y>0 && !this.isBackground) {
-      this.isBackground = true;
-      $header.classList.add('header_bg');
-    } else if(y==0 && this.isBackground) {
-      this.isBackground = false;
-      $header.classList.remove('header_bg');
-    }
-
-    //bottom
-    if(y>this.y && y>window.innerHeight) {
-      this.hide();
-    } 
-    //top
-    else {
-      this.show();
-    }
-    this.y = y;
-
-  },
-  hide: function() {
-    if(this.isVisible) {
-      this.isVisible=false;
-      this.animation.play();
-    }
-  },
-  show: function() {
-    if(!this.isVisible) {
-      this.isVisible=true;
-      this.animation.reverse();
-    }
   }
 }
 
@@ -594,7 +547,7 @@ const Cases = {
       animations[index] = gsap.timeline({paused:true})
         .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:speed, ease:'power2.inOut'})
         .fromTo($img, {scale:1.25}, {scale:1, duration:speed, ease:'power2.out'}, `-=${speed}`)
-        .fromTo([$title, $date], {x:50}, {x:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
+        .fromTo([$title, $date], {x:50}, {x:0, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
     })
 
     let slider = new Splide('.splide', {
@@ -1008,4 +961,99 @@ function onExitEvents() {
       }
     }
   });
+}
+
+const Nav = {
+  init: function() {
+    this.$nav = document.querySelector('.nav');
+    this.$toggle = document.querySelector('.nav-toggle');
+    this.$toggle_line = this.$toggle.querySelectorAll('span');
+    this.$line = document.querySelector('.nav__line');
+    this.$logo = document.querySelector('.nav__logo');
+    this.$nav_items = document.querySelectorAll('.nav__item');
+    this.$nav_socials = document.querySelectorAll('.nav__socials .socials__item');
+    this.$nav_contactitems = document.querySelectorAll('.nav__contacts-list li');
+    this.state = false;
+    this.opened = false;
+    this.animation = gsap.timeline({paused:true, 
+      onStart:()=>{
+        this.opened = true;
+        this.$toggle.classList.add('active');
+      }, 
+      onReverseComplete:()=>{
+        this.opened = false;
+        this.$toggle.classList.remove('active');
+      }
+    })
+      .to(this.$nav, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+      .to(this.$toggle_line[1], {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed/2}`)
+      .to(this.$toggle_line[0], {rotate:-45, y:9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      .to(this.$toggle_line[2], {rotate:45, y:-9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      .fromTo(this.$nav_items, {x:100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
+      .fromTo(this.$nav_socials, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2, from:'end'}}, `-=${speed}`)
+      .fromTo(this.$nav_contactitems, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
+      .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
+      .fromTo(this.$logo, {autoAlpha:0, yPercent:50}, {autoAlpha:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
+      this.open();
+    this.$toggle.addEventListener('click', ()=>{
+      if(!this.state) {
+        this.open();
+      } else {
+        this.close();
+      }
+    })
+  },
+  open: function() {
+    $header.classList.add('header_nav-opened');
+    this.state=true;
+    this.animation.timeScale(1).play();
+  },
+  close: function() {
+    $header.classList.remove('header_nav-opened');
+    this.state=false;
+    this.animation.timeScale(1.5).reverse();
+  }
+}
+
+const Header = {
+  init: function() {
+    this.height = $header.getBoundingClientRect().height;
+    this.scrollY = 0;
+    this.isVisible = true;
+    this.fixed = false;
+
+    this.animation = gsap.timeline({paused:true})
+      .to($header, {yPercent:-100, duration:speed, ease:'power2.in'})
+
+    window.addEventListener('resize', ()=>{
+      this.height = $header.getBoundingClientRect().height;
+    })
+
+    window.addEventListener('scroll', ()=>{
+      this.check();
+    })
+    this.check();
+  }, 
+  check: function() {
+    let y = window.pageYOffset,
+        h = window.innerHeight;
+
+    if(y>0 && !this.fixed) {
+      this.fixed = true;
+      $header.classList.add('header_fixed');
+    } else if(y==0 && this.fixed) {
+      this.fixed = false;
+      $header.classList.remove('header_fixed');
+    }
+
+    if(this.scrollY<y && this.scrollY>h && this.isVisible && !Nav.opened) {
+      this.isVisible = false;
+      this.animation.timeScale(2).play();
+    } else if(this.scrollY>y && !this.isVisible) {
+      this.isVisible = true;
+      this.animation.timeScale(1).reverse();
+    }    
+
+    this.scrollY = y;
+  }
 }

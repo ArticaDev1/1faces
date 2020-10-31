@@ -1,13 +1,27 @@
 .header {
   flex-shrink: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 100;
   transition: background-color $trs2;
-  &_bg {
-    background-color: rgba(0, 0, 0, 0.5);
+  &_fixed {
+    background-color: rgba(0, 0, 0, 0.6);
+    .header__container {
+      height: 80px;
+    }
+  }
+  &_nav-opened {
+    background-color: rgba(26, 28, 30, 0.6);
+    .header__container {
+      height: 100px;
+    }
+    .header__phone, .logo {
+      transition: opacity $trs2, visibility $trs2;
+      opacity: 0;
+      visibility: hidden;
+    }
   }
   &_type-home {
     @include media-breakpoint-up(md) {
@@ -30,6 +44,7 @@
     align-items: center;
     height: 100px;
     max-width: 100%;
+    transition: height $trs2;
   }
   &__phone {
     color: #fff;
@@ -39,6 +54,7 @@
     font-weight: 500;
     font-size: 1.125rem;
     margin: 0 60px 0 0;
+    transition: opacity $trs3, visibility $trs3;
     .icon {
       width: 16px;
       height: 16px;
@@ -49,6 +65,11 @@
     &__container {
       height: 90px;
     }
+    &_nav-opened {
+      .header__container {
+        height: 90px;
+      }
+    }
   }
   @include media-breakpoint-down(md) {
     &__phone {
@@ -56,6 +77,11 @@
     }
     &__container {
       height: 80px;
+    }
+    &_nav-opened {
+      .header__container {
+        height: 80px;
+      }
     }
   }
 }
@@ -69,36 +95,63 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
   padding: 15px 7px;
   span {
     display: block;
     height: 1px;
-    background-color: #fff;
-    transition: transform $trs1;
+    width: 36px;
+    position: relative;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 100%;
+      right: 0;
+      background-color: #fff;
+      transition: transform $trs1, width $trs1;
+    }
     &:first-child {
-      width: 36px;
+      &:before {
+        width: 36px;
+      }
     }
     &:nth-child(2) {
-      width: 24px;
+      &:before {
+        width: 24px;
+      }
     }
     &:nth-child(3) {
-      width: 12px;
+      &:before {
+        width: 12px;
+      }
     }
   }
   &.touch, &.hover {
     span {
       &:nth-child(2) {
-        transform: translateX(-6px);
+        &:before {
+          transform: translateX(-6px);
+        }
       }
       &:nth-child(3) {
-        transform: translateX(-12px);
+        &:before {
+          transform: translateX(-12px);
+        }
+      }
+    }
+  }
+  &.active {
+    span {
+      &:before {
+        transform: translateX(0) !important;
+        width: 100% !important;
       }
     }
   }
 }
 
 .logo {
+  transition: opacity $trs3, visibility $trs3;
   &__link {
     display: block;
     width: 260px;
