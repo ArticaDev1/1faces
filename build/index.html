@@ -24,8 +24,53 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
     <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png">
   </head>
-  <body>
-    <div class="preloader">
+  <body style="background-color:#0F0B17;">
+    <!--start preloader-->
+    <div class="preloader" style="opacity:0;visibility:hidden;">
+      <style>
+        .preloader {
+          display: flex;
+          position: fixed;
+          z-index: 1000;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          transition: opacity .5s ease-in-out, visibility .5s ease-in-out; }
+          .preloader__container {
+            width: 180px;
+            height: 180px;
+            margin: auto;
+            animation: rotation 2s linear infinite;
+            position: relative; }
+          .preloader__ratation {
+            width: 100%;
+            height: 100%;
+            position: relative; }
+          .preloader__icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; }
+          .preloader__bg {
+            fill: #AFB3BD; }
+          .preloader__mask {
+            fill: #E61515;
+            transition: .05s linear; }
+          @media (max-width: 575px) {
+            .preloader__container {
+              width: 140px;
+              height: 140px; } }
+        @keyframes rotation {
+          0% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 0deg); }
+          50% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 180deg); }
+          100% {
+            transform: perspective(1000px) rotate3d(0, 1, 0, 360deg); } }
+            
+      </style>
       <div class="preloader__container">
         <svg class="preloader__icon" viewBox="0 0 120 91">
           <defs>
@@ -38,87 +83,22 @@
           <image width="100%" height="100%" y="0" x="0" xlink:href="./img/mask.png" mask="url(#mask)"></image>
         </svg>
       </div>
-      <style>
-        .preloader {
-          display: flex;
-          position: fixed;
-          z-index:1000;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-        }
-        .preloader__container {
-          width: 180px;
-          height: 180px;
-          margin: auto;
-          animation: rotation 2s linear infinite;
-          position:relative;
-        }
-        .preloader__ratation {
-          width: 100%;
-          height: 100%;
-          position:relative;
-          
-        }
-        @keyframes rotation {
-          0% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
-          }
-          50% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 180deg);
-          }
-          100% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 360deg);
-          }
-        }
-        @keyframes fadeIn {
-          from {
-            opacity:0;
-            transform: scale(0.8);
-          }
-          to {
-            opacity:1;
-            transform: scale(1);
-          }
-        }
-        .preloader__icon {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          animation: fadeIn 1s ease-in-out;
-        }
-        
-        @media(max-width:575px) {
-           .preloader__container {
-             width: 140px;
-             height: 140px;
-           }
-        }
-        .preloader__container.fadeIn {
-          transform: scale(1);
-          opacity: 1;
-        }
-        .preloader__bg {
-          fill: #AFB3BD;
-        }
-        .preloader__mask {
-          fill: #E61515;
-          transition: .05s linear;
-        }
-      </style>
+      <script>
+        let $preloader = document.querySelector('.preloader');
+        setTimeout(()=>{
+          $preloader.style.cssText = 'opacity:1;visibility:visible;'
+        }, 500)
+      </script>
     </div>
-    <div class="wrapper" style="opacity:0;">
-      <header class="header header_type-home">
+    <!--finish preloader-->
+    <div class="wrapper" style="opacity:0;visibility:hidden;" data-namespace="main">
+      <header class="header">
         <div class="container header__container"> 
-          <div class="header__left">
-            <div class="logo"><a class="logo__link" href="index.html"><img class="logo__image" src="./img/logos/main_logo.svg" alt="logo"></a></div><a class="header__phone" href="tel:+74732602367"> 
+          <div class="logo header__logo"><a class="logo__link" href="./index.html"><img class="logo__image" src="./img/logos/main_logo.svg" alt="logo"></a></div>
+          <div class="header__items"><a class="header__phone" href="tel:+74732602367"> 
               <svg class="icon">
                 <use xlink:href="./img/icons/icons-sprite.svg#phone"></use>
-              </svg>+7 (473) 260-23-67</a>
-          </div><a class="nav-toggle" href="javascript:void(0);"> <span></span><span></span><span></span></a>
+              </svg>+7 (473) 260-23-67</a><a class="nav-toggle" href="javascript:void(0);"> <span></span><span></span><span></span></a></div>
         </div>
       </header>
       <main class="main">
@@ -128,9 +108,9 @@
           <div class="desktop-background-wrapper__background" style="background-image:url(&quot;./img/iStock-613111906.jpg&quot;);"></div>
           <section class="section home" id="home" data-scroll-block>
             <div class="home__mobile-background" style="background-image:url(&quot;./img/mobile-home-bg.jpg&quot;);"></div><span class="home__vertical-line"></span>
-            <div class="home-background-video">
-              <div class="home-background-video__wrap">
-                <div class="home-background-video__element" id="bg-player"></div>
+            <div class="background-video" data-video-id="0zxNqsKiQxE">
+              <div class="background-video__wrap">
+                <div class="background-video__element" id="bg-player"></div>
               </div>
             </div>
             <div class="container home__container"><a class="home-mobile-play home__item" href="https://youtu.be/0zxNqsKiQxE" data-video>
@@ -239,10 +219,10 @@
                         <path d="M607.5 607.5L0.499973 607.5L0.5 0.499973L348.846 0.499989L607.5 0.5L607.5 607.5Z"></path>
                       </svg>
                       <div class="organization-block__images-content">
-                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service1.png" alt="service"></div>
-                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service2.png" alt="service"></div>
-                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service3.png" alt="service"></div>
-                        <div class="organization-block__image image image_contain"><img class="lazyload" src="./img/service4.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" data-src="./img/service1.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" data-src="./img/service2.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" data-src="./img/service3.png" alt="service"></div>
+                        <div class="organization-block__image image image_contain"><img class="lazyload" data-src="./img/service4.png" alt="service"></div>
                       </div>
                     </div>
                   </div>
@@ -257,11 +237,11 @@
               <div class="team-slider col-xl-9">
                 <div class="team-slider__container">
                   <div class="team-slider__slides">
-                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Slastenko.jpg" alt="photo"></div>
-                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Fedunov.jpg" alt="photo"></div>
-                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Ovsyannikova.jpg" alt="photo"></div>
-                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Kozyavin.jpg" alt="photo"></div>
-                                        <div class="team-slider__image image image_cover"><img class="lazyload" src="./img/Goncharuk.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Slastenko.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Fedunov.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Ovsyannikova.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Kozyavin.jpg" alt="photo"></div>
+                                        <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Goncharuk.jpg" alt="photo"></div>
                   </div>
                   <div class="team-slider__nav">
                                         <div class="team-slider__info">
@@ -339,7 +319,7 @@
                           <svg class="icon">
                             <use xlink:href="./img/icons/icons-sprite.svg#ico-service1"></use>
                           </svg>
-                          <h5 class="services-block__front-title">Мероприятия<br> для АПК<br><br></h5>
+                          <h5 class="services-block__front-title">Мероприятия<br> для АПК</h5>
                         </div>
                         <div class="services-block__back">
                           <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
@@ -347,7 +327,7 @@
                               <h4 class="services-block__back-title">Мероприятия для АПК</h4>
                               <p class="services-block__back-text">Организация мероприятий формата «День поля» и событий для агропромышленного комплекса (АПК)</p>
                             </div>
-                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="./service2.html">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
                           </div>
                         </div>
                       </div>
@@ -357,17 +337,17 @@
                       <div class="services-block__container jsTouchHover">
                         <div class="services-block__front jsTouchHover">
                           <svg class="icon">
-                            <use xlink:href="./img/icons/icons-sprite.svg#ico-service2"></use>
+                            <use xlink:href="./img/icons/icons-sprite.svg#ico-star"></use>
                           </svg>
-                          <h5 class="services-block__front-title">Юбилеи<br> и торжественные<br> открытия</h5>
+                          <h5 class="services-block__front-title">Юбилей<br> компании</h5>
                         </div>
                         <div class="services-block__back">
                           <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
                             <div class="services-block__back-top">
-                              <h4 class="services-block__back-title">Юбилеи и <span class="d-none d-sm-inline">торжестванные </span>открытия</h4>
+                              <h4 class="services-block__back-title">Юбилей компании</h4>
                               <p class="services-block__back-text">Организация и проведение юбилейных мероприятий и торжественных открытий</p>
                             </div>
-                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="./service1.html">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
                           </div>
                         </div>
                       </div>
@@ -379,7 +359,7 @@
                           <svg class="icon">
                             <use xlink:href="./img/icons/icons-sprite.svg#ico-service3"></use>
                           </svg>
-                          <h5 class="services-block__front-title">Онлайн<br> мероприятия<br><br></h5>
+                          <h5 class="services-block__front-title">Онлайн<br> мероприятия</h5>
                         </div>
                         <div class="services-block__back">
                           <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
@@ -387,7 +367,7 @@
                               <h4 class="services-block__back-title">Онлайн мероприятия</h4>
                               <p class="services-block__back-text">Уникальное онлайн-мероприятие для ваших коллег, партнеров и клиентов</p>
                             </div>
-                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="./service3.html">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
                           </div>
                         </div>
                       </div>
@@ -399,15 +379,15 @@
                           <svg class="icon">
                             <use xlink:href="./img/icons/icons-sprite.svg#ico-service4"></use>
                           </svg>
-                          <h5 class="services-block__front-title">Обучающие<br> тренинги<br><br></h5>
+                          <h5 class="services-block__front-title">Торжественные<br> открытия</h5>
                         </div>
                         <div class="services-block__back">
                           <div class="services-block__back-content"><a class="services-block__close" href="javascript:void(0);"></a>
                             <div class="services-block__back-top">
-                              <h4 class="services-block__back-title">Обучающие тренинги</h4>
+                              <h4 class="services-block__back-title">Торжественные открытия</h4>
                               <p class="services-block__back-text">Тонкости организации мероприятий с участием иностранных делегаций и представителей власти</p>
                             </div>
-                            <div class="services-block__back-bottom"><a class="button button_style-2" href="javascript:void(0);">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
+                            <div class="services-block__back-bottom"><a class="button button_style-2" href="./service4.html">Подробности</a><a class="button button_style-1" href="tel:+74732602367">Позвонить нам</a></div>
                           </div>
                         </div>
                       </div>
@@ -482,7 +462,7 @@
       </main>
       <footer class="footer" id="footer" data-scroll-block data-dark>
         <div class="footer__map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1237.436169187519!2d39.1985954!3d51.6621737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x413b2f3118f502b7%3A0x85a07b631eefa457!2zRXZlbnQt0LDQs9C10L3RgtGB0YLQstC-INCf0LXRgNCy0YvQtSDQm9C40YbQsA!5e0!3m2!1sru!2sde!4v1602224905382!5m2!1sru!2sde"></iframe>
+          <!--iframe(src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1237.436169187519!2d39.1985954!3d51.6621737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x413b2f3118f502b7%3A0x85a07b631eefa457!2zRXZlbnQt0LDQs9C10L3RgtGB0YLQstC-INCf0LXRgNCy0YvQtSDQm9C40YbQsA!5e0!3m2!1sru!2sde!4v1602224905382!5m2!1sru!2sde')-->
         </div>
         <div class="footer__content">
           <div class="container footer__container">
@@ -521,21 +501,6 @@
           </div>
         </div>
       </footer>
-      <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
-          <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
-            <path d="M2.18 19.05L.77 17.64 8.4 10 .77 2.36 2.18.95 11.23 10l-9.05 9.05z"></path>
-          </svg></a>
-        <div class="helper__container">
-          <!--section-->
-          <div class="helper__section"><span class="helper__section-title">Акцентные цвета:</span>
-            <div class="helper__section-content"><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#E61515;" data-theme=""></a><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#792DA7;" data-theme=""></a></div>
-          </div>
-          <!--section-->
-          <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-            <div class="helper__section-content"><a class="helper__section-button" href="index.html">Главная</a></div>
-          </div>
-        </div>
-      </div>
     </div>
     <!--themes-->
     <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
@@ -545,6 +510,21 @@
     <!--scripts-->
     <script src="./scripts/common.js"></script>
     <!--preview-->
+    <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
+        <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
+          <path d="M2.18 19.05L.77 17.64 8.4 10 .77 2.36 2.18.95 11.23 10l-9.05 9.05z"></path>
+        </svg></a>
+      <div class="helper__container">
+        <!--section-->
+        <div class="helper__section"><span class="helper__section-title">Акцентные цвета:</span>
+          <div class="helper__section-content"><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#E61515;" data-theme=""></a><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#792DA7;" data-theme=""></a></div>
+        </div>
+        <!--section-->
+        <div class="helper__section"><span class="helper__section-title">Страницы:</span>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./service1.html">Юбилей ( Шаблон услуги )</a><a class="helper__section-button" href="./service2.html">АПК ( Шаблон услуги )</a><a class="helper__section-button" href="./service3.html">Онлайн ( Шаблон услуги )</a><a class="helper__section-button" href="./service4.html">Открытия ( Шаблон услуги )</a></div>
+        </div>
+      </div>
+    </div>
     <link rel="stylesheet" href="./styles/helper.css">
     <script src="./scripts/helper.js"></script>
   </body>

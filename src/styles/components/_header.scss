@@ -8,7 +8,6 @@
   transition: background-color $trs2;
   &_bg {
     background-color: rgba(0, 0, 0, 0.5);
-    
   }
   &_type-home {
     @include media-breakpoint-up(md) {
@@ -17,15 +16,18 @@
       }
     }
   }
-  &__left {
+  &__logo {
+    flex: 1 1 100%;
+  }
+  &__items {
+    flex: 1 0 auto;
     display: flex;
     align-items: center;
-    
+    justify-content: space-between;
   }
   &__container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     height: 100px;
     max-width: 100%;
   }
@@ -36,6 +38,7 @@
     text-decoration: none;
     font-weight: 500;
     font-size: 1.125rem;
+    margin: 0 60px 0 0;
     .icon {
       width: 16px;
       height: 16px;
@@ -96,21 +99,22 @@
 }
 
 .logo {
-  width: 260px;
-  margin: 0 60px 0 0;
   &__link {
     display: block;
-    width: 100%;
+    width: 260px;
   }
   &__image {
     display: block;
     width: 100%;
   }
   @include media-breakpoint-down(lg) {
-    margin: 0 40px 0 0;
-    width: 240px;
+    &__link {
+      width: 240px;
+    }
   }
   @include media-breakpoint-down(md) {
-    width: 200px;
+    &__link {
+      width: 200px;
+    }
   }
 }

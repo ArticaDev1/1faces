@@ -6,7 +6,7 @@ section.section.team#team(data-scroll-block)
           .team-slider__slides
             mixin image(href)
               .team-slider__image.image.image_cover
-                img(src=href, alt="photo").lazyload
+                img(data-src=href, alt="photo").lazyload
             +image('./img/Slastenko.jpg')
             +image('./img/Fedunov.jpg')
             +image('./img/Ovsyannikova.jpg')

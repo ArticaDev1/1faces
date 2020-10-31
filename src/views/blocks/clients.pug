@@ -1,0 +1,24 @@
+section.section.clients#clients(data-scroll-block)
+  .clients__container
+    .container
+      h2.section__title Наши клиенты
+      .row.grid
+        mixin block(href, adress)
+          .clients-block.grid__block.col-xl-20pc.col-lg-3.col-md-4.col-6
+            a(href=adress target='_blank' rel='nofollow').clients-block__image.image.image_contain.jsTouchHover
+              img(data-src=href, alt="clients").lazyload
+        +block('./img/ra.png', 'https://www.rosatom.ru/')
+        +block('./img/nlmk.png', 'https://nlmk.com/ru/')
+        +block('./img/vtb.png', 'https://www.vtb.ru/')
+        +block('./img/m.png', 'https://www.molvest.ru/')
+        +block('./img/gz.png', 'https://www.gazprom.ru/')
+        +block('./img/pi.png', 'https://www.pirelli.ru/')
+        +block('./img/sib.png', 'https://www.sibur.ru/')
+        +block('./img/mrsk-1.png', 'https://www.mrsk-1.ru/')
+        +block('./img/rzd.png', 'https://www.rzd.ru/')
+        +block('./img/rvk.png', 'https://voronezh-rvk.ru/')
+        +block('./img/kuhn.png', 'https://www.kuhn.ru/')
+        +block('./img/sch.png', 'https://www.slb.ru/')
+        +block('./img/agro.png', 'https://agroeco.ru/')
+        +block('./img/v.png', 'https://www.vaderstad.com/ru/')
+        +block('./img/lid.png', 'https://agro-lider.ru/')

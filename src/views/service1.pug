@@ -1,0 +1,33 @@
+extends layout/layout
+block variables
+  -var namespace = 'category'
+block title
+  title #{title} - Юбилей компании
+block content
+
+  section.section.category-screen
+    .background-video(data-video-id='PfyXBk0Eh0U')
+      .background-video__wrap
+        #bg-player.background-video__element
+    .container.category-screen__container
+      a(href="./index.html").back-to-button.category-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
+        span Главная страница
+      .category-screen__content
+        h1.category-screen__title.category-screen__item Организация<br> и проведение юбилейных мероприятий
+        p.category-screen__text.category-screen__item 
+          span.d-none.d-sm-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
+          span.d-block.d-sm-none Концепт мероприятия за 24 часа!
+        a(href="javasсript:void(0);").button.button_style-1.category-screen__button.category-screen__item Свяжитесь с нами
+        
+
+
+
+  include blocks/organization
+
+  include blocks/team
+
+  include blocks/clients
+
+  include blocks/contacts

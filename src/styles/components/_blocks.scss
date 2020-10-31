@@ -1,7 +1,6 @@
 
 .desktop-background-wrapper {
-  background: var(--color-dark-bg, #0F0B17);
-  border-radius: 0 0 $radius $radius;
+  background: var(--color-bg-gradient);
   overflow: hidden;
   position: relative;
   padding: 0;
@@ -14,29 +13,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.9);
-    }
-  }
-  @include media-breakpoint-down(lg) {
-    border-radius: 0 0 80px 80px;
+    mix-blend-mode: multiply;
   }
   @include media-breakpoint-down(md) {
     &__background {
       display: none;
     }
   }
-  @include media-breakpoint-down(sm) {
-    border-radius: 0 0 24px 24px;
-  }
 }
+
 
 .home {
   border-bottom: 1px solid #7C7878;
@@ -50,40 +35,6 @@
   }
   &__mobile-background {
     display: none;
-  }
-  &-background-video {
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    &__wrap {
-      pointer-events: none;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      visibility: hidden;
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        background: rgba(0, 0, 0, 0.8);
-      }
-    }
-    &__element {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
   }
   &__vertical-line {
     z-index: 2;
@@ -180,7 +131,7 @@
   &__title {
     color: inherit;
     text-transform: uppercase;
-    margin: 0 0 20px 0;
+    margin: 0 0 30px 0;
   }
   &__text {
     font-size: 1.125rem;
@@ -192,7 +143,7 @@
   }
   &__button {
     width: 286px;
-    margin: 50px 0 0 0;
+    margin: 60px 0 0 0;
   }
   @include media-breakpoint-up(xxl) {
     &__text {
@@ -204,10 +155,10 @@
   @include media-breakpoint-down(xxl) {
     &__container {
       min-height: 620px;
-      max-height: 1000px;
+      max-height: 800px;
     }
     &__button {
-      margin-top: 40px;
+      margin-top: 50px;
     }
     &-logo {
       width: 220px;
@@ -237,8 +188,8 @@
       padding-bottom: 60px;
       min-height: 660px;
     }
+    .background-video,
     &-logo, 
-    &-background-video,
     &__vertical-line {
       display: none;
     }
@@ -315,8 +266,11 @@
   @include media-breakpoint-down(sm) {
     &__container {
       padding-bottom: 40px;
-      min-height: 620px;
+      min-height: 580px;
       max-height: 700px;
+    }
+    &__text {
+      font-size: 1rem;
     }
     &__button {
       width: 100%;
@@ -683,7 +637,7 @@
       }
       &-text {
         line-height: 50px;
-        font-size: 0.875rem;
+        font-size: 1rem;
         display: flex;
         width: 100%;
         background-color: var(--color-dark-bg);
@@ -711,8 +665,7 @@
 
 .feedback {
   color: #fff;
-  background: var(--color-dark-bg, #0F0B17);
-  border-radius: $radius $radius 0 0;
+  background: var(--color-bg-gradient);
   margin: 0;
   &__title {
     color: inherit;
@@ -745,7 +698,6 @@
     
   }
   @include media-breakpoint-down(lg) {
-    border-radius: 80px 80px 0 0;
     &-block {
       &__text {
         font-size: 1.125rem;
@@ -756,7 +708,6 @@
     }
   }
   @include media-breakpoint-down(sm) {
-    border-radius: 24px 24px 0 0;
     &-block {
       &__buttons {
         margin: 40px  0;
@@ -911,8 +862,8 @@
       }
       &.active {
         .organization-block__item-title {
-          transition: color $trs3;
           color: var(--color-accent);
+          pointer-events: none;
         }
       }
     }
@@ -943,7 +894,7 @@
     }
     &-block__item-text {
       font-weight: 700;
-      font-size: 0.875rem;
+      font-size: 1rem;
       padding-top: 15px;
     }
     &-block__content {
@@ -1017,11 +968,13 @@
       height: 50px;
       transition: transform $trs1, color $trs1;
       color: #AFB3BD;
+      pointer-events: none;
     }
     &-title {
       font-weight: 500;
       line-height: 1.5;
       margin: 20px 0 0 0;
+      pointer-events: none;
     }
     &.touch {
       .icon {
@@ -1076,8 +1029,8 @@
   &__close {
     display: block;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 5px;
+    top: 5px;
     width: 40px;
     height: 40px;
     opacity: 0;
@@ -1091,9 +1044,8 @@
       height: 2px;
       top: 50%;
       left: 50%;
-      background-color: #fff;
-      opacity: 0.5;
-      transition: opacity $trs1;
+      background-color: var(--color-text-muted);
+      transition: background-color $trs1;
     }
     &::before {
       transform: translate(-50%, -50%) rotate(-45deg);
@@ -1102,8 +1054,8 @@
       transform: translate(-50%, -50%) rotate(45deg);
     }
     &.touch, &.hover {
-      &::before, &:after {
-        opacity: 1;
+      &:before, &:after {
+        background-color: var(--color-light);
       }
     }
   }
@@ -1500,4 +1452,171 @@
     }
   }
 
+}
+
+.back-to-button {
+  position: relative;
+  padding-left: 150px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 70px;
+    height: 1px;
+    background-color: #444444;
+    left: 70px;
+    top: 50%;
+    transition: transform $trs1;
+  }
+  .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    border: 1px solid #444444;
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background-color $trs1;
+  }
+  span {
+    transition: transform $trs1;
+  }
+  &.touch, &.hover {
+    &:before {
+      transform: translateX(2px);
+    }
+    span {
+      transform: translateX(4px);
+    }
+    .icon {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    height: 50px;
+    padding-left: 120px;
+    &::before {
+      left: 60px;
+      width: 50px;
+    }
+    .icon {
+      width: 50px;
+      height: 50px;
+      padding: 15px;
+    }
+  }
+}
+
+.category-screen {
+  padding: 0;
+  background: var(--color-bg-gradient);
+  color: #fff;
+  overflow: hidden;
+  .background-video {
+    position: absolute;
+    left: calc(50% - 100px);
+    width: calc(100vw - 50% + 100px);
+  }
+  &__container {
+    height: calc(100vh + 1px);
+    min-height: 820px;
+    max-height: 1100px;
+    padding-top: 180px;
+    display: flex;
+    flex-direction: column;
+    .back-to-button {
+      flex-shrink: 0;
+    }
+  }
+  &__content {
+    flex: 1 1 100%;
+    display: flex;
+    padding: 0 0 60px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  &__title {
+    color: inherit;
+    max-width: 60%;
+    margin: 0 0 30px 0;
+  }
+  &__text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  &__button {
+    width: 325px;
+    margin: 60px 0 0 0;
+  }
+  @include media-breakpoint-up(sm) {
+    &__title {
+      br {
+        display: none;
+      }
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    .background-video {
+      left: 50%;
+      width: 50%;
+    }
+    &__button {
+      margin: 50px 0 0 0;
+    }
+    &__container {
+      min-height: 620px;
+      max-height: 800px;
+      padding-top: 140px;
+    }
+    &__title {
+      max-width: 600px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &__content {
+      padding: 60px 0;
+      margin-top: 40px;
+      align-items: center;
+      text-align: center;
+    }
+    .background-video {
+      left: 0;
+      height: calc(100% - 240px);
+      width: 100%;
+      bottom: 0;
+      top: auto;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .background-video {
+      height: calc(100% - 200px);
+    }
+    &__button {
+      width: 100%;
+      max-width: calc(100% - 48px);
+    }
+    &__text {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    &__title {
+      margin: 0 0 20px 0;
+    }
+    &__container {
+      min-height: 580px;
+      max-height: 700px;
+      padding-top: 110px;
+    }
+    &__content {
+      padding: 0;
+    }
+  }
 }

@@ -3,7 +3,7 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background: var(--color-dark-bg, #0F0B17);
+  background: var(--color-bg-gradient);
   &__map {
     flex: 1 1 100%;
     min-height: 300px;
