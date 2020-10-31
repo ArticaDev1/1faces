@@ -994,7 +994,7 @@ const Nav = {
       .fromTo(this.$nav_contactitems, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
       .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
       .fromTo(this.$logo, {autoAlpha:0, yPercent:50}, {autoAlpha:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
-      this.open();
+    
     this.$toggle.addEventListener('click', ()=>{
       if(!this.state) {
         this.open();
