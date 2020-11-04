@@ -22,7 +22,6 @@
   }
 }
 
-
 .home {
   border-bottom: 1px solid #7C7878;
   position: relative;
@@ -1819,6 +1818,7 @@
     max-width: 900px;
     font-size: 1.5rem;
     font-weight: 500;
+    overflow: hidden;
   }
   @include media-breakpoint-down(lg) {
     &__text {
