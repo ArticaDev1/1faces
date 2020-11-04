@@ -1532,8 +1532,8 @@
   }
   @include media-breakpoint-down(xxl) {
     .background-video {
-      left: 50%;
-      width: 50%;
+      left: calc(50% - 180px);
+      width: calc(100vw - 50% + 180px);
     }
     &__button {
       margin: 50px 0 0 0;
@@ -1547,7 +1547,14 @@
       max-width: 600px;
     }
   }
+  @include media-breakpoint-down(xl) {
+    .background-video {
+      left: calc(50% - 50px);
+      width: calc(100vw - 50% + 50px);
+    }
+  }
   @include media-breakpoint-down(lg) {
+    
     &__content {
       padding: 60px 0;
       margin-top: 40px;

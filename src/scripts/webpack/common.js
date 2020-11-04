@@ -1,7 +1,6 @@
 //lazylaod
 import 'lazysizes';
-lazySizes.cfg.expand = 50;
-lazySizes.cfg.preloadAfterLoad = 50;
+lazySizes.cfg.preloadAfterLoad = true;
 document.addEventListener('lazybeforeunveil', function(e){
   let el = e.target.tagName,
       bg = e.target.getAttribute('data-src');
@@ -557,6 +556,9 @@ const Cases = {
       pagination: false,
       easing: 'ease-in-out',
       speed: speed*500,
+      autoplay: true,
+      perMove: 1,
+      interval: 10000,
       breakpoints: {
         1023: {
           perPage: 2
