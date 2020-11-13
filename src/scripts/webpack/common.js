@@ -17,12 +17,8 @@ import device from "current-device";
 //form
 import Inputmask from "inputmask";
 let validate = require("validate.js");
-// import Swiper JS
+//
 import Splide from '@splidejs/splide'
-
-window.onload = function(){
-  App.onLoadEvents();
-}
 
 const Brakepoints = {
   sm: 576,
@@ -38,52 +34,72 @@ const $preloader = document.querySelector('.preloader');
 const namespace = $wrapper.getAttribute('data-namespace');
 
 const speed = 1; //animations
-const after_load_delay = 1; //seconds
+const dev = false;
 const youtubeApi = {state: false};
 
+window.onload = function(){
+  App.init();
+}
 
 const App = {
   init: function() {
-    if(namespace=='main') {
-      Home.init();
-    } else if(namespace=='category') {
-      Category.init();
-    }
+    //components
+    Dots.init();
+    BackgroundVideo.init();
+    Cases.init();
+    OrganizationSlider.init();
+    TeamSlider.init();
+    ServicesCards.init();
     TouchHoverEvents.init();
     Video.init();
     Nav.init();
     Header.init();
+    Parralax.init();
+    //functions
     scrollItemsEvents();
     inputs();
     onExitEvents();
     hiddenText();
+    //finish
+    this.finish();   
   },
-  onLoadEvents: function() {
-    let fadInAnimation = gsap.timeline({paused:true})
+  finish: function() {
+    let anim = gsap.timeline({paused:true})
       .to($wrapper, {autoAlpha:1, duration:speed, ease:'power2.inOut'});
-      
-    if(after_load_delay==0) {
-      App.init();
-      gsap.set($wrapper, {autoAlpha:1});
+    if(dev) {
+      anim.seek(speed);
       if($preloader) $preloader.remove();
     } else {
       if($preloader) {
-        console.log('__')
-        let animation = gsap.timeline()
-          .set($preloader, {css:{'transition':'none'}}, `+=${after_load_delay}`)
-          .to($preloader, {autoAlpha:0, duration:speed, ease:'power2.inOut'})
-        animation.eventCallback('onComplete', ()=>{
-          App.init();
-          $preloader.remove();
-          fadInAnimation.play();
-        })
-      } 
-      else {
-        App.init();
-        fadInAnimation.play();
+        gsap.timeline()
+          .set($preloader, {css:{'transition':'none'}}, `+=${speed}`)
+          .to($preloader, {autoAlpha:0, duration:speed, ease:'power2.out', onComplete:()=>{
+            $preloader.remove();
+            anim.play();
+            this.animatePage();
+          }})
+      } else {
+        anim.play();
+        this.animatePage();
       }
     }
-
+  },
+  animatePage: function() {
+    if(namespace=='home') {
+      let $items = document.querySelectorAll('.home__item'),
+          $dots = document.querySelectorAll('.home-dots__link');
+      gsap.timeline()
+        .fromTo($items, {y:50}, {y:0, duration:speed*1.5, ease:'power2.out', stagger:{amount:speed*0.5}})
+        .fromTo($items, {autoAlpha:0}, {autoAlpha:1, duration:speed*1.5, ease:'power2.inOut', stagger:{amount:speed*0.5}}, `-=${speed*2}`)
+        .fromTo($dots, {x:20}, {x:0, duration:speed*1.5, ease:'power2.out', stagger:{amount:speed*0.5}}, '-=2')
+        .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:speed*1.5, ease:'power2.inOut', stagger:{amount:speed*0.5}}, `-=${speed*2}`)
+    } 
+    else if(namespace=='category' || namespace=='case') {
+      let $items = document.querySelectorAll('.template-screen__item');
+      gsap.timeline()
+        .fromTo($items, {y:50}, {y:0, duration:speed*1.5, ease:'power2.out', stagger:{amount:speed*0.5}})
+        .fromTo($items, {autoAlpha:0}, {autoAlpha:1, duration:speed*1.5, ease:'power2.inOut', stagger:{amount:speed*0.5}}, `-=${speed*2}`)
+    } 
   }
 }
 
@@ -159,62 +175,6 @@ const TouchHoverEvents = {
     }
   }
 }
-
-const Home = {
-  init: function() {
-    let $homeitems = document.querySelectorAll('.home__item'),
-        $line = document.querySelectorAll('.home__vertical-line'),
-        $dots = document.querySelectorAll('.home-dots__link');
-
-    $header.classList.add('header_type-home');
-
-    gsap.timeline()
-      .fromTo($homeitems, {y:50}, {y:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}})
-      .fromTo($homeitems, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
-      .fromTo($dots, {x:20}, {x:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}}, '-=2')
-      .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
-
-    OrganizationSlider.init();
-    TeamSlider.init();
-    ServicesCards.init();
-    Dots.init();
-
-    if(window.innerWidth>=Brakepoints.md) {
-      BgVideo.init();
-    }
-
-  }
-}
-
-const Category = {
-  init: function() {
-    let $items = document.querySelectorAll('.category-screen__item'),
-        $bg = document.querySelector('.background-video');
-
-    gsap.timeline()
-      .fromTo($items, {y:50}, {y:0, duration:1.5, ease:'power2.out', stagger:{amount:0.5}})
-      .fromTo($items, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.inOut', stagger:{amount:0.5}}, '-=2')
-
-    this.scroll = ()=> {
-      if(window.innerWidth>Brakepoints.lg) {
-        let y = window.pageYOffset;
-        gsap.set($bg, {y:y/3})
-      }
-    }
-
-    this.scroll();
-    window.addEventListener('scroll', ()=>{
-      this.scroll();
-    });
-
-    BgVideo.init();
-    Cases.init();
-    OrganizationSlider.init();
-    TeamSlider.init();
-    ServicesCards.init();
-  }
-}
-
 const Video = {
   init: function() {
     this.$openBtn = '[data-video]';
@@ -303,9 +263,14 @@ const Video = {
     });
   }
 }
-
 const OrganizationSlider = {
   init: function() {
+    this.$parent = document.querySelector('.organization-block');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     let $items = document.querySelectorAll('.organization-block__item'),
         $images = document.querySelectorAll('.organization-block__image'),
         $titles = document.querySelectorAll('.organization-block__item-title'),
@@ -317,22 +282,20 @@ const OrganizationSlider = {
         interval = 10, //seconds
         animations = [];
 
-    //autoslide
-
     let intervalAnimation = gsap.timeline({paused:true, onComplete:()=>{
-        index++;
-        if(index>slides_count-1) {
-          index = 0;
-        }
-        check();
-      }})
-        .set($loader, {css:{'stroke-dasharray':loader_width}})
-        .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
-        .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
+      index++;
+      if(index>slides_count-1) {
+        index = 0;
+      }
+      check();
+    }})
+      .set($loader, {css:{'stroke-dasharray':loader_width}})
+      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
+      .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
 
     let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-          intervalAnimation.duration(interval-0.5).play(0);
-        }});
+      intervalAnimation.duration(interval-0.5).play(0);
+    }});
 
 
     $items.forEach(($item, index)=>{
@@ -377,6 +340,12 @@ const OrganizationSlider = {
 }
 const TeamSlider = {
   init: function() {
+    this.$parent = document.querySelector('.team-slider');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     let $images = document.querySelectorAll('.team-slider__image'),
         $items = document.querySelectorAll('.team-slider__info'),
         $numbers = document.querySelectorAll('.team-slider__button-index'),
@@ -387,7 +356,6 @@ const TeamSlider = {
         index_old,
         interval = 10, //seconds
         animations = [];
-
 
     //autoslide
     let intervalAnimation = gsap.timeline({paused:true, onComplete:()=>{
@@ -401,8 +369,8 @@ const TeamSlider = {
       .fromTo($loader, {scaleX:0, xPercent:-50}, {duration:interval, scaleX:1, xPercent:0, ease:'linear'}, '-=0.5')
 
     let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-          intervalAnimation.duration(interval-0.5).play(0);
-        }});
+      intervalAnimation.duration(interval-0.5).play(0);
+    }});
 
     $images.forEach(($image, index)=>{
       let $item = $items[index],
@@ -435,6 +403,12 @@ const TeamSlider = {
 }
 const ServicesCards = {
   init: function() {
+    this.$parent = document.querySelector('.services');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     let $blocks = document.querySelectorAll('.services-block'),
         animations = [],
         oldIndex = false;
@@ -526,9 +500,14 @@ const ServicesCards = {
     })
   }
 }
-
 const Cases = {
   init: function() {
+    this.$parent = document.querySelector('.cases-slider');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     let $slides = document.querySelectorAll('.cases-slider__slide'),
         $next = document.querySelector('.cases-slider__next'),
         $prev = document.querySelector('.cases-slider__prev'),
@@ -536,8 +515,7 @@ const Cases = {
         slide_old,
         inAnimation = false,
         animations = [];
-        
-
+    
     $slides.forEach(($this, index)=>{
       let $img = $this.querySelector('.background'),
           $title = $this.querySelector('.cases-slider__slide-title'),
@@ -587,7 +565,6 @@ const Cases = {
           slide_index,
           next_index;
 
-      console.log('click')
       if($target && !inAnimation) {
         document.querySelectorAll('.cases-slider__nav-slide-container').forEach(($this, index)=>{
           if($this.parentNode.classList.contains('is-active')) {
@@ -608,12 +585,16 @@ const Cases = {
     $prev.addEventListener('click', ()=>{
       if(!inAnimation) slider.go('-1', false)
     })
-
   }
 }
-
 const Dots = {
   init: function() {
+    this.$parent = document.querySelector('.home-dots');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     let $buttons = document.querySelectorAll('.home-dots__link'),
         $sections = document.querySelectorAll('[data-scroll-block]'),
         $dark_sections = document.querySelectorAll('[data-dark]'),
@@ -709,38 +690,23 @@ const Dots = {
     })
   }
 }
-
-function scrollItemsEvents() {
-  let check = ()=>{
-    let $items = document.querySelectorAll('.js-scroll-animated'),
-        position = window.pageYOffset;
-
-    $items.forEach(($item)=>{
-      let top = $item.getBoundingClientRect().y + position - window.innerHeight;
-      if(position>top && !$item.classList.contains('animated')) {
-        $item.classList.add('animated');
-      }
-    })
-    
-  }
-  check();
-  window.addEventListener('scroll', ()=>{
-    check();
-  })
-}
-
-window.BgVideo = {
+const BackgroundVideo = {
   init: function() {
-    this.$wrapper = document.querySelector('.background-video');
+    this.$parent = document.querySelector('.background-video');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
     this.$video = document.querySelector('.background-video__wrap');
-    this.id = this.$wrapper.getAttribute('data-video-id');
+    this.id = this.$parent.getAttribute('data-video-id');
     this.loaded = false;
     this.before_end_delay = 8;
 
     this.fadeIn = gsap.timeline({paused:true})
       .fromTo(this.$video, {autoAlpha:0}, {autoAlpha:1, duration:speed*2, ease:'power2.inOut'})
 
-    if(namespace=='main') {
+    if(namespace=='home') {
       this.$loader = document.querySelector('.home-logo__circle path');
       this.loader_width = this.$loader.getTotalLength();
       this.startLoaderAnimation = gsap.timeline()
@@ -764,11 +730,10 @@ window.BgVideo = {
     window.addEventListener('resize', ()=>{this.resize()})
   },
   resize: function() {
-    let h = this.$wrapper.getBoundingClientRect().height,
-        w = this.$wrapper.getBoundingClientRect().width,
+    let h = this.$parent.getBoundingClientRect().height,
+        w = this.$parent.getBoundingClientRect().width,
         value = h/w,
         ratio = 0.5625;
-
     if(value<ratio) {
       this.$video.style.width = `${w}px`;
       this.$video.style.height = `${w*ratio+200}px`;
@@ -776,7 +741,6 @@ window.BgVideo = {
       this.$video.style.height = `${h+200}px`;
       this.$video.style.width = `${h/ratio}px`;
     }
-    
   },
   initPlayer: function() {
     this.player = new YT.Player('bg-player', {
@@ -798,12 +762,16 @@ window.BgVideo = {
     this.duration = this.player.getDuration() - this.before_end_delay;
     this.delay = 0;
     //main
-    if(namespace=='main') {
-      this.delay=speed*1.5;
+    if(namespace=='home') {
+      if($preloader) {
+        this.delay=speed*4;
+      } else {
+        this.delay=speed*2;
+      }
       this.startLoaderAnimation.pause();
       gsap.timeline()
         .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
-        .to(this.$loader, {duration:this.delay/2, autoAlpha:0, ease:'power1.inOut'}, `-=${this.delay/2}`)
+        .to(this.$loader, {duration:speed*0.5, autoAlpha:0, ease:'power1.in'}, `-=${speed*0.5}`)
 
       this.animationTimeline = gsap.timeline({paused:true})
         .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
@@ -815,16 +783,16 @@ window.BgVideo = {
       this.player.playVideo();
       this.player.mute();
       event.target.setPlaybackQuality('hd720');
-      console.log('play')
-
       let checkToPause = ()=>{
         let position = this.$video.getBoundingClientRect().y + this.$video.getBoundingClientRect().height;
         if((position<=0 || document.visibilityState=='hidden') && !this.flag) {
           this.flag = true;
           this.player.pauseVideo();
+          console.log('1')
         } else if(position>0 && document.visibilityState=='visible' && this.flag) {
           this.flag = false;
           this.player.playVideo();
+          console.log('2')
         }
       }
       checkToPause();
@@ -850,28 +818,157 @@ window.BgVideo = {
   },
   playerStateChange: function(event) {
     if(event.data === YT.PlayerState.BUFFERING) {
-      if(namespace=='main') {
+      if(namespace=='home') {
         this.animationTimeline.pause();
       }
     } 
     else if(event.data === YT.PlayerState.PAUSED) {
-      if(namespace=='main') {
+      if(namespace=='home') {
         this.animationTimeline.pause();
       }
     }
     else if(event.data === YT.PlayerState.PLAYING) {
-      console.log('playing')
       if(this.fadeIn.progress()==0) {
         this.fadeIn.play();
       }
-      //main
-      if(namespace=='main') {
+      if(namespace=='home') {
         this.animationTimeline.play(this.player.getCurrentTime());
       }
     }
   }
 }
+const Nav = {
+  init: function() {
+    this.$nav = document.querySelector('.nav');
+    this.$toggle = document.querySelector('.nav-toggle');
+    this.$toggle_line = this.$toggle.querySelectorAll('span');
+    this.$line = document.querySelector('.nav__line');
+    this.$logo = document.querySelector('.nav__logo');
+    this.$nav_items = document.querySelectorAll('.nav__item');
+    this.$nav_socials = document.querySelectorAll('.nav__socials .socials__item');
+    this.$nav_contactitems = document.querySelectorAll('.nav__contacts-list li');
+    this.state = false;
+    this.opened = false;
+    this.animation = gsap.timeline({paused:true, 
+      onStart:()=>{
+        this.opened = true;
+        this.$toggle.classList.add('active');
+      }, 
+      onReverseComplete:()=>{
+        this.opened = false;
+        this.$toggle.classList.remove('active');
+      }
+    })
+      .to(this.$nav, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+      .to(this.$toggle_line[1], {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed/2}`)
+      .to(this.$toggle_line[0], {rotate:-45, y:9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      .to(this.$toggle_line[2], {rotate:45, y:-9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      .fromTo(this.$nav_items, {x:100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
+      .fromTo(this.$nav_socials, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2, from:'end'}}, `-=${speed}`)
+      .fromTo(this.$nav_contactitems, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
+      .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
+      .fromTo(this.$logo, {autoAlpha:0, yPercent:50}, {autoAlpha:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
+    
+    this.$toggle.addEventListener('click', ()=>{
+      if(!this.state) {
+        this.open();
+      } else {
+        this.close();
+      }
+    })
+  },
+  open: function() {
+    $header.classList.add('header_nav-opened');
+    this.state=true;
+    this.animation.timeScale(1).play();
+  },
+  close: function() {
+    $header.classList.remove('header_nav-opened');
+    this.state=false;
+    this.animation.timeScale(1.5).reverse();
+  }
+}
+const Header = {
+  init: function() {
+    this.height = $header.getBoundingClientRect().height;
+    this.scrollY = 0;
+    this.isVisible = true;
+    this.fixed = false;
 
+    this.animation = gsap.timeline({paused:true})
+      .to($header, {yPercent:-100, duration:speed, ease:'power2.in'})
+
+    window.addEventListener('resize', ()=>{
+      this.height = $header.getBoundingClientRect().height;
+    })
+
+    window.addEventListener('scroll', ()=>{
+      this.check();
+    })
+    this.check();
+  }, 
+  check: function() {
+    let y = window.pageYOffset,
+        h = window.innerHeight;
+
+    if(y>0 && !this.fixed) {
+      this.fixed = true;
+      $header.classList.add('header_fixed');
+    } else if(y==0 && this.fixed) {
+      this.fixed = false;
+      $header.classList.remove('header_fixed');
+    }
+
+    if(this.scrollY<y && this.scrollY>h && this.isVisible && !Nav.opened) {
+      this.isVisible = false;
+      this.animation.timeScale(2).play();
+    } else if(this.scrollY>y && !this.isVisible) {
+      this.isVisible = true;
+      this.animation.timeScale(1).reverse();
+    }    
+
+    this.scrollY = y;
+  }
+}
+const Parralax = {
+  init: function() {
+    window.addEventListener('scroll', ()=>{
+      this.check();
+    })
+  },
+  check: function() {
+    let $items = document.querySelectorAll('[data-parralax]');
+    $items.forEach(($this)=>{
+      let y = $this.getBoundingClientRect().y,
+          h1 = window.innerHeight,
+          h2 = $this.getBoundingClientRect().height,
+          scroll = window.pageYOffset,
+          factor = +$this.getAttribute('data-parralax');
+  
+      let val = (scroll-y)*factor;
+      gsap.set($this, {y:val})
+    })
+  }
+}
+
+function scrollItemsEvents() {
+  let check = ()=>{
+    let $items = document.querySelectorAll('.js-scroll-animated'),
+        position = window.pageYOffset;
+
+    $items.forEach(($item)=>{
+      let top = $item.getBoundingClientRect().y + position - window.innerHeight;
+      if(position>top && !$item.classList.contains('animated')) {
+        $item.classList.add('animated');
+      }
+    })
+    
+  }
+  check();
+  window.addEventListener('scroll', ()=>{
+    check();
+  })
+}
 
 function hiddenText() {
   let $parent = document.querySelectorAll('.hidden-text');
@@ -963,99 +1060,4 @@ function onExitEvents() {
       }
     }
   });
-}
-
-const Nav = {
-  init: function() {
-    this.$nav = document.querySelector('.nav');
-    this.$toggle = document.querySelector('.nav-toggle');
-    this.$toggle_line = this.$toggle.querySelectorAll('span');
-    this.$line = document.querySelector('.nav__line');
-    this.$logo = document.querySelector('.nav__logo');
-    this.$nav_items = document.querySelectorAll('.nav__item');
-    this.$nav_socials = document.querySelectorAll('.nav__socials .socials__item');
-    this.$nav_contactitems = document.querySelectorAll('.nav__contacts-list li');
-    this.state = false;
-    this.opened = false;
-    this.animation = gsap.timeline({paused:true, 
-      onStart:()=>{
-        this.opened = true;
-        this.$toggle.classList.add('active');
-      }, 
-      onReverseComplete:()=>{
-        this.opened = false;
-        this.$toggle.classList.remove('active');
-      }
-    })
-      .to(this.$nav, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
-      .to(this.$toggle_line[1], {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed/2}`)
-      .to(this.$toggle_line[0], {rotate:-45, y:9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
-      .to(this.$toggle_line[2], {rotate:45, y:-9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
-      .fromTo(this.$nav_items, {x:100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
-      .fromTo(this.$nav_socials, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2, from:'end'}}, `-=${speed}`)
-      .fromTo(this.$nav_contactitems, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
-      .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
-      .fromTo(this.$logo, {autoAlpha:0, yPercent:50}, {autoAlpha:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
-    
-    this.$toggle.addEventListener('click', ()=>{
-      if(!this.state) {
-        this.open();
-      } else {
-        this.close();
-      }
-    })
-  },
-  open: function() {
-    $header.classList.add('header_nav-opened');
-    this.state=true;
-    this.animation.timeScale(1).play();
-  },
-  close: function() {
-    $header.classList.remove('header_nav-opened');
-    this.state=false;
-    this.animation.timeScale(1.5).reverse();
-  }
-}
-
-const Header = {
-  init: function() {
-    this.height = $header.getBoundingClientRect().height;
-    this.scrollY = 0;
-    this.isVisible = true;
-    this.fixed = false;
-
-    this.animation = gsap.timeline({paused:true})
-      .to($header, {yPercent:-100, duration:speed, ease:'power2.in'})
-
-    window.addEventListener('resize', ()=>{
-      this.height = $header.getBoundingClientRect().height;
-    })
-
-    window.addEventListener('scroll', ()=>{
-      this.check();
-    })
-    this.check();
-  }, 
-  check: function() {
-    let y = window.pageYOffset,
-        h = window.innerHeight;
-
-    if(y>0 && !this.fixed) {
-      this.fixed = true;
-      $header.classList.add('header_fixed');
-    } else if(y==0 && this.fixed) {
-      this.fixed = false;
-      $header.classList.remove('header_fixed');
-    }
-
-    if(this.scrollY<y && this.scrollY>h && this.isVisible && !Nav.opened) {
-      this.isVisible = false;
-      this.animation.timeScale(2).play();
-    } else if(this.scrollY>y && !this.isVisible) {
-      this.isVisible = true;
-      this.animation.timeScale(1).reverse();
-    }    
-
-    this.scrollY = y;
-  }
 }

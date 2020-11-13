@@ -138,7 +138,7 @@
     margin: 0;
   }
   &__button {
-    width: 286px;
+    width: 290px;
     margin: 60px 0 0 0;
   }
   @include media-breakpoint-up(xxl) {
@@ -154,7 +154,7 @@
       max-height: 800px;
     }
     &__button {
-      margin-top: 50px;
+      margin-top: 45px;
     }
     &-logo {
       width: 220px;
@@ -632,7 +632,7 @@
 .feedback {
   color: #fff;
   background: var(--color-bg-gradient);
-  margin: 0;
+  margin-bottom: 0;
   &__title {
     color: inherit;
   }
@@ -1479,15 +1479,15 @@
   }
 }
 
-.category-screen {
+.template-screen {
   padding: 0;
   background: var(--color-bg-gradient);
   color: #fff;
   overflow: hidden;
-  .background-video {
+  &__background-video {
     position: absolute;
-    left: calc(50% - 100px);
-    width: calc(100vw - 50% + 100px);
+    left: calc(50% - 200px);
+    width: calc(100vw - 50% + 200px);
   }
   &__container {
     height: calc(100vh + 1px);
@@ -1510,7 +1510,7 @@
   }
   &__title {
     color: inherit;
-    max-width: 60%;
+    max-width: 1000px;
     margin: 0 0 30px 0;
   }
   &__text {
@@ -1519,7 +1519,7 @@
     margin: 0;
   }
   &__button {
-    width: 325px;
+    width: 290px;
     margin: 60px 0 0 0;
   }
   @include media-breakpoint-up(sm) {
@@ -1530,37 +1530,29 @@
     }
   }
   @include media-breakpoint-down(xxl) {
-    .background-video {
-      left: calc(50% - 180px);
-      width: calc(100vw - 50% + 180px);
-    }
     &__button {
-      margin: 50px 0 0 0;
+      margin: 45px 0 0 0;
     }
     &__container {
       min-height: 620px;
       max-height: 800px;
       padding-top: 140px;
     }
-    &__title {
-      max-width: 600px;
-    }
   }
   @include media-breakpoint-down(xl) {
-    .background-video {
+    &__background-video {
       left: calc(50% - 50px);
       width: calc(100vw - 50% + 50px);
     }
   }
   @include media-breakpoint-down(lg) {
-    
     &__content {
       padding: 60px 0;
       margin-top: 40px;
       align-items: center;
       text-align: center;
     }
-    .background-video {
+    &__background-video {
       left: 0;
       height: calc(100% - 240px);
       width: 100%;
@@ -1575,7 +1567,7 @@
     }
   } 
   @include media-breakpoint-down(sm) {
-    .background-video {
+    &__background-video {
       height: calc(100% - 190px);
     }
     &__button {

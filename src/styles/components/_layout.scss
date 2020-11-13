@@ -33,6 +33,9 @@
   &_mb2 {
     margin-bottom: 100px;
   }
+  &_mt2 {
+    margin-top: 100px;
+  }
   &__title {
     text-align: center;
     margin: 0 0 100px 0;
@@ -53,6 +56,9 @@
     }
     &_mb2 {
       margin-bottom: 80px;
+    }
+    &_mt2 {
+      margin-top: 80px;
     }
     &__title {
       margin: 0 0 60px 0;
@@ -75,6 +81,9 @@
     &_mb2 {
       margin-bottom: 60px;
     }
+    &_mt2 {
+      margin-top: 60px;
+    }
   }
   @include media-breakpoint-down(md) {
     padding: 50px 0;
@@ -92,6 +101,9 @@
     }
     &_mb2 {
       margin-bottom: 50px;
+    }
+    &_mt2 {
+      margin-top: 50px;
     }
   }
   @include media-breakpoint-down(sm) {
@@ -113,6 +125,9 @@
     }
     &_mb2 {
       margin-bottom: 35px;
+    }
+    &_mt2 {
+      margin-top: 35px;
     }
   }
 }

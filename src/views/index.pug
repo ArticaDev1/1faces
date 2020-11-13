@@ -1,6 +1,6 @@
 extends layout/layout
 block variables
-  -var namespace = 'main'
+  -var namespace = 'home'
   -var preloader = true
 block title
   title #{title} - Организация мероприятий
@@ -32,7 +32,7 @@ block content
     section.section.home#home(data-scroll-block)
       .home__mobile-background(style='background-image:url("./img/mobile-home-bg.jpg");')
       span.home__vertical-line
-      .background-video(data-video-id='0zxNqsKiQxE')
+      .background-video(data-video-id='0zxNqsKiQxE' data-parralax='0.15')
         .background-video__wrap
           #bg-player.background-video__element
       .container.home__container
@@ -105,7 +105,7 @@ block content
 
   include blocks/clients
 
-  section.section.section_mb2.documents
+  section.section.documents
     .container
       h2.section__title Отзывы и благодарности
       .row.grid

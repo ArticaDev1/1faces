@@ -1,0 +1,29 @@
+extends layout/layout
+block variables
+  -var preloader = false
+  -var namespace = 'case'
+block title
+  title #{title} - Кейс
+block content 
+
+  section.section.template-screen
+    //video
+    .background-video.template-screen__background-video(data-video-id='khsn_tIIdJM' data-parralax='0.15')
+      .background.background-video__background.lazyload(data-src='./img/ddsd.jpg')
+      .background-video__wrap
+        #bg-player.background-video__element
+    //content
+    .container.template-screen__container
+      a(href="./service.html").back-to-button.template-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
+        span Юбилеи комипании
+      .template-screen__content
+        h1.h2.template-screen__title.template-screen__item Организация мероприятия в честь 85-летия ПАО «НЛМК»: юбилейный выпуск чугуна
+        p.template-screen__text.template-screen__item 
+          span.d-none.d-sm-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
+          span.d-block.d-sm-none Концепт мероприятия за 24 часа!
+        a(href="javasсript:void(0);").button.button_style-1.template-screen__button.template-screen__item Свяжитесь с нами
+
+  include blocks/organization
+  include blocks/contacts
