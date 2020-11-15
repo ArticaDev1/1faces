@@ -41,7 +41,7 @@ h6, .h6 {
 p {
   margin: 0 0 1.25rem 0;
   &:last-child {
-    margin: 0;
+    margin-bottom: 0;
   }
 }
 mark {
@@ -139,7 +139,7 @@ a {
     font-size: 2.25rem;
   }
   h4, .h4 {
-    font-size: 2rem;
+    font-size: 1.625rem;
   }
   h5, .h5 {
     font-size: 1.25rem;

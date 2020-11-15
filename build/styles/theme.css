@@ -5,9 +5,10 @@
   --color-dark-bg: #0F0B17;
   --color-bg-gradient: radial-gradient(60.68% 60.68% at 50% 36.44%, #353C44 0%, #121314 100%);
   --color-input-border: #C4C4C4;
+  --color-error:    #FF0000;
   --color-text: #26252D;
   --color-text-muted: #E1E1E1;
   --color-light: #fff;
-  --color-images-bg: #E1E1E1; }
+  --color-images-bg: rgba(0, 0, 0, 0.1); }
 
 /*# sourceMappingURL=maps/theme.css.map */

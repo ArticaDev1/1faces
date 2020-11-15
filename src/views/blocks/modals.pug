@@ -1,0 +1,41 @@
+.modal#modal-form
+  .modal__overlay(data-modal='close')
+  .modal__close
+    span
+    span
+  .modal__wrapper
+    .modal__container
+      .form-block
+        .form-block__container
+          .form-block__head
+            h4.form-block__title Концепт вашего<br> мероприятия за 24 часа!
+            p.form-block__text Напишите несколько слов о ваших задачах, оставьте свои контакты, и мы бесплатно предложим варианты решений уже через сутки.
+          form(action="#").form-block__form.js-validation
+            .row.form-block__row
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="phone_modal").input__label Введите телефон
+                  input(type="text" name='phone' id='phone_modal' data-validate='phone').input__element
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="email_modal").input__label Введите e-mail
+                  input(type="text" name='email' id='email_modal' data-validate='email').input__element
+              .form-block__item.col-12
+                .input.form-block__input
+                  label(for="text_modal").input__label Оставьте комментарий
+                  textarea(type="text" name='text' id='text_modal' data-validate='message').input__element
+              .form-block__item.col-sm-6
+                button.button.button_style-1.form-block__button Отправить
+          p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
+
+.modal.modal-succes#modal-succes
+  .modal__overlay(data-modal='close')
+  .modal__close
+    span
+    span
+  .modal__wrapper
+    .modal__container.modal-succes__container
+      h3.modal-succes__title Спасибо!
+      svg.modal-succes__icon(width='65' height='59' viewBox='0 0 65 59' fill='none' stroke='currentColor' xmlns='http://www.w3.org/2000/svg')
+        path(d='M1.5 36.8079L20.1349 56.7611L63.4635 1.23926' stroke-width='2')
+      p.modal-succes__text Мы свяжемся с вами в ближайшее время.

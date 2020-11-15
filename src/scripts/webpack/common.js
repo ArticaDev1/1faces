@@ -18,7 +18,10 @@ import device from "current-device";
 import Inputmask from "inputmask";
 let validate = require("validate.js");
 //
-import Splide from '@splidejs/splide'
+import Splide from '@splidejs/splide';
+import SwipeListener from 'swipe-listener';
+
+
 
 const Brakepoints = {
   sm: 576,
@@ -36,6 +39,7 @@ const namespace = $wrapper.getAttribute('data-namespace');
 const speed = 1; //animations
 const dev = false;
 const youtubeApi = {state: false};
+const interval = 3; //autoslide duration
 
 window.onload = function(){
   App.init();
@@ -45,16 +49,18 @@ const App = {
   init: function() {
     //components
     Dots.init();
-    BackgroundVideo.init();
+    //BackgroundVideo.init();
     Cases.init();
     OrganizationSlider.init();
     TeamSlider.init();
+    Gallery.init();
     ServicesCards.init();
     TouchHoverEvents.init();
-    Video.init();
     Nav.init();
     Header.init();
+    Modal.init();
     Parralax.init();
+    Validation.init();
     //functions
     scrollItemsEvents();
     inputs();
@@ -95,10 +101,12 @@ const App = {
         .fromTo($dots, {autoAlpha:0}, {autoAlpha:1, duration:speed*1.5, ease:'power2.inOut', stagger:{amount:speed*0.5}}, `-=${speed*2}`)
     } 
     else if(namespace=='category' || namespace=='case') {
-      let $items = document.querySelectorAll('.template-screen__item');
+      let $items = document.querySelectorAll('.template-screen__item'),
+          $image = document.querySelector('.background-video__background');
       gsap.timeline()
         .fromTo($items, {y:50}, {y:0, duration:speed*1.5, ease:'power2.out', stagger:{amount:speed*0.5}})
         .fromTo($items, {autoAlpha:0}, {autoAlpha:1, duration:speed*1.5, ease:'power2.inOut', stagger:{amount:speed*0.5}}, `-=${speed*2}`)
+        .fromTo($image, {scale:1.25}, {scale:1, duration:speed*2, ease:'power2.out'}, `-=${speed*2}`)
     } 
   }
 }
@@ -175,94 +183,115 @@ const TouchHoverEvents = {
     }
   }
 }
-const Video = {
+
+const Gallery = {
   init: function() {
-    this.$openBtn = '[data-video]';
-    this.$closeBtn = '[data-video-close]';
-    this.initialized = false;
-    //triggers click
-    document.addEventListener('click', function(event){
-      let $open = event.target.closest(Video.$openBtn),
-          $close = event.target.closest(Video.$closeBtn);
-      if($open!==null) {
-        event.preventDefault();
-        Video.href = $open.getAttribute('href');
-        let array = Video.href.split('/');
-        Video.id = array[array.length-1];
-        Video.openModal();
-      } else if($close!==null) {
-        Video.closeModal();
+    this.$parent = document.querySelector('.gallery');
+    if(this.$parent) {
+      this.initEvent();
+    }
+  },
+  initEvent: function() {
+    this.$max_images = document.querySelectorAll('.gallery__max img');
+    this.$min_images = document.querySelectorAll('.gallery__min img');
+    this.$prev = document.querySelector('.gallery__prev');
+    this.$next = document.querySelector('.gallery__next');
+    this.$line = document.querySelector('.gallery__line span');
+    this.$idx = document.querySelectorAll('.gallery__index span');
+    this.in_animation = false;
+
+    this.getAnimation = ($image1, $image2)=> {
+      let val1 = 1/this.length*this.index,
+          val2 = -(100-(100*val1))/2;
+      gsap.to(this.$line, {scaleX:val1, xPercent:val2, duration:speed, ease:'power2.inOut'})
+      gsap.set([$image1.parentNode, $image2.parentNode], {autoAlpha:1});
+
+      //index
+      if(this.indexAnimOld) {
+        this.indexAnimOld.reverse();
       }
-    })
-  },
-  setVideoSize: function(callback) {
-    let style = window.getComputedStyle(Video.$modal),
-        pt = parseFloat(style.getPropertyValue("padding-top")),
-        pb = parseFloat(style.getPropertyValue("padding-bottom")),
-        pl = parseFloat(style.getPropertyValue("padding-left")),
-        pr = parseFloat(style.getPropertyValue("padding-right")),
-        h = Video.$modal.getBoundingClientRect().height - pt - pb,
-        w = Video.$modal.getBoundingClientRect().width - pl - pr;
-
-    if(w/h > 16/9) {
-      Video.$container.style.height = `${h}px`;
-      Video.$container.style.width = `${h*1.77}px`;
-    } else {
-      Video.$container.style.height = `${w*0.5625}px`;
-      Video.$container.style.width = `${w}px`;
+      this.indexAnim = gsap.timeline()
+        .to(this.$idx[this.index], {autoAlpha:1, duration:speed, ease:'power2.inOut'})
+      this.indexAnimOld = this.indexAnim;
+      
+      let animation = gsap.timeline({paused:true})
+        .fromTo($image1.parentNode, {xPercent:0}, {xPercent:-100, duration:speed, ease:'power2.inOut'})
+        .fromTo($image1, {xPercent:0}, {xPercent:50, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+        .fromTo($image2.parentNode, {xPercent:100}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+        .fromTo($image2, {xPercent:-50}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      return animation;
     }
 
-    typeof callback === 'function' && callback()
-  },
-  openModal: function() {
-    Video.initialized = true;
-    //create modal
-    $wrapper.insertAdjacentHTML('beforeEnd', `<div class="modal video-modal"><a href="javascript:void(0);" data-video-close data-cursor="white" class="modal__overlay"></a><div class="modal-close" href="javascript:void(0);"><span></span><span></span></div><div class="modal__video"><div id="video-player"></div></div></div>`);
-    Video.$modal = document.querySelector('.video-modal');
-    Video.$close = Video.$modal.querySelector('[data-video-close]');
-    Video.$container = Video.$modal.querySelector('.modal__video');
+    this.index = 0;
+    this.length = this.$max_images.length-1;
 
-    window.addEventListener('resize', Video.setVideoSize);
-    Video.setVideoSize(()=>{
-      Video.animation = gsap.timeline()
-        .fromTo(Video.$modal, {autoAlpha:0}, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-        .fromTo(Video.$container, {yPercent:20}, {duration:1, yPercent:0, ease:'power2.out'}, '-=0.5')
-    })
-
-    if(!youtubeApi.state) {
-      youtubeApi.state = true;
-      let tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.insertAdjacentElement('beforeEnd', tag);
-      window.onYouTubeIframeAPIReady=()=>{
-        this.initPlayer();
-      };
-    } else {
-      this.initPlayer();
+    this.getNext = (index)=> {
+      let val = index==this.length?0:index+1;
+      return val;
     }
-  },
-  closeModal: function() {
-    Video.initialized = false;
-    window.removeEventListener('resize', Video.setVideoSize);
-    Video.animation = gsap.timeline()
-      .to(Video.$modal, {duration:0.5, autoAlpha:0, ease:'power2.in'})
-      .to(Video.$container, {duration:0.5, yPercent:20, ease:'power2.in'}, '-=0.5')
-    Video.animation.eventCallback('onComplete',()=>{
-      Video.$modal.remove();
+    this.getPrev = (index)=> {
+      let val = index==0?this.length:index-1;
+      return val;
+    }
+    this.next = ()=> {
+      if(!this.in_animation) {
+        this.in_animation = true;
+        this.index = this.getNext(this.index);
+        this.change('next');
+      }
+    }
+    this.prev = ()=> {
+      if(!this.in_animation) {
+        this.in_animation = true;
+        this.index = this.getPrev(this.index);
+        this.change('prev');
+      }
+    }
+
+    this.$prev.addEventListener('click', ()=>{
+      this.prev();
     })
-  },
-  initPlayer: function() {
-    Video.player = new YT.Player('video-player', {
-      videoId: Video.id,
-      events: {
-        'onReady': function(event) {
-          event.target.playVideo();
-          document.querySelector('#video-player').classList.add('ready');
-        }
+    this.$next.addEventListener('click', ()=>{
+      this.next();
+    })
+    this.swipes = SwipeListener(this.$parent);
+    this.$parent.addEventListener('swipe', (event)=> {
+      let dir = event.detail.directions;
+      console.log(dir)
+      if(dir.left) {
+        this.next();
+      } else if(dir.right) {
+        this.prev();
       }
     });
+
+    this.change('next');
+  },
+  change: function(direction) {
+    //timer
+    if(this.timer) clearTimeout(this.timer)
+    this.timer = setTimeout(()=>{
+      this.next();
+    }, interval*1000)
+    
+    if(direction=='next') {
+      this.getAnimation(this.$max_images[this.getPrev(this.index)], this.$max_images[this.index]).play()
+        .eventCallback('onComplete', ()=>{
+          this.in_animation=false;
+        });
+      this.getAnimation(this.$min_images[this.index], this.$min_images[this.getNext(this.index)]).play();
+
+    } 
+    else if(direction=='prev') {
+      this.getAnimation(this.$max_images[this.index], this.$max_images[this.getNext(this.index)]).reverse(0)
+        .eventCallback('onReverseComplete', ()=>{
+          this.in_animation=false;
+        });
+      this.getAnimation(this.$min_images[this.getNext(this.index)], this.$min_images[this.getNext(this.getNext(this.index))]).reverse(0);
+    }
   }
 }
+
 const OrganizationSlider = {
   init: function() {
     this.$parent = document.querySelector('.organization-block');
@@ -279,7 +308,6 @@ const OrganizationSlider = {
         index = 0,
         slides_count = $items.length,
         index_old,
-        interval = 10, //seconds
         animations = [];
 
     let intervalAnimation = gsap.timeline({paused:true, onComplete:()=>{
@@ -338,6 +366,7 @@ const OrganizationSlider = {
     })
   }
 }
+
 const TeamSlider = {
   init: function() {
     this.$parent = document.querySelector('.team-slider');
@@ -354,7 +383,6 @@ const TeamSlider = {
         index = 0,
         slides_count = $images.length,
         index_old,
-        interval = 10, //seconds
         animations = [];
 
     //autoslide
@@ -409,6 +437,7 @@ const ServicesCards = {
     }
   },
   initEvent: function() {
+    console.log(':')
     let $blocks = document.querySelectorAll('.services-block'),
         animations = [],
         oldIndex = false;
@@ -536,7 +565,7 @@ const Cases = {
       speed: speed*500,
       autoplay: true,
       perMove: 1,
-      interval: 10000,
+      interval: interval*1000,
       breakpoints: {
         1023: {
           perPage: 2
@@ -693,13 +722,14 @@ const Dots = {
 const BackgroundVideo = {
   init: function() {
     this.$parent = document.querySelector('.background-video');
-    if(this.$parent) {
+    if(this.$parent && device.desktop()) {
       this.initEvent();
     }
   },
   initEvent: function() {
+    let array = this.$parent.getAttribute('data-video').split('/');
     this.$video = document.querySelector('.background-video__wrap');
-    this.id = this.$parent.getAttribute('data-video-id');
+    this.id = array[array.length-1];
     this.loaded = false;
     this.before_end_delay = 8;
 
@@ -1016,14 +1046,7 @@ function hiddenText() {
 }
 
 function inputs() {
-  let mask = Inputmask({
-      mask: "+7 999 999-9999",
-      showMaskOnHover: false,
-      clearIncomplete: false
-    }).mask('[data-mask]');
-
   let $inputs = document.querySelectorAll('input, textarea');
-
   $inputs.forEach(($input)=>{
 
     $input.addEventListener('focus', ()=>{
@@ -1060,4 +1083,324 @@ function onExitEvents() {
       }
     }
   });
+}
+
+
+const Modal = {
+  init: function() {
+    gsap.registerEffect({
+      name: "modal",
+      effect: ($modal, $content) => {
+        let anim = gsap.timeline({paused:true})
+          .fromTo($modal, {autoAlpha:0}, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+          .fromTo($content, {y:20}, {y:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
+        return anim;
+      },
+      extendTimeline: true
+    });
+    
+    document.addEventListener('click', (event)=>{
+      let $button = event.target!==document?event.target.closest('[data-modal]'):null;
+      if($button) {
+        event.preventDefault();
+        if($button.getAttribute('data-modal')=='open') {
+          let $modal = document.querySelector(`${$button.getAttribute('href')}`);
+          if($modal) this.open($modal);
+        } else if($button.getAttribute('data-modal')=='video') {
+          let href = $button.getAttribute('href');
+          if(href) this.video(href);
+        } else if($button.getAttribute('data-modal')=='close') {
+          let $modal = $button.closest('.modal');
+          if($modal) this.close($modal);
+        }
+      }
+    })
+  }, 
+  open: function($modal) {
+
+    let play = ()=> {
+      let $content = $modal.querySelector('.modal__container');
+      this.newAnimation = gsap.effects.modal($modal, $content);
+      this.newAnimation.play();
+      this.$old = $modal;
+      this.oldAnimation = this.newAnimation;
+      //succes
+      if($modal.classList.contains('modal-succes')) {
+        let $icon = $modal.querySelector('path'),
+            w = $icon.getTotalLength();
+        gsap.timeline()
+          .set($icon, {autoAlpha:0})
+          .set($icon, {css:{'stroke-dasharray':w}}, `+=${speed*0.25}`)
+          .set($icon, {autoAlpha:1})
+          .fromTo($icon, {css:{'stroke-dashoffset':w}}, {duration:speed, css:{'stroke-dashoffset':0}, ease:'power2.out'})
+      }
+    }
+
+    if(this.$old) {
+      this.close(this.$old, ()=> {
+        play();
+      });
+    } else {
+      play();
+    }
+
+  }, 
+  close: function($modal, callback) {
+    this.$old = false;
+    this.oldAnimation.timeScale(2).reverse();
+    this.oldAnimation.eventCallback('onReverseComplete', ()=>{
+      if($modal.classList.contains('video-modal')) {
+        $modal.remove();
+        window.removeEventListener('resize', this.resizeEvent);
+      }
+      //callback
+      if(callback) {
+        callback();
+      }
+    })
+    //reset form
+    let $form = $modal.querySelector('form');
+    if($form) {
+      Validation.reset($form)
+    }
+  },
+  video: function(href) {
+    
+    let play = ()=> {
+      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__overlay" data-modal="close"></div><div class="modal__close"><span></span><span></span></div><div class="modal__video"><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
+      let $modal = document.querySelector('.video-modal'),
+          $wrap = $modal.querySelector('.modal__video'),
+          $content = $modal.querySelector('.modal__video-content');
+          
+      this.newAnimation = gsap.effects.modal($modal, $content);
+      this.newAnimation.eventCallback('onStart', ()=>{
+        if(!youtubeApi.state) {
+          youtubeApi.state = true;
+          let tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/iframe_api";
+          document.body.insertAdjacentElement('beforeEnd', tag);
+          window.onYouTubeIframeAPIReady=()=>{
+            initPlayer();
+          };
+        } else {
+          initPlayer();
+        }
+      })
+
+      let resize = (callback)=> {
+        let style = window.getComputedStyle($wrap),
+            pt = parseFloat(style.getPropertyValue("padding-top")),
+            pb = parseFloat(style.getPropertyValue("padding-bottom")),
+            pl = parseFloat(style.getPropertyValue("padding-left")),
+            pr = parseFloat(style.getPropertyValue("padding-right")),
+            h = $modal.getBoundingClientRect().height,
+            w = $modal.getBoundingClientRect().width;
+  
+        if((w-pl-pr)/(h-pt-pb) > 16/9) {
+          $content.style.height = `${h - pt - pb}px`;
+          $content.style.width = `${(h - pt - pb)*1.77}px`;
+        } else {
+          $content.style.width = `${w - pl - pr}px`;
+          $content.style.height = `${(w - pl - pr)*0.5625}px`;
+        }
+        if(callback) callback();
+      }
+      this.resizeEvent = ()=> {
+        resize();
+      }
+      window.addEventListener('resize', this.resizeEvent);
+
+      let initPlayer = ()=> {
+        let array = href.split('/'),
+            id = array[array.length-1];
+        let player = new YT.Player('video-player', {
+          videoId: id,
+          events: {
+            'onReady': function(event) {
+              event.target.playVideo();
+              gsap.to(event.target.f, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+            }
+          }
+        });
+      }
+
+      resize(()=>{
+        this.newAnimation.play();
+      });
+      this.$old = $modal;
+      this.oldAnimation = this.newAnimation;
+    }
+
+    if(this.$old) {
+      this.close(this.$old, ()=> {
+        setTimeout(()=>{
+          play();
+        }, 200)
+      });
+    } else {
+      play();
+    }
+  }
+}
+
+const Validation = {
+  init: function() {
+    //validation
+    this.namspaces = {
+      name: 'name',
+      phone: 'phone',
+      email: 'email',
+      message: 'message'
+    }
+    this.constraints = {
+      name: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше имя'
+        },
+        format: {
+          pattern: /[A-zА-яЁё ]+/,
+          message: '^Введите корректное имя'
+        },
+        length: {
+          minimum: 2,
+          tooShort: "^Имя слишком короткое (минимум %{count} символа)",
+          maximum: 20,
+          tooLong: "^Имя слишком длинное (максимум %{count} символов)"
+        }
+      },
+      phone: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш номер телефона'
+        },
+        format: {
+          pattern: /^\+7 \d{3}\ \d{3}\-\d{4}$/,
+          message: '^Введите корректный номер телефона'
+        }
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш email'
+        },
+        email: {
+          message: '^Неправильный формат email-адреса' 
+        }
+      },
+      message: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше сообщение'
+        },
+        length: {
+          minimum: 5,
+          tooShort: "^Сообщение слишком короткое (минимум %{count} символов)",
+          maximum: 100,
+          tooLong: "^Сообщение слишком длинное (максимум %{count} символов)"
+        }
+      }
+    };
+    this.mask = Inputmask({
+      mask: "+7 999 999-9999",
+      showMaskOnHover: false,
+      clearIncomplete: false
+    }).mask("[data-validate='phone']");
+
+    document.addEventListener('submit', (event)=>{
+      event.preventDefault();
+      let $form = event.target;
+      if($form.classList.contains('js-validation') && this.checkValid($form)) {
+        //submit
+      }
+    })
+    document.addEventListener('input', (event)=>{
+      let $input = event.target,
+          $form = $input.closest('form');
+      if($form.classList.contains('js-validation')) {
+        this.checkValid($form, $input);
+      }
+    })
+
+  },
+  checkValid: function($form, $input) {
+    let $inputs = $form.querySelectorAll('input, textarea'),
+        values = {},
+        constraints = {},
+        resault;
+
+    $inputs.forEach(($input)=>{
+      let name = $input.getAttribute('name');
+      for(let key in this.namspaces) {
+        if($input.getAttribute('data-validate')==this.namspaces[key]) {
+          values[name] = $input.value;
+          constraints[name] = this.constraints[key];
+        }
+      }
+    })
+
+    resault = validate(values, constraints);
+
+    if(resault!==undefined) {
+      if($input!==undefined) {
+        let flag = true,
+            name = $input.getAttribute('name');
+        for(let key in resault) {
+          if(name==key) {
+            flag=false;
+          }
+        }
+        if(flag && $input.parentNode.classList.contains('error')) {
+          $input.parentNode.classList.remove('error');
+          let $msg = $input.parentNode.querySelector('.input__message');
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut'}).eventCallback('onComplete', ()=>{
+            $msg.remove();
+          })
+        }
+      } 
+      else {
+        $inputs.forEach(($input)=>{
+          let name = $input.getAttribute('name');
+          for(let key in resault) {
+            if(name==key) {
+              if(!$input.parentNode.classList.contains('error')) {
+                $input.parentNode.classList.add('error');
+                $input.parentNode.insertAdjacentHTML('beforeend', `<span class="input__message">${resault[key][0]}</span>`);
+                gsap.to($input.parentNode.querySelector('.input__message'), {autoAlpha:1, duration:0.3, ease:'power2.inOut'})
+              } else {
+                $input.parentNode.querySelector('.input__message').textContent = `${resault[key][0]}`;
+              }
+            }
+          }
+        })
+      }
+      return false;
+    } else {
+      $inputs.forEach(($input)=>{
+        $input.parentNode.classList.remove('error');
+        let $msg = $input.parentNode.querySelector('.input__message');
+        if($msg) {
+          let $msg = $input.parentNode.querySelector('.input__message');
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut'}).eventCallback('onComplete', ()=>{
+            $msg.remove();
+          })
+        }
+      })
+      return true;
+    }
+  },
+  reset: function($form) {
+    let $inputs = $form.querySelectorAll('input, textarea');
+    $inputs.forEach(($input)=>{
+      $input.value = '';
+      let $parent = $input.parentNode;
+      if($parent.classList.contains('focused')) {
+        $parent.classList.remove('focused');
+      }
+      if($parent.classList.contains('error')) {
+        $parent.classList.remove('error');
+        $parent.querySelector('.input__message').remove();
+      }
+    })
+  }
 }

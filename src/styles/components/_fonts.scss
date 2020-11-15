@@ -10,7 +10,8 @@
 	}
 }
 
-@include font-face("UniNeue", "../fonts/UniNeue/UniNeueLight", 400);
+@include font-face("UniNeue", "../fonts/UniNeue/UniNeueLight", 300);
+@include font-face("UniNeue", "../../fonts/UniNeue/UniNeueBook", 400);
 @include font-face("UniNeue", "../fonts/UniNeue/UniNeueRegular", 500);
 @include font-face("UniNeue", "../fonts/UniNeue/UniNeueBold", 700);
 @include font-face("UniNeue", "../fonts/UniNeue/UniNeueHeavy", 800);

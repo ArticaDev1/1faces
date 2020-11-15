@@ -1,7 +1,7 @@
 section.section.team#team(data-scroll-block)
   .container
     .row
-      .team-slider.col-xl-9
+      .team-slider.col-xxl-9.col-xl-8
         .team-slider__container
           .team-slider__slides
             mixin image(href)
@@ -46,17 +46,15 @@ section.section.team#team(data-scroll-block)
               .form-block__item.col-sm-6
                 .input.form-block__input
                   label(for="phone").input__label Введите телефон
-                  input(type="text" name='phone' id='phone' data-mask).input__element
+                  input(type="text" name='phone' id='phone' data-validate='phone').input__element
               .form-block__item.col-sm-6
                 .input.form-block__input
                   label(for="email").input__label Введите e-mail
-                  input(type="text" name='email' id='email').input__element
+                  input(type="text" name='email' id='email' data-validate='email').input__element
               .form-block__item.col-12
                 .input.form-block__input
                   label(for="text").input__label Оставьте комментарий
-                  textarea(type="text" name='text' id='text').input__element
+                  textarea(type="text" name='text' id='text' data-validate='message').input__element
               .form-block__item.col-sm-6
-                a(href="javascript:void(0);").button.button_style-1.form-block__button Отправить
-
+                button.button.button_style-1.form-block__button Отправить
           p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
-                

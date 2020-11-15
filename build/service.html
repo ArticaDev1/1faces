@@ -81,20 +81,23 @@
         </div>
       </nav>
       <main class="main">
-        <section class="section category-screen">
-          <div class="background-video" data-video-id="PfyXBk0Eh0U">
-            <div class="background lazyload" data-src="./img/20191206-117.jpg"></div>
+        <section class="section template-screen">
+          <!--video-->
+          <div class="background-video template-screen__background-video" data-video="https://youtu.be/PfyXBk0Eh0U" data-parralax="0.15">
+            <div class="background background-video__background lazyload" data-src="./img/20191206-117.jpg"></div>
             <div class="background-video__wrap">
               <div class="background-video__element" id="bg-player"></div>
             </div>
           </div>
-          <div class="container category-screen__container"><a class="back-to-button category-screen__item" href="./index.html">
+          <!--content-->
+          <div class="container template-screen__container">
+            <!--prev--><a class="back-button template-screen__item" href="./index.html">
               <svg class="icon">
                 <use xlink:href="./img/icons/icons-sprite.svg#arrow-back"></use>
               </svg><span>Главная страница</span></a>
-            <div class="category-screen__content">
-              <h1 class="category-screen__title category-screen__item">Организация<br> и проведение юбилейных мероприятий</h1>
-              <p class="category-screen__text category-screen__item"> <span class="d-none d-sm-block">Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!</span><span class="d-block d-sm-none">Концепт мероприятия за 24 часа!</span></p><a class="button button_style-1 category-screen__button category-screen__item" href="javasсript:void(0);">Свяжитесь с нами</a>
+            <div class="template-screen__content">
+              <h1 class="template-screen__title template-screen__item">Организация и проведение<br> юбилейных мероприятий </h1>
+              <p class="template-screen__text template-screen__item"> <span class="d-none d-sm-block">Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!</span><span class="d-block d-sm-none">Концепт мероприятия за 24 часа!</span></p><a class="button button_style-1 template-screen__button template-screen__item" href="#modal-form" data-modal="open">Свяжитесь с нами</a>
             </div>
           </div>
         </section>
@@ -233,7 +236,7 @@
         <section class="section team" id="team" data-scroll-block>
           <div class="container">
             <div class="row">
-              <div class="team-slider col-xl-9">
+              <div class="team-slider col-xxl-9 col-xl-8">
                 <div class="team-slider__container">
                   <div class="team-slider__slides">
                                         <div class="team-slider__image image image_cover"><img class="lazyload" data-src="./img/Slastenko.jpg" alt="photo"></div>
@@ -278,22 +281,24 @@
                       <div class="form-block__item col-sm-6">
                         <div class="input form-block__input">
                           <label class="input__label" for="phone">Введите телефон</label>
-                          <input class="input__element" type="text" name="phone" id="phone" data-mask>
+                          <input class="input__element" type="text" name="phone" id="phone" data-validate="phone">
                         </div>
                       </div>
                       <div class="form-block__item col-sm-6">
                         <div class="input form-block__input">
                           <label class="input__label" for="email">Введите e-mail</label>
-                          <input class="input__element" type="text" name="email" id="email">
+                          <input class="input__element" type="text" name="email" id="email" data-validate="email">
                         </div>
                       </div>
                       <div class="form-block__item col-12">
                         <div class="input form-block__input">
                           <label class="input__label" for="text">Оставьте комментарий</label>
-                          <textarea class="input__element" type="text" name="text" id="text"></textarea>
+                          <textarea class="input__element" type="text" name="text" id="text" data-validate="message"></textarea>
                         </div>
                       </div>
-                      <div class="form-block__item col-sm-6"><a class="button button_style-1 form-block__button" href="javascript:void(0);">Отправить</a></div>
+                      <div class="form-block__item col-sm-6">
+                        <button class="button button_style-1 form-block__button">Отправить</button>
+                      </div>
                     </div>
                   </form>
                   <p class="form-block__alert">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p>
@@ -333,7 +338,7 @@
               <p class="feedback-block__text">Обсудим оптимальный для ваших задач формат и подготовим проект мероприятия за 24 часа.</p>
               <div class="feedback-block__buttons">
                 <div class="row grid">
-                  <div class="col-sm-6 grid__block"><a class="button button_style-2" href="mailto:info@1faces.com">Написать нам</a></div>
+                  <div class="col-sm-6 grid__block"><a class="button button_style-2" href="#modal-form" data-modal="open">Написать нам</a></div>
                   <div class="col-sm-6 grid__block"><a class="button button_style-1" href="tel:+79103433330">Позвонить нам</a></div>
                 </div>
               </div>
@@ -384,6 +389,62 @@
         </div>
       </footer>
     </div>
+    <!--modals-->
+    <div class="modal" id="modal-form">
+      <div class="modal__overlay" data-modal="close"></div>
+      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__wrapper">
+        <div class="modal__container">
+          <div class="form-block">
+            <div class="form-block__container">
+              <div class="form-block__head">
+                <h4 class="form-block__title">Концепт вашего<br> мероприятия за 24 часа!</h4>
+                <p class="form-block__text">Напишите несколько слов о ваших задачах, оставьте свои контакты, и мы бесплатно предложим варианты решений уже через сутки.</p>
+              </div>
+              <form class="form-block__form js-validation" action="#">
+                <div class="row form-block__row">
+                  <div class="form-block__item col-sm-6">
+                    <div class="input form-block__input">
+                      <label class="input__label" for="phone_modal">Введите телефон</label>
+                      <input class="input__element" type="text" name="phone" id="phone_modal" data-validate="phone">
+                    </div>
+                  </div>
+                  <div class="form-block__item col-sm-6">
+                    <div class="input form-block__input">
+                      <label class="input__label" for="email_modal">Введите e-mail</label>
+                      <input class="input__element" type="text" name="email" id="email_modal" data-validate="email">
+                    </div>
+                  </div>
+                  <div class="form-block__item col-12">
+                    <div class="input form-block__input">
+                      <label class="input__label" for="text_modal">Оставьте комментарий</label>
+                      <textarea class="input__element" type="text" name="text" id="text_modal" data-validate="message"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-block__item col-sm-6">
+                    <button class="button button_style-1 form-block__button">Отправить</button>
+                  </div>
+                </div>
+              </form>
+              <p class="form-block__alert">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-succes" id="modal-succes">
+      <div class="modal__overlay" data-modal="close"></div>
+      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__wrapper">
+        <div class="modal__container modal-succes__container">
+          <h3 class="modal-succes__title">Спасибо!</h3>
+          <svg class="modal-succes__icon" width="65" height="59" viewBox="0 0 65 59" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 36.8079L20.1349 56.7611L63.4635 1.23926" stroke-width="2"></path>
+          </svg>
+          <p class="modal-succes__text">Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+      </div>
+    </div>
     <!--themes-->
     <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
     <link class="theme" rel="stylesheet" data-href="./styles/theme2.css">
@@ -400,6 +461,10 @@
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Акцентные цвета:</span>
           <div class="helper__section-content"><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#E61515;" data-theme=""></a><a class="helper__section-button helper__section-button-theme" href="javascript:void(0);" style="background-color:#792DA7;" data-theme=""></a></div>
+        </div>
+        <!--section-->
+        <div class="helper__section"><span class="helper__section-title">Всплывающие окна:</span>
+          <div class="helper__section-content"><a class="helper__section-button" href="#modal-form" data-modal="open">Форма обратной связи</a><a class="helper__section-button" href="#modal-succes" data-modal="open">Успешная отправка формы</a><a class="helper__section-button" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">Видео</a></div>
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>

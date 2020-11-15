@@ -23,13 +23,6 @@
       visibility: hidden;
     }
   }
-  &_type-home {
-    @include media-breakpoint-up(md) {
-      .logo {
-        display: none;
-      }
-    }
-  }
   &__logo {
     flex: 1 1 100%;
   }
@@ -81,6 +74,15 @@
     &_nav-opened {
       .header__container {
         height: 80px;
+      }
+    }
+  }
+}
+.desktop {
+  .header_type-home {
+    @include media-breakpoint-up(md) {
+      .logo {
+        display: none;
       }
     }
   }

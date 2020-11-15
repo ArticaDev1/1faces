@@ -32,11 +32,11 @@ block content
     section.section.home#home(data-scroll-block)
       .home__mobile-background(style='background-image:url("./img/mobile-home-bg.jpg");')
       span.home__vertical-line
-      .background-video(data-video-id='0zxNqsKiQxE' data-parralax='0.15')
+      .background-video(data-video='https://youtu.be/0zxNqsKiQxE' data-parralax='0.15')
         .background-video__wrap
           #bg-player.background-video__element
       .container.home__container
-        a(href="https://youtu.be/0zxNqsKiQxE" data-video).home-mobile-play.home__item
+        a(href="https://youtu.be/0zxNqsKiQxE" data-modal='video').home-mobile-play.home__item
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#play')
         .home__items
@@ -51,7 +51,7 @@ block content
           p.home__text.home__item 
             span.d-none.d-sm-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия за 24 часа!
             span.d-block.d-sm-none Концепт мероприятия за 24 часа!
-          a(href="mailto:info@1faces.com").button.button_style-1.home__button.home__item Свяжитесь с нами
+          a(href="#modal-form" data-modal='open').button.button_style-1.home__button.home__item Свяжитесь с нами
 
     section.section.section_pt.about#about(data-scroll-block)
       .container
@@ -90,7 +90,7 @@ block content
       .container
         .row.justify-content-center
           .col-lg-10
-            a(href="https://youtu.be/OCYLrB_KrSM" data-video).video-section__video.image.image_cover
+            a(href="https://youtu.be/0zxNqsKiQxE" data-modal='video').video-section__video.image.image_cover
               img(data-src="./img/2I5A5799 2.jpg", alt="image").lazyload
               .video-section__video-text 
                 span За 90 секунд о Первых лицах 
