@@ -6,7 +6,7 @@ block title
   title #{title} - Кейс
 block content 
 
-  section.section.template-screen
+  section.section.template-screen.case-screen
     //video
     .background-video.template-screen__background-video(data-video='https://youtu.be/khsn_tIIdJM' data-parralax='0.15')
       .image.image_cover.background-video__background
@@ -29,17 +29,31 @@ block content
           use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
       .template-screen__content
         h1.h2.template-screen__title.template-screen__item Организация мероприятия в честь 85-летия ПАО «НЛМК»: юбилейный выпуск чугуна
-        p.template-screen__text.template-screen__item 
-          span.d-none.d-sm-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
-          span.d-block.d-sm-none Концепт мероприятия за 24 часа!
+        p.template-screen__text.template-screen__item.d-none.d-md-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!
+
         a(href="#modal-form" data-modal='open').button.button_style-1.template-screen__button.template-screen__item Свяжитесь с нами
 
-  section.section.section_mb2.case-wrapper
-    .background.lazyload.case-wrapper__bg(data-src='./img/iStock-613111906.jpg')
+  section.section.section_mb2.category-about-wrapper
+    .background.lazyload.category-about-wrapper__bg(data-src='./img/iStock-613111906.jpg')
+
+    section.section.case-info
+      .container 
+        .section__container
+          .row.justify-content-center
+            .col-xxl-6.col-xl-7.col-lg-8
+              h2.case-info__title Особенности мероприятия
+              ul.case-info__list
+                li.case-info__item Площадка EVENT HALL
+                li.case-info__item Выездное ресторанное обслуживание, банкетный зал
+                li.case-info__item Режиссерское шоу в концепции «Агроэко — это я»
+                li.case-info__item Фотозоны, интерактивы
+                li.case-info__item Объемная входная группа в фирменном стиле
+                li.case-info__item Хэдлайнер — Дискотека Авария
+
     section.section.gallery
       .container.gallery__container
         .gallery__content.row
-          .gallery__max.col-xl-8
+          .gallery__max.col-lg-8
             .gallery__image-container
               .image.image_cover
                 img(data-src="https://thumb.tildacdn.com/tild3439-6331-4466-a235-656137653238/-/format/webp/20191206-27.jpg", alt="image").lazyload
@@ -50,7 +64,7 @@ block content
               .image.image_cover
                 img(data-src="https://thumb.tildacdn.com/tild3366-3735-4635-a338-313061666463/-/format/webp/20191206-80.jpg", alt="image").lazyload
      
-          .gallery__min.col-xl-4
+          .gallery__min.col-lg-4.col-md-8
             .gallery__image-container
               .image.image_cover
                 img(data-src="https://thumb.tildacdn.com/tild3439-6331-4466-a235-656137653238/-/format/webp/20191206-27.jpg", alt="image").lazyload
@@ -61,7 +75,7 @@ block content
               .image.image_cover
                 img(data-src="https://thumb.tildacdn.com/tild3366-3735-4635-a338-313061666463/-/format/webp/20191206-80.jpg", alt="image").lazyload
 
-          .gallery__pagination.col-xl-8
+          .gallery__pagination.col-lg-8
             a(href="javascript:void(0);").gallery__prev
               svg(viewBox='0 0 95 8' fill='currentColor').icon
                 path(d='M0.646446 3.64645C0.451187 3.84171 0.451187 4.15829 0.646446 4.35355L3.82843 7.53553C4.02369 7.7308 4.34027 7.7308 4.53554 7.53553C4.7308 7.34027 4.7308 7.02369 4.53554 6.82843L1.70711 4L4.53554 1.17157C4.7308 0.976311 4.7308 0.659728 4.53554 0.464466C4.34027 0.269204 4.02369 0.269204 3.82843 0.464466L0.646446 3.64645ZM95 3.5L1 3.5V4.5L95 4.5V3.5Z')
@@ -76,11 +90,10 @@ block content
               svg(viewBox='0 0 54 8' fill='currentColor').icon
                 path(d='M53.3535 4.35356C53.5488 4.15829 53.5488 3.84171 53.3535 3.64645L50.1716 0.46447C49.9763 0.269207 49.6597 0.269207 49.4645 0.46447C49.2692 0.659732 49.2692 0.976314 49.4645 1.17158L52.2929 4L49.4645 6.82843C49.2692 7.02369 49.2692 7.34028 49.4645 7.53554C49.6597 7.7308 49.9763 7.7308 50.1716 7.53554L53.3535 4.35356ZM-5.51144e-08 4.5L53 4.5L53 3.5L5.51144e-08 3.5L-5.51144e-08 4.5Z')
 
-        a(href="https://youtu.be/0zxNqsKiQxE" data-modal='video').gallery__video 
+        a(href="https://youtu.be/khsn_tIIdJM" data-modal='video').gallery__video 
           span Смотреть видео о кейсе
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#play')
-
-
+  
   include blocks/organization
   include blocks/contacts

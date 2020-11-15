@@ -13,14 +13,24 @@
     }
   }
   &_nav-opened {
-    background-color: rgba(26, 28, 30, 0.6);
+    background-color: transparent;
     .header__container {
       height: 100px;
     }
-    .header__phone, .logo {
+    .header__phone {
       transition: opacity $trs2, visibility $trs2;
       opacity: 0;
       visibility: hidden;
+    }
+    @include media-breakpoint-up(lg) {
+      .logo {
+        transition: opacity $trs2, visibility $trs2;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      background-color: rgba(26, 28, 30, 0.75);
     }
   }
   &__logo {
@@ -36,7 +46,6 @@
     display: flex;
     align-items: center;
     height: 100px;
-    max-width: 100%;
     transition: height $trs2;
   }
   &__phone {
@@ -98,6 +107,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 15px 7px;
+  pointer-events: all;
   span {
     display: block;
     height: 1px;

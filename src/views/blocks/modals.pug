@@ -1,9 +1,9 @@
 .modal#modal-form
-  .modal__overlay(data-modal='close')
-  .modal__close
+  .modal__close(data-modal='close')
     span
     span
   .modal__wrapper
+    .modal__overlay(data-modal='close')
     .modal__container
       .form-block
         .form-block__container
@@ -29,11 +29,11 @@
           p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
 
 .modal.modal-succes#modal-succes
-  .modal__overlay(data-modal='close')
-  .modal__close
+  .modal__close(data-modal='close')
     span
     span
   .modal__wrapper
+    .modal__overlay(data-modal='close')
     .modal__container.modal-succes__container
       h3.modal-succes__title Спасибо!
       svg.modal-succes__icon(width='65' height='59' viewBox='0 0 65 59' fill='none' stroke='currentColor' xmlns='http://www.w3.org/2000/svg')

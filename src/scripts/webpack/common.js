@@ -85,8 +85,10 @@ const App = {
             this.animatePage();
           }})
       } else {
-        anim.play();
-        this.animatePage();
+        setTimeout(()=>{
+          anim.play();
+          this.animatePage();
+        }, speed*500)
       }
     }
   },
@@ -213,12 +215,20 @@ const Gallery = {
       this.indexAnim = gsap.timeline()
         .to(this.$idx[this.index], {autoAlpha:1, duration:speed, ease:'power2.inOut'})
       this.indexAnimOld = this.indexAnim;
-      
-      let animation = gsap.timeline({paused:true})
-        .fromTo($image1.parentNode, {xPercent:0}, {xPercent:-100, duration:speed, ease:'power2.inOut'})
-        .fromTo($image1, {xPercent:0}, {xPercent:50, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
-        .fromTo($image2.parentNode, {xPercent:100}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
-        .fromTo($image2, {xPercent:-50}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      let animation;
+      if(window.innerWidth>Brakepoints.lg) {
+        animation = gsap.timeline({paused:true})
+          .fromTo($image1.parentNode, {xPercent:0}, {xPercent:-100, duration:speed, ease:'power2.inOut'})
+          .fromTo($image1, {xPercent:0}, {xPercent:50, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+          .fromTo($image2.parentNode, {xPercent:100}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+          .fromTo($image2, {xPercent:-50}, {xPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      } else {
+        animation = gsap.timeline({paused:true})
+          .fromTo($image1.parentNode, {yPercent:0}, {yPercent:-100, duration:speed, ease:'power2.inOut'})
+          .fromTo($image1, {yPercent:0}, {yPercent:50, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+          .fromTo($image2.parentNode, {yPercent:100}, {yPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+          .fromTo($image2, {yPercent:-50}, {yPercent:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      }
       return animation;
     }
 
@@ -375,6 +385,7 @@ const TeamSlider = {
     }
   },
   initEvent: function() {
+    this.$slides = document.querySelector('.team-slider__slides');
     let $images = document.querySelectorAll('.team-slider__image'),
         $items = document.querySelectorAll('.team-slider__info'),
         $numbers = document.querySelectorAll('.team-slider__button-index'),
@@ -408,13 +419,31 @@ const TeamSlider = {
         .fromTo($image, {scale:1.25}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
     })
 
+    let getNext = (idx)=> {
+      let val = idx==slides_count-1?0:idx+1;
+      return val;
+    }
+    let getPrev = (idx)=> {
+      let val = idx==0?slides_count-1:idx-1;
+      return val;
+    }
+
     $next.addEventListener('click', ()=>{
-      index++;
-      if(index>slides_count-1) {
-        index = 0;
-      }
+      index = getNext(index);
       check();
     })
+
+    this.swipes = SwipeListener(this.$slides);
+    this.$slides.addEventListener('swipe', (event)=> {
+      let dir = event.detail.directions;
+      if(dir.left) {
+        index = getNext(index);
+        check();
+      } else if(dir.right) {
+        index = getPrev(index);
+        check();
+      }
+    });
 
     let check = ()=> {
       if(index_old!==undefined) {
@@ -537,6 +566,7 @@ const Cases = {
     }
   },
   initEvent: function() {
+    this.$parent = document.querySelector('.cases-slider__slides');
     let $slides = document.querySelectorAll('.cases-slider__slide'),
         $next = document.querySelector('.cases-slider__next'),
         $prev = document.querySelector('.cases-slider__prev'),
@@ -588,6 +618,16 @@ const Cases = {
     });
 
     slider.go('+1', false);
+
+    this.swipes = SwipeListener(this.$parent);
+    this.$parent.addEventListener('swipe', (event)=> {
+      let dir = event.detail.directions;
+      if(dir.left) {
+        if(!inAnimation) slider.go('+1', false)
+      } else if(dir.right) {
+        if(!inAnimation) slider.go('-1', false)
+      }
+    });
 
     document.addEventListener('click', (event)=>{
       let $target = event.target!==document?event.target.closest('.cases-slider__nav-slide-container'):false,
@@ -717,12 +757,15 @@ const Dots = {
     window.addEventListener('scroll', ()=>{
       check();
     })
+    window.addEventListener('resize', ()=>{
+      check();
+    })
   }
 }
 const BackgroundVideo = {
   init: function() {
     this.$parent = document.querySelector('.background-video');
-    if(this.$parent && device.desktop()) {
+    if(this.$parent && device.desktop() && window.innerWidth>Brakepoints.lg) {
       this.initEvent();
     }
   },
@@ -896,9 +939,10 @@ const Nav = {
       .fromTo(this.$nav_items, {x:100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
       .fromTo(this.$nav_socials, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2, from:'end'}}, `-=${speed}`)
       .fromTo(this.$nav_contactitems, {x:-100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
-      .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
+      .fromTo(this.$line, {scaleY:0, yPercent:50}, {scaleY:1, yPercent:0, duration:speed, ease:'power2.out', onReverseComplete:()=>{
+        $header.classList.remove('header_nav-opened');
+      }}, `-=${speed/2}`)
       .fromTo(this.$logo, {autoAlpha:0, yPercent:50}, {autoAlpha:1, yPercent:0, duration:speed, ease:'power2.out'}, `-=${speed}`)
-    
     this.$toggle.addEventListener('click', ()=>{
       if(!this.state) {
         this.open();
@@ -913,7 +957,6 @@ const Nav = {
     this.animation.timeScale(1).play();
   },
   close: function() {
-    $header.classList.remove('header_nav-opened');
     this.state=false;
     this.animation.timeScale(1.5).reverse();
   }
@@ -1085,7 +1128,6 @@ function onExitEvents() {
   });
 }
 
-
 const Modal = {
   init: function() {
     gsap.registerEffect({
@@ -1167,7 +1209,7 @@ const Modal = {
   video: function(href) {
     
     let play = ()=> {
-      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__overlay" data-modal="close"></div><div class="modal__close"><span></span><span></span></div><div class="modal__video"><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
+      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__close" data-modal="close"><span></span><span></span></div><div class="modal__video"><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
       let $modal = document.querySelector('.video-modal'),
           $wrap = $modal.querySelector('.modal__video'),
           $content = $modal.querySelector('.modal__video-content');
@@ -1380,7 +1422,6 @@ const Validation = {
         $input.parentNode.classList.remove('error');
         let $msg = $input.parentNode.querySelector('.input__message');
         if($msg) {
-          let $msg = $input.parentNode.querySelector('.input__message');
           gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut'}).eventCallback('onComplete', ()=>{
             $msg.remove();
           })
@@ -1399,7 +1440,12 @@ const Validation = {
       }
       if($parent.classList.contains('error')) {
         $parent.classList.remove('error');
-        $parent.querySelector('.input__message').remove();
+        let $msg = $input.parentNode.querySelector('.input__message');
+        if($msg) {
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut'}).eventCallback('onComplete', ()=>{
+            $msg.remove();
+          })
+        }
       }
     })
   }

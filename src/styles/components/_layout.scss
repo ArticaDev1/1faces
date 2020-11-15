@@ -41,24 +41,24 @@
     margin: 0 0 100px 0;
   }
   @include media-breakpoint-down(xxl) {
-    padding: 80px 0;
+    padding: 70px 0;
     &_pt {
-      padding-top: 160px;
+      padding-top: 140px;
     }
     &_pb {
-      padding-bottom: 160px;
+      padding-bottom: 140px;
     }
     &_mt {
-      margin-top: 160px;
+      margin-top: 140px;
     }
     &_mb {
-      margin-bottom: 160px;
+      margin-bottom: 140px;
     }
     &_mb2 {
-      margin-bottom: 80px;
+      margin-bottom: 70px;
     }
     &_mt2 {
-      margin-top: 80px;
+      margin-top: 70px;
     }
     &__title {
       margin: 0 0 60px 0;

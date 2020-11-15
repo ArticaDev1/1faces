@@ -107,13 +107,13 @@
           <div class="nav__content">
             <div class="nav__info">
               <ul class="nav__contacts-list">
-                <li>Event-агентство «Первые Лица»</li>
+                <li class="d-none d-lg-block">Event-агентство «Первые Лица»</li>
                 <li>Россия, Воронеж</li>
                 <li>Плехановская улица, 9, оф. 308</li>
                 <li> <a href="tel:+74732602367">+7 (473) 2602367</a></li>
                 <li> <a href="tel:+79103433330">+7 (910) 3433330</a></li>
                 <li> <a href="mailto:info@1faces.com">info@1faces.com</a></li>
-                <li>©Event-агентство «Первые Лица» 2020</li>
+                <li>© Event-агентство «Первые Лица» 2020</li>
               </ul>
               <div class="socials nav__socials">
                 <ul class="socials__list">
@@ -139,7 +139,7 @@
             <div class="nav__right"><img class="nav__logo" src="./img/logos/logo.svg" alt="logo"><span class="nav__line"></span>
               <ul class="nav__list">
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Мероприятия для АПК</a></li>
-                <li class="nav__item"> <a class="nav__link" href="./service.html">Юбилей компании</a></li>
+                <li class="nav__item"> <a class="nav__link active" href="./service.html">Юбилей компании</a></li>
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Торжественные открытия</a></li>
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Онлайн мероприятия</a></li>
               </ul>
@@ -159,7 +159,7 @@
                 <div class="background-video__element" id="bg-player"></div>
               </div>
             </div>
-            <div class="container home__container"><a class="home-mobile-play home__item" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">
+            <div class="container home__container"><a class="video-play-round home__item" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">
                 <svg class="icon">
                   <use xlink:href="./img/icons/icons-sprite.svg#play"></use>
                 </svg></a>
@@ -555,9 +555,9 @@
     </div>
     <!--modals-->
     <div class="modal" id="modal-form">
-      <div class="modal__overlay" data-modal="close"></div>
-      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__close" data-modal="close"><span></span><span></span></div>
       <div class="modal__wrapper">
+        <div class="modal__overlay" data-modal="close"></div>
         <div class="modal__container">
           <div class="form-block">
             <div class="form-block__container">
@@ -597,9 +597,9 @@
       </div>
     </div>
     <div class="modal modal-succes" id="modal-succes">
-      <div class="modal__overlay" data-modal="close"></div>
-      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__close" data-modal="close"><span></span><span></span></div>
       <div class="modal__wrapper">
+        <div class="modal__overlay" data-modal="close"></div>
         <div class="modal__container modal-succes__container">
           <h3 class="modal-succes__title">Спасибо!</h3>
           <svg class="modal-succes__icon" width="65" height="59" viewBox="0 0 65 59" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -610,12 +610,12 @@
       </div>
     </div>
     <!--themes-->
-    <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
-    <link class="theme" rel="stylesheet" data-href="./styles/theme2.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme.min.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme2.min.css">
     <!--styles-->
-    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/common.min.css">
     <!--scripts-->
-    <script src="./scripts/common.js"></script>
+    <script src="./scripts/common.min.js"></script>
     <!--preview-->
     <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
         <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
@@ -636,7 +636,7 @@
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="./styles/helper.css">
-    <script src="./scripts/helper.js"></script>
+    <link rel="stylesheet" href="./styles/helper.min.css">
+    <script src="./scripts/helper.min.js"></script>
   </body>
 </html>

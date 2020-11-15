@@ -40,13 +40,13 @@
           <div class="nav__content">
             <div class="nav__info">
               <ul class="nav__contacts-list">
-                <li>Event-агентство «Первые Лица»</li>
+                <li class="d-none d-lg-block">Event-агентство «Первые Лица»</li>
                 <li>Россия, Воронеж</li>
                 <li>Плехановская улица, 9, оф. 308</li>
                 <li> <a href="tel:+74732602367">+7 (473) 2602367</a></li>
                 <li> <a href="tel:+79103433330">+7 (910) 3433330</a></li>
                 <li> <a href="mailto:info@1faces.com">info@1faces.com</a></li>
-                <li>©Event-агентство «Первые Лица» 2020</li>
+                <li>© Event-агентство «Первые Лица» 2020</li>
               </ul>
               <div class="socials nav__socials">
                 <ul class="socials__list">
@@ -72,7 +72,7 @@
             <div class="nav__right"><img class="nav__logo" src="./img/logos/logo.svg" alt="logo"><span class="nav__line"></span>
               <ul class="nav__list">
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Мероприятия для АПК</a></li>
-                <li class="nav__item"> <a class="nav__link" href="./service.html">Юбилей компании</a></li>
+                <li class="nav__item"> <a class="nav__link active" href="./service.html">Юбилей компании</a></li>
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Торжественные открытия</a></li>
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Онлайн мероприятия</a></li>
               </ul>
@@ -81,7 +81,7 @@
         </div>
       </nav>
       <main class="main">
-        <section class="section template-screen">
+        <section class="section template-screen service-screen">
           <!--video-->
           <div class="background-video template-screen__background-video" data-video="https://youtu.be/PfyXBk0Eh0U" data-parralax="0.15">
             <div class="image image_cover background-video__background"><img class="lazyload" data-src="./img/20191206-117.jpg" alt="bg"></div>
@@ -94,7 +94,10 @@
             <!--prev--><a class="back-button template-screen__item" href="./index.html">
               <svg class="icon">
                 <use xlink:href="./img/icons/icons-sprite.svg#arrow-back"></use>
-              </svg><span>Главная страница</span></a>
+              </svg><span>Главная страница</span></a><a class="video-play-round template-screen__item" href="https://youtu.be/PfyXBk0Eh0U" data-modal="video">
+              <svg class="icon">
+                <use xlink:href="./img/icons/icons-sprite.svg#play"></use>
+              </svg></a>
             <div class="template-screen__content">
               <h1 class="template-screen__title template-screen__item">Организация и проведение<br> юбилейных мероприятий </h1>
               <p class="template-screen__text template-screen__item"> <span class="d-none d-sm-block">Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия под ключ за 24 часа!</span><span class="d-block d-sm-none">Концепт мероприятия за 24 часа!</span></p><a class="button button_style-1 template-screen__button template-screen__item" href="#modal-form" data-modal="open">Свяжитесь с нами</a>
@@ -102,7 +105,7 @@
           </div>
         </section>
         <section class="section section_mb2 category-about-wrapper">
-          <div class="background lazyload category-about-wrapper_bg" data-src="./img/iStock-613111906.jpg"></div>
+          <div class="background lazyload category-about-wrapper__bg" data-src="./img/iStock-613111906.jpg"></div>
           <section class="section about-text">
             <div class="container">
               <h2 class="about-text__title">Юбилей компании</h2>
@@ -391,9 +394,9 @@
     </div>
     <!--modals-->
     <div class="modal" id="modal-form">
-      <div class="modal__overlay" data-modal="close"></div>
-      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__close" data-modal="close"><span></span><span></span></div>
       <div class="modal__wrapper">
+        <div class="modal__overlay" data-modal="close"></div>
         <div class="modal__container">
           <div class="form-block">
             <div class="form-block__container">
@@ -433,9 +436,9 @@
       </div>
     </div>
     <div class="modal modal-succes" id="modal-succes">
-      <div class="modal__overlay" data-modal="close"></div>
-      <div class="modal__close"><span></span><span></span></div>
+      <div class="modal__close" data-modal="close"><span></span><span></span></div>
       <div class="modal__wrapper">
+        <div class="modal__overlay" data-modal="close"></div>
         <div class="modal__container modal-succes__container">
           <h3 class="modal-succes__title">Спасибо!</h3>
           <svg class="modal-succes__icon" width="65" height="59" viewBox="0 0 65 59" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -446,12 +449,12 @@
       </div>
     </div>
     <!--themes-->
-    <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
-    <link class="theme" rel="stylesheet" data-href="./styles/theme2.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme.min.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/theme2.min.css">
     <!--styles-->
-    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/common.min.css">
     <!--scripts-->
-    <script src="./scripts/common.js"></script>
+    <script src="./scripts/common.min.js"></script>
     <!--preview-->
     <div class="helper"><a class="helper__trigger" href="javascript:void(0);"> 
         <svg class="icon" stroke="none" fill="currentColor" viewBox="0 0 12 20">
@@ -472,7 +475,7 @@
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="./styles/helper.css">
-    <script src="./scripts/helper.js"></script>
+    <link rel="stylesheet" href="./styles/helper.min.css">
+    <script src="./scripts/helper.min.js"></script>
   </body>
 </html>

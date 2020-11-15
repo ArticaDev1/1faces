@@ -8,6 +8,7 @@
   background-color: var(--color-gray-bg);
   opacity: 0;
   visibility: hidden;
+  overflow: auto;
   &__container {
     height: 100%;
     display: flex;
@@ -78,14 +79,15 @@
   }
   &__item {
     &:not(:last-child) {
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
   }
   &__link {
+    white-space: nowrap;
     display: block;
     text-decoration: none;
     color: var(--color-text-muted);
-    line-height: 1;
+    line-height: 1.1;
     will-change: transform;
     font-size: 3rem;
     font-weight: 700;
@@ -108,9 +110,99 @@
         height: 13px;
         border-radius: 13px;
         background-color: var(--color-accent);
-        top: 18px;
+        top: calc(50% - 6px);
       }
     }
   }
-
+  @include media-breakpoint-down(xl) {
+    &__item {
+      &:not(:last-child) {
+        margin-bottom: 40px;
+      }
+    }
+    &__link {
+      font-size: 2.5rem;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &__content {
+      flex-direction: column;
+      min-height: 100%;
+      padding: 90px 0;
+    }
+    &__line {
+      left: 24px;
+    }
+    &__list {
+      padding-left: 35px;
+    }
+    &__link.active::before {
+      left: -40px;
+    }
+    &__right {
+      order: 1;
+      width: 100%;
+      margin: 0;
+      padding: 35px 0 100px 24px;
+      flex: 0 0 auto;
+    }
+    &__info {
+      order: 2;
+      padding: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 100%;
+      justify-content: space-between;
+    }
+    &__socials {
+      order: 1;
+      padding-left: 59px;
+      margin: -40px 0 0 0;
+      .socials__list {
+        justify-content: flex-start;
+      }
+    }
+    &__contacts-list {
+      order: 2;
+      text-align: left;
+      margin-top: 100px;
+    }
+    &__item {
+      &:not(:last-child) {
+        margin-bottom: 35px;
+      }
+    }
+    &__logo {
+      display: none;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    &__right {
+      padding: 35px 0 100px 20px;
+    }
+    &__line {
+      left: 20px;
+    }
+    &__socials {
+      padding-left: 55px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__content {
+      padding: 80px 0 50px 0;
+    }
+    &__link {
+      font-size: 7.5vw;
+    }
+    &__contacts-list {
+      margin-top: 50px;
+    }
+    &__socials .socials__list {
+      justify-content: flex-start;
+    }
+    &__socials .socials__item:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
 }

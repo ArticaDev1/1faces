@@ -5,7 +5,7 @@ block title
   title #{title} - Юбилей компании
 block content
 
-  section.section.template-screen
+  section.section.template-screen.service-screen
     //video
     .background-video.template-screen__background-video(data-video='https://youtu.be/PfyXBk0Eh0U' data-parralax='0.15')
       .image.image_cover.background-video__background
@@ -19,6 +19,9 @@ block content
         svg.icon
           use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
         span Главная страница
+      a(href="https://youtu.be/PfyXBk0Eh0U" data-modal='video').video-play-round.template-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#play')
       .template-screen__content
         h1.template-screen__title.template-screen__item Организация и проведение<br> юбилейных мероприятий 
         p.template-screen__text.template-screen__item 
@@ -27,7 +30,7 @@ block content
         a(href="#modal-form" data-modal='open').button.button_style-1.template-screen__button.template-screen__item Свяжитесь с нами
 
   section.section.section_mb2.category-about-wrapper
-    .background.lazyload.category-about-wrapper_bg(data-src='./img/iStock-613111906.jpg')
+    .background.lazyload.category-about-wrapper__bg(data-src='./img/iStock-613111906.jpg')
     section.section.about-text
       .container
         h2.about-text__title Юбилей компании

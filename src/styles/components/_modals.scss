@@ -8,9 +8,8 @@
   opacity: 0;
   visibility: hidden;
   display: flex;
-  overflow: auto;
   &__overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -25,8 +24,7 @@
     right: 17px;
     width: 50px;
     height: 50px;
-    z-index: 2;
-    pointer-events: none;
+    z-index: 3;
     span {
       display: block;
       position: absolute;
@@ -47,37 +45,56 @@
   &__video {
     position: relative;
     z-index: 2;
-    margin: auto;
     padding: 100px;
-    visibility: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
     &-content {
-      visibility: visible;
       background-color: #000;
       height: 100%;
       width: 100%;
+      position: relative;
+      z-index: 2;
+      margin: auto;
     }
   }
   &__wrapper {
-    margin: auto;
     padding: $container-padding-x;
-    max-width: calc(#{$container-padding-x * 2} + 920px);
     position: relative;
     z-index: 2;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
   }
   &__container {
     position: relative;
+    margin: auto;
+    z-index: 2;
   }
   @include media-breakpoint-down(lg) {
-    padding: 90px 24px;
-    &-close {
-      top: 20px;
+    &__close {
+      top: 21px;
+    }
+    &__video {
+      padding: 90px;
+    }
+    &__video {
+      padding: 90px $container-padding-x;
     }
   }
   @include media-breakpoint-down(md) {
-    padding: 80px 16px;
-    &-close {
+    &__close {
       top: 15px;
       right: 9px;
+    }
+    &__video {
+      padding: 80px $mobile-container-padding-x;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    &__wrapper {
+      padding: 80px $mobile-container-padding-x $mobile-container-padding-x $mobile-container-padding-x;
     }
   }
 }
@@ -117,6 +134,11 @@
     &__container {
       width: 560px;
       padding: 40px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__container {
+      padding: 30px $mobile-container-padding-x;
     }
   }
 }
