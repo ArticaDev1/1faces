@@ -3185,7 +3185,7 @@ template {
   font-family: "UniNeue";
   font-weight: 400;
   font-style: normal;
-  src: url("../../fonts/UniNeue/UniNeueBook.woff2") format("woff2"), url("../../fonts/UniNeue/UniNeueBook.woff") format("woff"); }
+  src: url("../fonts/UniNeue/UniNeueBook.woff2") format("woff2"), url("../fonts/UniNeue/UniNeueBook.woff") format("woff"); }
 
 @font-face {
   font-display: swap;
