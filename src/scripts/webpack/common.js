@@ -1,7 +1,7 @@
 //lazylaod
 import 'lazysizes';
 lazySizes.cfg.preloadAfterLoad = true;
-document.addEventListener('lazybeforeunveil', function(e){
+document.addEventListener('lazyloaded', function(e){
   let el = e.target.tagName,
       bg = e.target.getAttribute('data-src');
   if(el!=='IMG') {
@@ -39,7 +39,7 @@ const namespace = $wrapper.getAttribute('data-namespace');
 const speed = 1; //animations
 const dev = false;
 const youtubeApi = {state: false};
-const interval = 3; //autoslide duration
+const interval = 10; //autoslide duration
 
 window.onload = function(){
   App.init();
@@ -49,7 +49,7 @@ const App = {
   init: function() {
     //components
     Dots.init();
-    //BackgroundVideo.init();
+    BackgroundVideo.init();
     Cases.init();
     OrganizationSlider.init();
     TeamSlider.init();

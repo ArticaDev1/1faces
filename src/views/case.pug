@@ -9,7 +9,8 @@ block content
   section.section.template-screen
     //video
     .background-video.template-screen__background-video(data-video='https://youtu.be/khsn_tIIdJM' data-parralax='0.15')
-      .background.background-video__background.lazyload(data-src='./img/ddsd.jpg')
+      .image.image_cover.background-video__background
+        img(data-src='./img/ddsd.jpg', alt="bg").lazyload
       .background-video__wrap
         #bg-player.background-video__element
     //content
