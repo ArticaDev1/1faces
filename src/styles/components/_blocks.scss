@@ -1787,13 +1787,12 @@
     .icon {
       width: 100%;
       height: 100%;
-      transform: rotate(180deg);
       transition: transform $trs1;
     }
     &.touch, &.hover {
       color: var(--color-accent);
       .icon {
-        transform: translateX(-5px) rotate(180deg);
+        transform: translateX(-5px);
       }
     }
   }
@@ -1806,7 +1805,6 @@
       border-radius: 100%;
       padding: 35px;
       border: 1px solid #444444;
-      transform: rotate(180deg);
       transition: background-color $trs1;
       display: block;
     }
@@ -2002,6 +2000,10 @@
     &__prev {
       width: 50px;
       margin-right: $mobile-container-padding-x;
+      overflow: hidden;
+      .icon {
+        width: 85px;
+      }
     }
     &__arrows {
       margin-top: 35px;

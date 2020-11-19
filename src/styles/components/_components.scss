@@ -144,3 +144,13 @@
     }
   }
 }
+
+.dev-link {
+  font-size: 0;
+  display: inline-block;
+  transform: translateY(5%);
+  svg {
+    height: 15px;
+    width: 73px;
+  }
+}
