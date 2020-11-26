@@ -1114,7 +1114,8 @@ function onExitEvents() {
     if($link) {
       let href = $link.getAttribute('href'),
           split = href.split('/')[0];
-      if(split=='.' || split=='/') {
+      if(split=='.' || split=='') {
+        console.log('ss')
         event.preventDefault();
         gsap.timeline({
           onComplete:function(){
