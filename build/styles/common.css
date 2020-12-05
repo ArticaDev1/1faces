@@ -4107,7 +4107,7 @@ textarea {
       display: none; } }
   @media (max-width: 1599.98px) {
     .home__container {
-      min-height: 720px;
+      min-height: 620px;
       max-height: 800px; }
     .home__button {
       margin-top: 45px; }
@@ -4127,6 +4127,12 @@ textarea {
         height: 234px;
         top: -7px;
         left: -7px; } }
+
+@media (min-width: 1280px) and (max-width: 1599.98px) and (max-height: 640px) {
+  .home__title {
+    margin: 0 0 20px 0; }
+  .home__button {
+    margin: 30px 0 0 0; } }
   @media (max-width: 1023.98px) {
     .home {
       border-bottom: none; }
@@ -4225,9 +4231,15 @@ textarea {
     .template-screen__button {
       margin: 45px 0 0 0; }
     .template-screen__container {
-      min-height: 720px;
+      min-height: 620px;
       max-height: 800px;
       padding-top: 140px; } }
+
+@media (min-width: 1280px) and (max-width: 1599.98px) and (max-height: 640px) {
+  .template-screen__title {
+    margin: 0 0 20px 0; }
+  .template-screen__button {
+    margin: 30px 0 0 0; } }
   @media (max-width: 1279.98px) {
     .template-screen__background-video {
       width: calc(100vw - (100vw - 912px + 290px)); } }

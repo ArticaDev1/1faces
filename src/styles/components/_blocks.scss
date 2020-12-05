@@ -147,7 +147,7 @@
   }
   @include media-breakpoint-down(xxl) {
     &__container {
-      min-height: 720px;
+      min-height: 620px;
       max-height: 800px;
     }
     &__button {
@@ -171,6 +171,16 @@
         height: 234px;
         top: -7px;
         left: -7px;
+      }
+    }
+  }
+  @include media-breakpoint-between(xl, xxl) {
+    @media (max-height:640px) {
+      &__title {
+        margin: 0 0 20px 0;
+      }
+      &__button {
+        margin: 30px 0 0 0;
       }
     }
   }
@@ -296,9 +306,19 @@
       margin: 45px 0 0 0;
     }
     &__container {
-      min-height: 720px;
+      min-height: 620px;
       max-height: 800px;
       padding-top: 140px;
+    }
+  }
+  @include media-breakpoint-between(xl, xxl) {
+    @media (max-height:640px) {
+      &__title {
+        margin: 0 0 20px 0;
+      }
+      &__button {
+        margin: 30px 0 0 0;
+      }
     }
   }
   @include media-breakpoint-down(xl) {

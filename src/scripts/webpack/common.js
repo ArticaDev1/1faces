@@ -267,7 +267,6 @@ const Gallery = {
     this.swipes = SwipeListener(this.$parent);
     this.$parent.addEventListener('swipe', (event)=> {
       let dir = event.detail.directions;
-      console.log(dir)
       if(dir.left) {
         this.next();
       } else if(dir.right) {
@@ -331,7 +330,7 @@ const OrganizationSlider = {
       .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
       .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
 
-    let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
+    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
       intervalAnimation.duration(interval-0.5).play(0);
     }});
 
@@ -358,7 +357,7 @@ const OrganizationSlider = {
         animations[index_old].reverse();
         $items[index_old].classList.remove('active');
         hideAnimation.play(0);
-      } else {
+      } else if(this.visibility) {
         intervalAnimation.play(0);
       }
 
@@ -374,6 +373,27 @@ const OrganizationSlider = {
         check();
       })
     })
+
+    let checkVisibilityEvent = ()=> {
+      let h = this.$parent.getBoundingClientRect().height,
+          y = this.$parent.getBoundingClientRect().top,
+          v1 = window.innerHeight-y, 
+          v2 = h+y;
+      if(v1>0 && v2>0 && document.visibilityState=='visible' && !this.visibility) {
+        this.visibility = true;
+        if(intervalAnimation) {
+          intervalAnimation.play();
+        }
+      } else if((v1<0 || v2<0 || document.visibilityState=='hidden') && this.visibility) {
+        this.visibility = false;
+        if(intervalAnimation) {
+          intervalAnimation.pause();
+        }
+      }
+    }
+    checkVisibilityEvent();
+    window.addEventListener('scroll', ()=>{checkVisibilityEvent()})
+    document.removeEventListener("visibilitychange", ()=>{checkVisibilityEvent()})
   }
 }
 
@@ -407,7 +427,7 @@ const TeamSlider = {
       .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
       .fromTo($loader, {scaleX:0, xPercent:-50}, {duration:interval, scaleX:1, xPercent:0, ease:'linear'}, '-=0.5')
 
-    let hideAnimation = gsap.fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
+    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
       intervalAnimation.duration(interval-0.5).play(0);
     }});
 
@@ -449,13 +469,34 @@ const TeamSlider = {
       if(index_old!==undefined) {
         animations[index_old].reverse();
         hideAnimation.play(0);
-      } else {
+      } else if(this.visibility) {
         intervalAnimation.play(0);
       }
       animations[index].play(0);
       index_old = index;
     }
     check();
+
+    let checkVisibilityEvent = ()=> {
+      let h = this.$parent.getBoundingClientRect().height,
+          y = this.$parent.getBoundingClientRect().top,
+          v1 = window.innerHeight-y, 
+          v2 = h+y;
+      if(v1>0 && v2>0 && document.visibilityState=='visible' && !this.visibility) {
+        this.visibility = true;
+        if(intervalAnimation) {
+          intervalAnimation.play();
+        }
+      } else if((v1<0 || v2<0 || document.visibilityState=='hidden') && this.visibility) {
+        this.visibility = false;
+        if(intervalAnimation) {
+          intervalAnimation.pause();
+        }
+      }
+    }
+    checkVisibilityEvent();
+    window.addEventListener('scroll', ()=>{checkVisibilityEvent()})
+    document.removeEventListener("visibilitychange", ()=>{checkVisibilityEvent()})
   }
 }
 const ServicesCards = {
@@ -466,7 +507,6 @@ const ServicesCards = {
     }
   },
   initEvent: function() {
-    console.log(':')
     let $blocks = document.querySelectorAll('.services-block'),
         animations = [],
         oldIndex = false;
@@ -524,7 +564,6 @@ const ServicesCards = {
       let check = (event)=> {
         if(!TouchHoverEvents.touched) {
           if(event.type=='mouseenter') {
-            console.log('play')
             animations[index].play();
             oldIndex = index;
           } else {
@@ -709,7 +748,6 @@ const Dots = {
                   id = '#'+$section.getAttribute('id');
               if(attr==id) {
                 $active = $button;
-                console.log('++')
               }
             })
           } 
@@ -861,11 +899,9 @@ const BackgroundVideo = {
         if((position<=0 || document.visibilityState=='hidden') && !this.flag) {
           this.flag = true;
           this.player.pauseVideo();
-          console.log('1')
         } else if(position>0 && document.visibilityState=='visible' && this.flag) {
           this.flag = false;
           this.player.playVideo();
-          console.log('2')
         }
       }
       checkToPause();
@@ -1035,9 +1071,7 @@ function scrollItemsEvents() {
         $item.classList.add('animated');
       }
     })
-    
   }
-  check();
   window.addEventListener('scroll', ()=>{
     check();
   })
@@ -1115,7 +1149,6 @@ function onExitEvents() {
       let href = $link.getAttribute('href'),
           split = href.split('/')[0];
       if(split=='.' || split=='') {
-        console.log('ss')
         event.preventDefault();
         gsap.timeline({
           onComplete:function(){
