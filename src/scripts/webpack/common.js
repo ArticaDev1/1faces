@@ -1387,18 +1387,25 @@ const Validation = {
     document.addEventListener('submit', (event)=>{
       event.preventDefault();
       let $form = event.target;
-      console.log('click')
+      console.log('new')
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
         //submit
-        $.ajax({
+        $($form).request('message', {
+          success: ()=>{
+            Modal.open(document.querySelector('#modal-succes'));
+            this.reset($form);
+          }
+        })
+        //
+        /* $.ajax({
           type: $($form).attr('method'),
           url: $($form).attr('action'),
           data: $($form).serialize()
         }).done(function() {
-          console.log('success');
+          Modal.open(document.querySelector('#modal-succes'));
         }).fail(function() {
           console.log('fail');
-        });
+        }); */
       }
     })
     document.addEventListener('input', (event)=>{
