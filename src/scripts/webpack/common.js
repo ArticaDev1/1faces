@@ -20,6 +20,7 @@ let validate = require("validate.js");
 //
 import Splide from '@splidejs/splide';
 import SwipeListener from 'swipe-listener';
+//
 
 
 
@@ -1384,15 +1385,12 @@ const Validation = {
     }).mask("[data-validate='phone']");
 
     document.addEventListener('submit', (event)=>{
-      console.log('click')
       event.preventDefault();
       let $form = event.target;
+      console.log('click')
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
         //submit
-       /*  $($form).request('sending', {
-          
-        }) */
-        $($form).ajax({
+        $.ajax({
           type: $($form).attr('method'),
           url: $($form).attr('action'),
           data: $($form).serialize()
