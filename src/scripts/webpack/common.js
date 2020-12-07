@@ -1384,10 +1384,23 @@ const Validation = {
     }).mask("[data-validate='phone']");
 
     document.addEventListener('submit', (event)=>{
+      console.log('click')
       event.preventDefault();
       let $form = event.target;
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
         //submit
+       /*  $($form).request('sending', {
+          
+        }) */
+        $($form).ajax({
+          type: $($form).attr('method'),
+          url: $($form).attr('action'),
+          data: $($form).serialize()
+        }).done(function() {
+          console.log('success');
+        }).fail(function() {
+          console.log('fail');
+        });
       }
     })
     document.addEventListener('input', (event)=>{
