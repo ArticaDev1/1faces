@@ -1387,10 +1387,10 @@ const Validation = {
     document.addEventListener('submit', (event)=>{
       event.preventDefault();
       let $form = event.target;
-      console.log('new')
+      console.log('test')
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
         //submit
-        $($form).request('message', {
+        $($form).request('onProcessing', {
           success: ()=>{
             Modal.open(document.querySelector('#modal-succes'));
             this.reset($form);
