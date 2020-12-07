@@ -1223,22 +1223,24 @@ const Modal = {
 
   }, 
   close: function($modal, callback) {
-    this.$old = false;
-    this.oldAnimation.timeScale(2).reverse();
-    this.oldAnimation.eventCallback('onReverseComplete', ()=>{
-      if($modal.classList.contains('video-modal')) {
-        $modal.remove();
-        window.removeEventListener('resize', this.resizeEvent);
+    if(this.$old) {
+      this.$old = false;
+      this.oldAnimation.timeScale(2).reverse();
+      this.oldAnimation.eventCallback('onReverseComplete', ()=>{
+        if($modal.classList.contains('video-modal')) {
+          $modal.remove();
+          window.removeEventListener('resize', this.resizeEvent);
+        }
+        //callback
+        if(callback) {
+          callback();
+        }
+      })
+      //reset form
+      let $form = $modal.querySelector('form');
+      if($form) {
+        Validation.reset($form)
       }
-      //callback
-      if(callback) {
-        callback();
-      }
-    })
-    //reset form
-    let $form = $modal.querySelector('form');
-    if($form) {
-      Validation.reset($form)
     }
   },
   video: function(href) {
@@ -1387,12 +1389,16 @@ const Validation = {
     document.addEventListener('submit', (event)=>{
       event.preventDefault();
       let $form = event.target;
-      console.log('test')
+      console.log('new')
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
         //submit
-        $($form).request('onProcessing', {
+        $($form).request('onSend', {
           success: ()=>{
-            Modal.open(document.querySelector('#modal-succes'));
+            let modal = document.querySelector('#modal-succes');
+            Modal.open(modal);
+            setTimeout(()=>{
+              Modal.close(modal);
+            }, 2000)
             this.reset($form);
           }
         })
