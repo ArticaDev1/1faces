@@ -1389,8 +1389,9 @@ const Validation = {
     document.addEventListener('submit', (event)=>{
       event.preventDefault();
       let $form = event.target;
-      console.log('new')
+      console.log('test')
       if($form.classList.contains('js-validation') && this.checkValid($form)) {
+        $form.classList.add('loading');
         //submit
         $($form).request('onSend', {
           success: ()=>{
@@ -1398,20 +1399,11 @@ const Validation = {
             Modal.open(modal);
             setTimeout(()=>{
               Modal.close(modal);
-            }, 2000)
+            }, 3000)
             this.reset($form);
+            $form.classList.remove('loading');
           }
         })
-        //
-        /* $.ajax({
-          type: $($form).attr('method'),
-          url: $($form).attr('action'),
-          data: $($form).serialize()
-        }).done(function() {
-          Modal.open(document.querySelector('#modal-succes'));
-        }).fail(function() {
-          console.log('fail');
-        }); */
       }
     })
     document.addEventListener('input', (event)=>{

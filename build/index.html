@@ -30,73 +30,6 @@
 <meta property="og:image" content='https://1faces.com/themes/ffaces/assets/img/favicons/apple-touch-icon-180x180.png'>
   </head>
   <body style="background-color:#0F0B17;">
-    <!--start preloader-->
-    <div class="preloader" style="opacity:0;visibility:hidden;">
-      <style>
-        .preloader {
-          display: flex;
-          position: fixed;
-          z-index: 1000;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          transition: opacity .5s ease-in-out, visibility .5s ease-in-out; }
-          .preloader__container {
-            width: 180px;
-            height: 180px;
-            margin: auto;
-            animation: rotation 2s linear infinite;
-            position: relative; }
-          .preloader__ratation {
-            width: 100%;
-            height: 100%;
-            position: relative; }
-          .preloader__icon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; }
-          .preloader__bg {
-            fill: #AFB3BD; }
-          .preloader__mask {
-            fill: #E61515;
-            transition: .05s linear; }
-          @media (max-width: 575px) {
-            .preloader__container {
-              width: 140px;
-              height: 140px; } }
-        @keyframes rotation {
-          0% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 0deg); }
-          50% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 180deg); }
-          100% {
-            transform: perspective(1000px) rotate3d(0, 1, 0, 360deg); } }
-            
-      </style>
-      <div class="preloader__container">
-        <svg class="preloader__icon" viewBox="0 0 120 91">
-          <defs>
-            <mask id="mask" x="0" y="0" width="100" height="100">
-              <rect x="0" y="0" width="100%" height="100%" fill="#000"></rect>
-              <path fill="#fff" d="M91.0829 41.3262C101.176 40.3158 109.176 37.5758 111.687 36.6401C116.227 28.6103 118.966 19.4282 119.341 9.63672C113.293 17.1255 105.865 23.4516 97.4411 28.228C92.238 31.1782 86.6574 33.5392 80.787 35.2155C76.5091 36.437 72.0746 37.2839 67.5258 37.7437C65.4677 37.0247 65.2174 29.824 65.6916 28.2832C65.7898 27.9637 65.846 27.5186 65.8392 27.0131C67.4583 26.9841 69.3407 27.0296 69.9454 27.3618C69.8812 24.2119 66.3624 23.7418 64.765 23.6905C63.9813 22.6431 62.702 21.8488 60.68 21.8488C51.7515 21.8488 55.1492 31.0003 51.5284 37.709C47.1192 37.2424 42.8195 36.4091 38.6662 35.2252C32.793 33.551 27.2098 31.1907 22.0041 28.2417C13.5701 23.4636 6.13368 17.1326 0.0800781 9.63672C0.454572 19.4204 3.18919 28.5961 7.72282 36.6214C10.1748 37.5385 18.2147 40.309 28.3767 41.3262C23.3958 42.4131 16.4445 42.1661 10.5637 41.1548C11.1781 42.0452 11.8076 42.9246 12.4683 43.7794C13.6572 45.3173 14.9238 46.7917 16.2544 48.2049C20.2195 48.3253 27.0896 48.0988 34.8027 45.9258C30.9002 48.4032 25.0981 50.4089 19.6735 51.5603C21.8386 53.5206 24.1486 55.3229 26.585 56.952C30.4332 55.603 36.0466 53.1881 41.772 49.1581C39.0461 52.624 34.5472 56.2566 30.0296 59.0916C31.1229 59.7197 32.236 60.3178 33.3718 60.8772C34.883 61.6219 36.4332 62.2991 38.0133 62.9162C40.922 60.6833 44.9489 57.1485 49.1043 52.1031C47.4212 56.1072 44.8252 60.4649 41.6882 64.2111C44.8946 65.2257 48.2148 65.9846 51.6304 66.4469C48.9111 71.2564 45.6873 75.7419 42.0301 79.8328C43.7791 81.8803 45.742 83.7386 47.8837 85.3748C50.1482 80.9183 52.5683 76.4971 55.3829 72.7759C53.117 78.6923 51.5957 83.6951 50.6285 87.281C52.931 88.7386 55.4002 89.9547 58.0037 90.8933C58.2386 86.9762 58.829 78.3249 59.7204 73.2442V73.1344C59.7237 73.1523 59.7265 73.1715 59.7298 73.1893C59.7329 73.1715 59.7359 73.1523 59.739 73.1344V73.2442C60.6306 78.3249 61.2209 86.9762 61.4557 90.8933C64.0592 89.9547 66.5286 88.7391 68.8311 87.2818C67.8639 83.6956 66.3426 78.6928 64.0765 72.7759C66.8911 76.4968 69.3109 80.918 71.5754 85.3743C73.7598 83.7058 75.7591 81.8073 77.5341 79.712C73.9133 75.6442 70.7197 71.1887 68.0233 66.4144C71.3678 65.9483 74.6207 65.1985 77.7639 64.2023C74.6302 60.4581 72.037 56.1038 70.3554 52.1031C74.5041 57.1404 78.5246 60.672 81.4323 62.9055C83.0182 62.2854 84.5738 61.6054 86.0904 60.8569C87.2187 60.2998 88.3249 59.7048 89.4116 59.08C84.9001 56.2467 80.4094 52.6193 77.6873 49.1581C83.4002 53.1794 89.0016 55.5922 92.8489 56.9428C95.2829 55.3145 97.5908 53.513 99.754 51.5539C94.3386 50.4014 88.5516 48.3983 84.6566 45.9258C92.3438 48.0915 99.1939 48.3237 103.165 48.2063C104.506 46.7818 105.782 45.2956 106.979 43.7444C107.629 42.9034 108.248 42.0382 108.852 41.1624C102.98 42.1673 96.0513 42.4105 91.0829 41.3262ZM62.9206 25.8162C62.3532 25.8162 61.8935 25.3562 61.8935 24.789C61.8935 24.6646 61.9237 24.5486 61.9641 24.4382H63.8769C63.9175 24.5486 63.9478 24.6646 63.9478 24.789C63.9478 25.3562 63.4878 25.8162 62.9206 25.8162Z"></path>
-              <path fill="#fff" d="M59.9041 18.1665C63.8989 18.0912 65.3461 20.014 65.3461 20.014L68.8044 8.24225L63.8554 13.5212C63.8554 16.1599 61.4885 15.8779 61.4885 14.0581C61.4885 12.2383 62.5428 11.847 62.5428 9.39033C62.5428 6.93367 60.7078 5.7625 59.9041 0.576172C59.1005 5.7625 57.2656 6.93367 57.2656 9.39033C57.2656 11.847 58.3199 12.2383 58.3199 14.0581C58.3199 15.8779 55.9529 16.1599 55.9529 13.5212L51.0039 8.24225L54.4622 20.014C54.4622 20.014 55.9095 18.0912 59.9041 18.1665Z"></path>
-            </mask>
-          </defs>
-          <image width="100%" height="100%" y="0" x="0" xlink:href="./img/mask.png" mask="url(#mask)"></image>
-        </svg>
-      </div>
-      <script>
-        let $preloader = document.querySelector('.preloader');
-        setTimeout(()=>{
-          $preloader.style.opacity = '1';
-          $preloader.style.visibility = 'visible';
-        }, 500)
-      </script>
-    </div>
-    <!--finish preloader-->
     <div class="wrapper" style="opacity:0;visibility:hidden;" data-namespace="home">
       <header class="header header_type-home">
         <div class="container header__container"> 
@@ -349,7 +282,22 @@
                         </div>
                       </div>
                       <div class="form-block__item col-sm-6">
-                        <button class="button button_style-1 form-block__button">Отправить</button>
+                        <button class="button button_style-1 form-block__button"> <span>Отправить</span>
+                          <svg viewBox="0 0 120 30" fill="currentColor">
+                            <circle cx="15" cy="15" r="15">
+                              <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                              <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                            </circle>
+                            <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                              <animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite"></animate>
+                              <animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite"></animate>
+                            </circle>
+                            <circle cx="105" cy="15" r="15">
+                              <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                              <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                            </circle>
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </form>
