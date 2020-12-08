@@ -21,6 +21,7 @@ let validate = require("validate.js");
 import Splide from '@splidejs/splide';
 import SwipeListener from 'swipe-listener';
 //
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 
 
@@ -992,10 +993,12 @@ const Nav = {
     $header.classList.add('header_nav-opened');
     this.state=true;
     this.animation.timeScale(1).play();
+    disablePageScroll();
   },
   close: function() {
     this.state=false;
     this.animation.timeScale(1.5).reverse();
+    enablePageScroll();
   }
 }
 const Header = {
@@ -1182,13 +1185,13 @@ const Modal = {
         event.preventDefault();
         if($button.getAttribute('data-modal')=='open') {
           let $modal = document.querySelector(`${$button.getAttribute('href')}`);
-          if($modal) this.open($modal);
+          this.open($modal);
         } else if($button.getAttribute('data-modal')=='video') {
           let href = $button.getAttribute('href');
-          if(href) this.video(href);
+          this.video(href);
         } else if($button.getAttribute('data-modal')=='close') {
           let $modal = $button.closest('.modal');
-          if($modal) this.close($modal);
+          this.close($modal);
         }
       }
     })
@@ -1196,6 +1199,7 @@ const Modal = {
   open: function($modal) {
 
     let play = ()=> {
+      disablePageScroll();
       let $content = $modal.querySelector('.modal__container');
       this.newAnimation = gsap.effects.modal($modal, $content);
       this.newAnimation.play();
@@ -1213,17 +1217,19 @@ const Modal = {
       }
     }
 
-    if(this.$old) {
-      this.close(this.$old, ()=> {
+    if($modal) {
+      if(this.$old) {
+        this.close(this.$old, ()=> {
+          play();
+        });
+      } else {
         play();
-      });
-    } else {
-      play();
+      }
     }
-
   }, 
   close: function($modal, callback) {
-    if(this.$old) {
+    if(this.$old && $modal) {
+      enablePageScroll();
       this.$old = false;
       this.oldAnimation.timeScale(2).reverse();
       this.oldAnimation.eventCallback('onReverseComplete', ()=>{
@@ -1246,6 +1252,7 @@ const Modal = {
   video: function(href) {
     
     let play = ()=> {
+      disablePageScroll();
       $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__close" data-modal="close"><span></span><span></span></div><div class="modal__video"><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
       let $modal = document.querySelector('.video-modal'),
           $wrap = $modal.querySelector('.modal__video'),

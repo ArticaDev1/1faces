@@ -3385,11 +3385,9 @@ table {
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 1s ease-in-out, visibility 1s ease-in-out; }
+  transition: opacity 1s ease-in-out; }
   .background.lazyloaded {
-    opacity: 1;
-    visibility: visible; }
+    opacity: 1; }
   .background_left {
     background-position-x: left; }
   .background_right {
@@ -3405,11 +3403,9 @@ table {
   .image img {
     display: block;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s ease-in-out, visibility 1s ease-in-out, transform 0.3s ease-in-out; }
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out; }
     .image img.lazyloaded {
-      opacity: 1;
-      visibility: visible; }
+      opacity: 1; }
   .image_cover img, .image_contain img {
     position: absolute;
     top: 0;
@@ -3920,7 +3916,8 @@ textarea {
     padding: 24px;
     position: relative;
     z-index: 2;
-    overflow: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
     height: 100%;
     display: flex; }
@@ -5876,7 +5873,8 @@ textarea {
   background-color: var(--color-gray-bg);
   opacity: 0;
   visibility: hidden;
-  overflow: auto; }
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
   .nav__container {
     height: 100%;
     display: flex; }
