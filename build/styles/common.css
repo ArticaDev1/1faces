@@ -3887,7 +3887,8 @@ textarea {
     right: 17px;
     width: 50px;
     height: 50px;
-    z-index: 3; }
+    z-index: 3;
+    pointer-events: none; }
     .modal__close span {
       display: block;
       position: absolute;
