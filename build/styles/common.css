@@ -3867,14 +3867,14 @@ textarea {
   left: 0;
   opacity: 0;
   visibility: hidden;
-  display: flex; }
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.9); }
   .modal__overlay {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
     z-index: 1;
     cursor: pointer; }
   .modal__close {
@@ -3884,7 +3884,7 @@ textarea {
     width: 50px;
     height: 50px;
     z-index: 3;
-    pointer-events: none; }
+    cursor: pointer; }
     .modal__close span {
       display: block;
       position: absolute;
@@ -3904,6 +3904,8 @@ textarea {
     padding: 100px;
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     display: flex; }
     .modal__video-content {
       background-color: #000;

@@ -1253,7 +1253,7 @@ const Modal = {
     
     let play = ()=> {
       disablePageScroll();
-      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__close" data-modal="close"><span></span><span></span></div><div class="modal__video"><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
+      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__close" data-modal="close"><span></span><span></span></div><div class="modal__video" data-scroll-lock-scrollable><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
       let $modal = document.querySelector('.video-modal'),
           $wrap = $modal.querySelector('.modal__video'),
           $content = $modal.querySelector('.modal__video-content');
