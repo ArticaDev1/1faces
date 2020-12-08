@@ -8,7 +8,7 @@
   background-color: var(--color-gray-bg);
   opacity: 0;
   visibility: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   &__container {
     height: 100%;

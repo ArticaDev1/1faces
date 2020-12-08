@@ -1,5 +1,5 @@
-.modal#modal-form
-  .modal__close(data-modal='close')
+.modal#modal-form(data-scroll-lock-fill-gap)
+  .modal__close(data-modal='close' data-scroll-lock-fill-gap)
     span
     span
   .modal__wrapper(data-scroll-lock-scrollable)
@@ -28,8 +28,8 @@
                 button.button.button_style-1.form-block__button Отправить
           p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
 
-.modal.modal-succes#modal-succes
-  .modal__close(data-modal='close')
+.modal.modal-succes#modal-succes(data-scroll-lock-fill-gap)
+  .modal__close(data-modal='close' data-scroll-lock-fill-gap)
     span
     span
   .modal__wrapper(data-scroll-lock-scrollable)

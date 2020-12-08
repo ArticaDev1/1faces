@@ -1252,13 +1252,13 @@ const Modal = {
   video: function(href) {
     
     let play = ()=> {
-      disablePageScroll();
-      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal"><div class="modal__close" data-modal="close"><span></span><span></span></div><div class="modal__video" data-scroll-lock-scrollable><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
+      $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal" data-scroll-lock-fill-gap><div class="modal__close" data-scroll-lock-fill-gap data-modal="close"><span></span><span></span></div><div class="modal__video" data-scroll-lock-scrollable><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
       let $modal = document.querySelector('.video-modal'),
           $wrap = $modal.querySelector('.modal__video'),
           $content = $modal.querySelector('.modal__video-content');
           
       this.newAnimation = gsap.effects.modal($modal, $content);
+      disablePageScroll();
       this.newAnimation.eventCallback('onStart', ()=>{
         if(!youtubeApi.state) {
           youtubeApi.state = true;

@@ -20,16 +20,17 @@ var Helper = {
     });
   },
   themes: function themes() {
-    var local = localStorage.getItem('theme'),
+    var local = localStorage.getItem('theme-index'),
         value = local ? local : 0,
         themes = document.querySelectorAll('.theme'),
         $triggers = document.querySelectorAll('.helper__section-button-theme');
+    console.log(local);
 
     function check() {
       themes.forEach(function (theme, index) {
         if (value == index) {
           theme.setAttribute('href', theme.getAttribute('data-href'));
-          localStorage.setItem('theme', index);
+          localStorage.setItem('theme-index', index);
         } else {
           theme.setAttribute('href', '');
         }
