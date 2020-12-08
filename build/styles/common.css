@@ -5398,15 +5398,22 @@ textarea {
   overflow: hidden;
   opacity: 0;
   visibility: hidden; }
-  .cases-slider__slide .background:after {
-    content: '';
-    display: block;
+  .cases-slider__slide .image {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.65); }
+    left: 0; }
+    .cases-slider__slide .image:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.65);
+      z-index: 2; }
   .cases-slider__slide-title {
     position: relative;
     z-index: 2;
@@ -5438,17 +5445,22 @@ textarea {
     text-decoration: none;
     overflow: hidden;
     color: #fff; }
-    .cases-slider__nav-slide-container.touch .background, .cases-slider__nav-slide-container.hover .background {
+    .cases-slider__nav-slide-container.touch .image, .cases-slider__nav-slide-container.hover .image {
       transform: scale(1.05); }
-      .cases-slider__nav-slide-container.touch .background::after, .cases-slider__nav-slide-container.hover .background::after {
+      .cases-slider__nav-slide-container.touch .image::after, .cases-slider__nav-slide-container.hover .image::after {
         background-color: rgba(0, 0, 0, 0.65); }
-  .cases-slider__nav-slide.active .background {
+  .cases-slider__nav-slide.active .image {
     transform: scale(1.05); }
-    .cases-slider__nav-slide.active .background::after {
+    .cases-slider__nav-slide.active .image::after {
       background-color: rgba(0, 0, 0, 0.75); }
-  .cases-slider__nav-slide .background {
-    transition: opacity 1s ease-in-out, visibility 1s ease-in-out, transform 0.3s ease-in-out; }
-    .cases-slider__nav-slide .background:after {
+  .cases-slider__nav-slide .image {
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out, transform 0.3s ease-in-out;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0; }
+    .cases-slider__nav-slide .image:after {
       content: '';
       display: block;
       position: absolute;
@@ -5457,7 +5469,8 @@ textarea {
       top: 0;
       left: 0;
       background-color: rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s ease-in-out; }
+      transition: background-color 0.3s ease-in-out;
+      z-index: 2; }
   .cases-slider__nav-slide-title {
     padding: 15px 40px;
     margin: 0;

@@ -616,7 +616,7 @@ const Cases = {
         animations = [];
     
     $slides.forEach(($this, index)=>{
-      let $img = $this.querySelector('.background'),
+      let $img = $this.querySelector('.image'),
           $title = $this.querySelector('.cases-slider__slide-title'),
           $date = $this.querySelector('.cases-slider__slide-date');
 
