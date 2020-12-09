@@ -35,7 +35,7 @@
   img {
     display: block;
     opacity: 0;
-    transition: opacity $trs3, transform $trs1;
+    transition: opacity $trs3;
     &.lazyloaded {
       opacity: 1;
     }

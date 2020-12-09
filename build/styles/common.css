@@ -3403,7 +3403,7 @@ table {
   .image img {
     display: block;
     opacity: 0;
-    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out; }
+    transition: opacity 1s ease-in-out; }
     .image img.lazyloaded {
       opacity: 1; }
   .image_cover img, .image_contain img {
@@ -5659,7 +5659,6 @@ textarea {
   opacity: 0;
   visibility: hidden; }
   .gallery .image img {
-    transition: none;
     pointer-events: none;
     user-select: none; }
 

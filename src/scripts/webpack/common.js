@@ -1250,15 +1250,16 @@ const Modal = {
     }
   },
   video: function(href) {
-    
     let play = ()=> {
       $wrapper.insertAdjacentHTML('beforeEnd', '<div class="modal video-modal" data-scroll-lock-fill-gap><div class="modal__close" data-scroll-lock-fill-gap data-modal="close"><span></span><span></span></div><div class="modal__video" data-scroll-lock-scrollable><div class="modal__overlay" data-modal="close"></div><div class="modal__video-content"><div id="video-player"></div></div></div></div>');
+      //
+      disablePageScroll();
+
       let $modal = document.querySelector('.video-modal'),
           $wrap = $modal.querySelector('.modal__video'),
           $content = $modal.querySelector('.modal__video-content');
-          
+      
       this.newAnimation = gsap.effects.modal($modal, $content);
-      disablePageScroll();
       this.newAnimation.eventCallback('onStart', ()=>{
         if(!youtubeApi.state) {
           youtubeApi.state = true;
@@ -1304,12 +1305,12 @@ const Modal = {
           events: {
             'onReady': function(event) {
               event.target.playVideo();
-              gsap.to(event.target.f, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+              let $video = $modal.querySelector('iframe');
+              gsap.to($video, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
             }
           }
         });
       }
-
       resize(()=>{
         this.newAnimation.play();
       });
@@ -1326,6 +1327,7 @@ const Modal = {
     } else {
       play();
     }
+    
   }
 }
 
