@@ -333,7 +333,7 @@ const OrganizationSlider = {
       .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
 
     let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-      intervalAnimation.duration(interval-0.5).play(0);
+      //intervalAnimation.duration(interval-0.5).play(0);
     }});
 
 
@@ -360,7 +360,7 @@ const OrganizationSlider = {
         $items[index_old].classList.remove('active');
         hideAnimation.play(0);
       } else if(this.visibility) {
-        intervalAnimation.play(0);
+        //intervalAnimation.play(0);
       }
 
       animations[index].play(0);
@@ -384,12 +384,12 @@ const OrganizationSlider = {
       if(v1>0 && v2>0 && document.visibilityState=='visible' && !this.visibility) {
         this.visibility = true;
         if(intervalAnimation) {
-          intervalAnimation.play();
+          //intervalAnimation.play();
         }
       } else if((v1<0 || v2<0 || document.visibilityState=='hidden') && this.visibility) {
         this.visibility = false;
         if(intervalAnimation) {
-          intervalAnimation.pause();
+          //intervalAnimation.pause();
         }
       }
     }
