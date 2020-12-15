@@ -4170,8 +4170,7 @@ textarea {
   @media (max-width: 575.98px) {
     .home__container {
       padding-bottom: 50px;
-      min-height: 600px;
-      max-height: 700px; }
+      height: 620px; }
     .home__text {
       font-size: 1rem; }
     .home__button {
@@ -4283,8 +4282,7 @@ textarea {
       font-size: 1rem; }
     .template-screen__container {
       padding-bottom: 50px;
-      min-height: 600px;
-      max-height: 700px; }
+      height: 620px; }
     .template-screen__content {
       padding: 0; } }
 

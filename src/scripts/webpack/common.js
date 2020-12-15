@@ -333,9 +333,8 @@ const OrganizationSlider = {
       .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
 
     let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-      //intervalAnimation.duration(interval-0.5).play(0);
+      intervalAnimation.duration(interval-0.5).play(0);
     }});
-
 
     $items.forEach(($item, index)=>{
       let $container = $item.querySelector('.organization-block__item-content'),
@@ -360,9 +359,8 @@ const OrganizationSlider = {
         $items[index_old].classList.remove('active');
         hideAnimation.play(0);
       } else if(this.visibility) {
-        //intervalAnimation.play(0);
+        intervalAnimation.play(0);
       }
-
       animations[index].play(0);
       $items[index].classList.add('active');
       index_old = index;
@@ -384,12 +382,12 @@ const OrganizationSlider = {
       if(v1>0 && v2>0 && document.visibilityState=='visible' && !this.visibility) {
         this.visibility = true;
         if(intervalAnimation) {
-          //intervalAnimation.play();
+          intervalAnimation.play();
         }
       } else if((v1<0 || v2<0 || document.visibilityState=='hidden') && this.visibility) {
         this.visibility = false;
         if(intervalAnimation) {
-          //intervalAnimation.pause();
+          intervalAnimation.pause();
         }
       }
     }
@@ -397,6 +395,7 @@ const OrganizationSlider = {
     window.addEventListener('scroll', ()=>{checkVisibilityEvent()})
     document.removeEventListener("visibilitychange", ()=>{checkVisibilityEvent()})
   }
+
 }
 
 const TeamSlider = {
@@ -733,64 +732,65 @@ const Dots = {
     })
 
     let check = ()=> {
-      let position = window.pageYOffset,
-          y = position + window.innerHeight/2,
-          $active = false;
-
-      if(!inscroll) {
-
-        $sections.forEach(($section, index)=>{
-          let top = $section.getBoundingClientRect().y + position,
-              bottom = top + $section.getBoundingClientRect().height;
-          
-          if (y >= top && y <= bottom) {
+      if(window.innerWidth > Brakepoints.lg) {
+        let position = window.pageYOffset,
+            y = position + window.innerHeight/2,
+            $active = false;
+  
+        if(!inscroll) {
+  
+          $sections.forEach(($section, index)=>{
+            let top = $section.getBoundingClientRect().y + position,
+                bottom = top + $section.getBoundingClientRect().height;
             
-            $buttons.forEach(($button)=>{
-              let attr = $button.getAttribute('href'),
-                  id = '#'+$section.getAttribute('id');
-              if(attr==id) {
-                $active = $button;
-              }
-            })
-          } 
-        })
-        
-        if($active && $active!==$oldLink) {
-          if($oldLink) $oldLink.classList.remove('active');
-          $active.classList.add('active');
-          $oldLink = $active;
-        } else if(!$active) {
-          if($oldLink) $oldLink.classList.remove('active');
-          $oldLink = false;
-        }
-      }
-
-      let $dots = document.querySelectorAll('.home-dots__link');
-      $dots.forEach(($dot, index)=>{
-        let y = $dot.getBoundingClientRect().top, 
-            h = $dot.getBoundingClientRect().height/2,
-            pos = y+h;
-
-        let flag = false;
-
-        for(let index = 0; index<$dark_sections.length; index++) {
-          let h = $dark_sections[index].getBoundingClientRect().height,
-              top = $dark_sections[index].getBoundingClientRect().y,
-              bottom = $dark_sections[index].getBoundingClientRect().y + h;
+            if (y >= top && y <= bottom) {
+              
+              $buttons.forEach(($button)=>{
+                let attr = $button.getAttribute('href'),
+                    id = '#'+$section.getAttribute('id');
+                if(attr==id) {
+                  $active = $button;
+                }
+              })
+            } 
+          })
           
-          if(pos>top && pos<bottom) {
-            flag = true;
+          if($active && $active!==$oldLink) {
+            if($oldLink) $oldLink.classList.remove('active');
+            $active.classList.add('active');
+            $oldLink = $active;
+          } else if(!$active) {
+            if($oldLink) $oldLink.classList.remove('active');
+            $oldLink = false;
           }
         }
-
-        if(!$dot.classList.contains('reversed') && flag) {
-          $dot.classList.add('reversed');
-        } else if(!flag) {
-          $dot.classList.remove('reversed');
-        }
-        
-      })
-
+  
+        let $dots = document.querySelectorAll('.home-dots__link');
+        $dots.forEach(($dot, index)=>{
+          let y = $dot.getBoundingClientRect().top, 
+              h = $dot.getBoundingClientRect().height/2,
+              pos = y+h;
+  
+          let flag = false;
+  
+          for(let index = 0; index<$dark_sections.length; index++) {
+            let h = $dark_sections[index].getBoundingClientRect().height,
+                top = $dark_sections[index].getBoundingClientRect().y,
+                bottom = $dark_sections[index].getBoundingClientRect().y + h;
+            
+            if(pos>top && pos<bottom) {
+              flag = true;
+            }
+          }
+  
+          if(!$dot.classList.contains('reversed') && flag) {
+            $dot.classList.add('reversed');
+          } else if(!flag) {
+            $dot.classList.remove('reversed');
+          }
+          
+        })
+      }
     }
 
     check();
@@ -1050,17 +1050,19 @@ const Parralax = {
     })
   },
   check: function() {
-    let $items = document.querySelectorAll('[data-parralax]');
-    $items.forEach(($this)=>{
-      let y = $this.getBoundingClientRect().y,
-          h1 = window.innerHeight,
-          h2 = $this.getBoundingClientRect().height,
-          scroll = window.pageYOffset,
-          factor = +$this.getAttribute('data-parralax');
-  
-      let val = (scroll-y)*factor;
-      gsap.set($this, {y:val})
-    })
+    if(window.innerWidth > Brakepoints.lg) {
+      let $items = document.querySelectorAll('[data-parralax]');
+      $items.forEach(($this)=>{
+        let y = $this.getBoundingClientRect().y,
+            h1 = window.innerHeight,
+            h2 = $this.getBoundingClientRect().height,
+            scroll = window.pageYOffset,
+            factor = +$this.getAttribute('data-parralax');
+    
+        let val = (scroll-y)*factor;
+        gsap.set($this, {y:val})
+      })
+    }
   }
 }
 

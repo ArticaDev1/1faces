@@ -228,8 +228,7 @@
   @include media-breakpoint-down(sm) {
     &__container {
       padding-bottom: 50px;
-      min-height: 600px;
-      max-height: 700px;
+      height: 620px;
     }
     &__text {
       font-size: 1rem;
@@ -377,8 +376,7 @@
     }
     &__container {
       padding-bottom: 50px;
-      min-height: 600px;
-      max-height: 700px;
+      height: 620px;
     }
     &__content {
       padding: 0;
