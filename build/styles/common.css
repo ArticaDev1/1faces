@@ -4282,7 +4282,8 @@ textarea {
       font-size: 1rem; }
     .template-screen__container {
       padding-bottom: 50px;
-      height: 620px; }
+      height: auto;
+      min-height: 620px; }
     .template-screen__content {
       padding: 0; } }
 
@@ -4292,7 +4293,7 @@ textarea {
 @media (max-width: 767.98px) {
   .service-screen .video-play-round {
     display: flex;
-    margin: auto; }
+    margin: 20px auto; }
   .service-screen .template-screen__content {
     flex: 0 0 auto; } }
 
@@ -6011,7 +6012,8 @@ textarea {
     .nav__content {
       padding: 80px 0 50px 0; }
     .nav__link {
-      font-size: 7.5vw; }
+      font-size: 6vw;
+      transform: none; }
     .nav__contacts-list {
       margin-top: 50px; }
     .nav__socials .socials__list {

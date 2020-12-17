@@ -376,7 +376,8 @@
     }
     &__container {
       padding-bottom: 50px;
-      height: 620px;
+      height: auto;
+      min-height: 620px;
     }
     &__content {
       padding: 0;
@@ -391,7 +392,7 @@
   @include media-breakpoint-down(md) {
     .video-play-round {
       display: flex;
-      margin: auto;
+      margin: 20px auto;
     }
     .template-screen__content {
       flex: 0 0 auto;
