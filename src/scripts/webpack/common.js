@@ -24,8 +24,7 @@ import SwipeListener from 'swipe-listener';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 
-
-const Brakepoints = {
+const Breakpoints = {
   sm: 576,
   md: 768,
   lg: 1024,
@@ -38,10 +37,10 @@ const $header = document.querySelector('.header');
 const $preloader = document.querySelector('.preloader');
 const namespace = $wrapper.getAttribute('data-namespace');
 
-const speed = 1; //animations
+const speed = 0.5; //animations
 const dev = false;
 const youtubeApi = {state: false};
-const interval = 10; //autoslide duration
+const interval = 5; //autoslide duration
 
 window.onload = function(){
   App.init();
@@ -218,7 +217,7 @@ const Gallery = {
         .to(this.$idx[this.index], {autoAlpha:1, duration:speed, ease:'power2.inOut'})
       this.indexAnimOld = this.indexAnim;
       let animation;
-      if(window.innerWidth>Brakepoints.lg) {
+      if(window.innerWidth>Breakpoints.lg) {
         animation = gsap.timeline({paused:true})
           .fromTo($image1.parentNode, {xPercent:0}, {xPercent:-100, duration:speed, ease:'power2.inOut'})
           .fromTo($image1, {xPercent:0}, {xPercent:50, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
@@ -329,11 +328,11 @@ const OrganizationSlider = {
       check();
     }})
       .set($loader, {css:{'stroke-dasharray':loader_width}})
-      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
-      .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, '-=0.5')
+      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:speed*0.5, ease:'power2.inOut'})
+      .fromTo($loader, {css:{'stroke-dashoffset':loader_width}}, {duration:interval, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed*0.5}`)
 
-    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-      intervalAnimation.duration(interval-0.5).play(0);
+    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:speed*0.5, ease:'power2.inOut', onComplete:()=>{
+      intervalAnimation.duration(interval-speed*0.5).play(0);
     }});
 
     $items.forEach(($item, index)=>{
@@ -342,15 +341,15 @@ const OrganizationSlider = {
           $title = $titles[index],
           $image = $images[index],
           h = $text.getBoundingClientRect().height,
-          w_var = window.innerWidth<Brakepoints.sm ? -12.5 : 0;
+          w_var = window.innerWidth<Breakpoints.sm ? -12.5 : 0;
 
       animations[index] = gsap.timeline({paused:true})
-        .fromTo($container, {css:{height:0}}, {css:{height:h}, duration:1, ease:'power2.inOut'})
-        .fromTo($text, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
-        .fromTo($title, {scale:0.75, xPercent:w_var}, {xPercent:0, scale:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo($container, {css:{height:0}}, {css:{height:h}, duration:speed, ease:'power2.inOut'})
+        .fromTo($text, {autoAlpha:0}, {autoAlpha:speed, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+        .fromTo($title, {scale:0.75, xPercent:w_var}, {xPercent:0, scale:1, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
         //image
-        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
-        .fromTo($image, {scale:0.5}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
+        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+        .fromTo($image, {scale:0.5}, {scale:1, duration:speed, ease:'power2.out'}, `-=${speed}`)
     })
 
     let check = ()=> {
@@ -425,19 +424,19 @@ const TeamSlider = {
       }
       check();
     }})
-      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.inOut'})
-      .fromTo($loader, {scaleX:0, xPercent:-50}, {duration:interval, scaleX:1, xPercent:0, ease:'linear'}, '-=0.5')
+      .fromTo($loader, {autoAlpha:0}, {autoAlpha:1, duration:speed*0.5, ease:'power2.inOut'})
+      .fromTo($loader, {scaleX:0, xPercent:-50}, {duration:interval, scaleX:1, xPercent:0, ease:'linear'}, `-=${speed*0.5}`)
 
-    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:0.5, ease:'power2.inOut', onComplete:()=>{
-      intervalAnimation.duration(interval-0.5).play(0);
+    let hideAnimation = gsap.timeline({paused:true}).fromTo($loader, {autoAlpha:1}, {autoAlpha:0, duration:speed*0.5, ease:'power2.inOut', onComplete:()=>{
+      intervalAnimation.duration(interval-speed*0.5).play(0);
     }});
 
     $images.forEach(($image, index)=>{
       let $item = $items[index],
           $number = $numbers[index];
       animations[index] = gsap.timeline({paused:true})
-        .fromTo([$image, $item, $number], {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
-        .fromTo($image, {scale:1.25}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
+        .fromTo([$image, $item, $number], {autoAlpha:0}, {autoAlpha:1, duration:speed, ease:'power2.inOut'})
+        .fromTo($image, {scale:1.25}, {scale:1, duration:speed, ease:'power2.out'}, `-=${speed}`)
     })
 
     let getNext = (idx)=> {
@@ -500,6 +499,7 @@ const TeamSlider = {
     document.removeEventListener("visibilitychange", ()=>{checkVisibilityEvent()})
   }
 }
+
 const ServicesCards = {
   init: function() {
     this.$parent = document.querySelector('.services');
@@ -526,7 +526,7 @@ const ServicesCards = {
           offsetY = -50,
           offset = -50;
 
-      if(window.innerWidth<Brakepoints.md) {
+      if(window.innerWidth<Breakpoints.md) {
         offset = 0;
         if(index==0) {
           offsetX = -((1-scale)/2)*100;
@@ -547,17 +547,17 @@ const ServicesCards = {
 
       animations[index] = gsap.timeline({paused:true})
         .set($back, {scale:scale, yPercent:offsetY, xPercent:offsetX})
-        .to($front, {autoAlpha:0, duration:0.33, ease:'power2.inOut',
+        .to($front, {autoAlpha:0, duration:speed*0.5, ease:'power2.inOut',
           onComplete:()=>{
             $block.classList.add('active');
           }})
-        .to($back, {scale:1, yPercent:offset, xPercent:offset, duration:0.66, ease:'power2.inOut'
+        .to($back, {scale:1, yPercent:offset, xPercent:offset, duration:speed*0.7, ease:'power2.inOut'
         })
-        .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:0.66, ease:'power2.inOut',
+        .fromTo($content, {autoAlpha:0}, {autoAlpha:1, duration:speed*0.7, ease:'power2.inOut',
           onReverseComplete:()=>{
             $block.classList.remove('active');
           }
-        }, '-=0.66')
+        }, `-=${speed*0.7}`)
 
 
       $button.addEventListener('mouseenter', (event)=>{check(event)})
@@ -623,7 +623,7 @@ const Cases = {
       animations[index] = gsap.timeline({paused:true})
         .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:speed, ease:'power2.inOut'})
         .fromTo($img, {scale:1.25}, {scale:1, duration:speed, ease:'power2.out'}, `-=${speed}`)
-        .fromTo([$title, $date], {x:50}, {x:0, duration:speed*0.9, ease:'power2.out', stagger:{amount:speed*0.1}}, `-=${speed}`)
+        .fromTo([$title, $date], {x:50}, {x:0, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
     })
 
     let slider = new Splide('.splide', {
@@ -632,7 +632,7 @@ const Cases = {
       arrows: false,
       pagination: false,
       easing: 'ease-in-out',
-      speed: speed*500,
+      speed: speed*1000,
       autoplay: true,
       perMove: 1,
       interval: interval*1000,
@@ -647,9 +647,9 @@ const Cases = {
       slide_current=newIndex-1<0?slider.length-1:newIndex-1;
       inAnimation = true;
       if(slide_old!==undefined) {
-        animations[slide_old].timeScale(2).reverse();
+        animations[slide_old].reverse();
       } 
-      animations[slide_current].timeScale(1).play();
+      animations[slide_current].play();
       slide_old=slide_current;
     });
 
@@ -724,7 +724,7 @@ const Dots = {
           if(animation!==undefined) {
             animation.pause();
           }
-          animation = gsap.to(window, {duration: 1, scrollTo:{y:$block}, ease:'power2.inOut', onComplete: function() {
+          animation = gsap.to(window, {duration:speed, scrollTo:{y:$block}, ease:'power2.inOut', onComplete: function() {
             inscroll = false;
           }});
         }
@@ -732,7 +732,7 @@ const Dots = {
     })
 
     let check = ()=> {
-      if(window.innerWidth > Brakepoints.lg) {
+      if(window.innerWidth > Breakpoints.lg) {
         let position = window.pageYOffset,
             y = position + window.innerHeight/2,
             $active = false;
@@ -805,7 +805,7 @@ const Dots = {
 const BackgroundVideo = {
   init: function() {
     this.$parent = document.querySelector('.background-video');
-    if(this.$parent && device.desktop() && window.innerWidth>Brakepoints.lg) {
+    if(this.$parent && device.desktop() && window.innerWidth>Breakpoints.lg) {
       this.initEvent();
     }
   },
@@ -884,12 +884,12 @@ const BackgroundVideo = {
       this.startLoaderAnimation.pause();
       gsap.timeline()
         .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
-        .to(this.$loader, {duration:speed*0.5, autoAlpha:0, ease:'power1.in'}, `-=${speed*0.5}`)
+        .to(this.$loader, {duration:speed, autoAlpha:0, ease:'power1.in'}, `-=${speed}`)
 
       this.animationTimeline = gsap.timeline({paused:true})
         .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
         .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {immediateRender:false, duration:this.duration, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed}`)
-        .to(this.$loader, {autoAlpha:0, duration:speed, ease:'power2.in'}, `-=${speed}`)
+        .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
     }
 
     setTimeout(()=>{
@@ -970,8 +970,8 @@ const Nav = {
         this.$toggle.classList.remove('active');
       }
     })
-      .to(this.$nav, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
-      .to(this.$toggle_line[1], {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed/2}`)
+      .to(this.$nav, {autoAlpha:1, duration:speed, ease:'power2.inOut'})
+      .to(this.$toggle_line[1], {autoAlpha:0, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
       .to(this.$toggle_line[0], {rotate:-45, y:9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
       .to(this.$toggle_line[2], {rotate:45, y:-9.5, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
       .fromTo(this.$nav_items, {x:100, autoAlpha:0}, {x:0, autoAlpha:1, duration:speed*0.8, ease:'power2.out', stagger:{amount:speed*0.2}}, `-=${speed}`)
@@ -1050,7 +1050,7 @@ const Parralax = {
     })
   },
   check: function() {
-    if(window.innerWidth > Brakepoints.lg) {
+    if(window.innerWidth > Breakpoints.lg) {
       let $items = document.querySelectorAll('[data-parralax]');
       $items.forEach(($this)=>{
         let y = $this.getBoundingClientRect().y,
@@ -1174,8 +1174,8 @@ const Modal = {
       name: "modal",
       effect: ($modal, $content) => {
         let anim = gsap.timeline({paused:true})
-          .fromTo($modal, {autoAlpha:0}, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
-          .fromTo($content, {y:20}, {y:0, duration:speed, ease:'power2.out'}, `-=${speed/2}`)
+          .fromTo($modal, {autoAlpha:0}, {autoAlpha:1, duration:speed*0.5, ease:'power2.inOut'})
+          .fromTo($content, {y:20}, {y:0, duration:speed, ease:'power2.out'}, `-=${speed*0.5}`)
         return anim;
       },
       extendTimeline: true
@@ -1213,7 +1213,7 @@ const Modal = {
             w = $icon.getTotalLength();
         gsap.timeline()
           .set($icon, {autoAlpha:0})
-          .set($icon, {css:{'stroke-dasharray':w}}, `+=${speed*0.25}`)
+          .set($icon, {css:{'stroke-dasharray':w}}, `+=${speed*0.5}`)
           .set($icon, {autoAlpha:1})
           .fromTo($icon, {css:{'stroke-dashoffset':w}}, {duration:speed, css:{'stroke-dashoffset':0}, ease:'power2.out'})
       }
@@ -1233,7 +1233,7 @@ const Modal = {
     if(this.$old && $modal) {
       enablePageScroll();
       this.$old = false;
-      this.oldAnimation.timeScale(2).reverse();
+      this.oldAnimation.reverse();
       this.oldAnimation.eventCallback('onReverseComplete', ()=>{
         if($modal.classList.contains('video-modal')) {
           $modal.remove();
@@ -1417,6 +1417,7 @@ const Validation = {
         })
       }
     })
+    
     document.addEventListener('input', (event)=>{
       let $input = event.target,
           $form = $input.closest('form');

@@ -56,7 +56,7 @@
     font-weight: 500;
     font-size: 1.125rem;
     margin: 0 60px 0 0;
-    transition: opacity $trs3, visibility $trs3;
+    transition: opacity $trs2, visibility $trs2;
     .icon {
       width: 16px;
       height: 16px;
@@ -163,7 +163,7 @@
 }
 
 .logo {
-  transition: opacity $trs3, visibility $trs3;
+  transition: opacity $trs2, visibility $trs2;
   &__link {
     display: block;
     width: 260px;

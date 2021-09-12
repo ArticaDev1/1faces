@@ -28,6 +28,32 @@
                 button.button.button_style-1.form-block__button Отправить
           p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
 
+.modal#modal-check-list(data-scroll-lock-fill-gap)
+  .modal__close(data-modal='close' data-scroll-lock-fill-gap)
+    span
+    span
+  .modal__wrapper(data-scroll-lock-scrollable)
+    .modal__overlay(data-modal='close')
+    .modal__container
+      .form-block
+        .form-block__container
+          .form-block__head
+            h4.form-block__title Получите чек лист мероприятия
+            p.form-block__text По нашему чек-листу вы сможете проверить, всё ли Вы предусмотрели в организации «Дня поля».
+          form(action="#").form-block__form.js-validation
+            .row.form-block__row
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="phone_modal2").input__label Введите телефон
+                  input(type="text" name='phone' id='phone_modal2' data-validate='phone').input__element
+              .form-block__item.col-sm-6
+                .input.form-block__input
+                  label(for="email_modal2").input__label Введите e-mail
+                  input(type="text" name='email' id='email_modal2' data-validate='email').input__element
+              .form-block__item.col-sm-6
+                button.button.button_style-1.form-block__button Отправить
+          p.form-block__alert *Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных
+
 .modal.modal-succes#modal-succes(data-scroll-lock-fill-gap)
   .modal__close(data-modal='close' data-scroll-lock-fill-gap)
     span

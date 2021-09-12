@@ -80,6 +80,7 @@
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Юбилей компании</a></li>
                 <li class="nav__item"> <a class="nav__link active" href="./service.html">Торжественные открытия</a></li>
                 <li class="nav__item"> <a class="nav__link" href="./service.html">Онлайн мероприятия</a></li>
+                <li class="nav__item"> <a class="nav__link" href="./den-polya.html">День поля</a></li>
               </ul>
             </div>
           </div>
@@ -97,7 +98,9 @@
                 <div class="background-video__element" id="bg-player"></div>
               </div>
             </div>
-            <div class="container home__container"><a class="video-play-round home__item" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">
+            <div class="container home__container">
+              <!--new element start--><a class="field-day-icon" href="./den-polya.html"><img src="./img/den-polya/den-polya-icon-back.svg" alt="image"><img src="./img/den-polya/den-polya-icon-front.svg" alt="image"></a>
+              <!--new element end--><a class="video-play-round home__item" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">
                 <svg class="icon">
                   <use xlink:href="./img/icons/icons-sprite.svg#play"></use>
                 </svg></a>
@@ -448,7 +451,7 @@
             </div>
           </div>
         </section>
-        <section class="section section_mt2 section_pt section_pb feedback" id="feedback" data-scroll-block data-dark>
+        <section class="section section_mt2 section_pt section_pb feedback" data-scroll-block data-dark>
           <div class="container">
             <div class="feedback-block">
               <h2 class="section__title feedback__title">Планируете провести мероприятие?</h2>
@@ -558,6 +561,42 @@
         </div>
       </div>
     </div>
+    <div class="modal" id="modal-check-list" data-scroll-lock-fill-gap>
+      <div class="modal__close" data-modal="close" data-scroll-lock-fill-gap><span></span><span></span></div>
+      <div class="modal__wrapper" data-scroll-lock-scrollable>
+        <div class="modal__overlay" data-modal="close"></div>
+        <div class="modal__container">
+          <div class="form-block">
+            <div class="form-block__container">
+              <div class="form-block__head">
+                <h4 class="form-block__title">Получите чек лист мероприятия</h4>
+                <p class="form-block__text">По нашему чек-листу вы сможете проверить, всё ли Вы предусмотрели в организации «Дня поля».</p>
+              </div>
+              <form class="form-block__form js-validation" action="#">
+                <div class="row form-block__row">
+                  <div class="form-block__item col-sm-6">
+                    <div class="input form-block__input">
+                      <label class="input__label" for="phone_modal2">Введите телефон</label>
+                      <input class="input__element" type="text" name="phone" id="phone_modal2" data-validate="phone">
+                    </div>
+                  </div>
+                  <div class="form-block__item col-sm-6">
+                    <div class="input form-block__input">
+                      <label class="input__label" for="email_modal2">Введите e-mail</label>
+                      <input class="input__element" type="text" name="email" id="email_modal2" data-validate="email">
+                    </div>
+                  </div>
+                  <div class="form-block__item col-sm-6">
+                    <button class="button button_style-1 form-block__button">Отправить</button>
+                  </div>
+                </div>
+              </form>
+              <p class="form-block__alert">*Нажимая кнопку, вы даете свое согласие на обработку персональных данных в соответствии с законом №152-ФЗ и принимаете условия Соглашения на обработку персональных данных</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal modal-succes" id="modal-succes" data-scroll-lock-fill-gap>
       <div class="modal__close" data-modal="close" data-scroll-lock-fill-gap><span></span><span></span></div>
       <div class="modal__wrapper" data-scroll-lock-scrollable>
@@ -572,8 +611,8 @@
       </div>
     </div>
     <!--themes-->
-    <link class="theme" rel="stylesheet" data-href="./styles/theme.css">
-    <link class="theme" rel="stylesheet" data-href="./styles/theme2.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/red.css">
+    <link class="theme" rel="stylesheet" data-href="./styles/violet.css">
     <!--styles-->
     <link rel="stylesheet" href="./styles/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -596,11 +635,11 @@
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Всплывающие окна:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="#modal-form" data-modal="open">Форма обратной связи</a><a class="helper__section-button" href="#modal-succes" data-modal="open">Успешная отправка формы</a><a class="helper__section-button" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">Видео</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="#modal-form" data-modal="open">Форма обратной связи</a><a class="helper__section-button" href="#modal-check-list" data-modal="open">Форма обратной связи 2</a><a class="helper__section-button" href="#modal-succes" data-modal="open">Успешная отправка формы</a><a class="helper__section-button" href="https://youtu.be/0zxNqsKiQxE" data-modal="video">Видео</a></div>
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./service.html">Шаблон услуги</a><a class="helper__section-button" href="./case.html">Шаблон кейса</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./service.html">Шаблон услуги</a><a class="helper__section-button" href="./case.html">Шаблон кейса</a><a class="helper__section-button" href="./den-polya.html">День поля</a></div>
         </div>
       </div>
     </div>

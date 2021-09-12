@@ -1,0 +1,80 @@
+extends layout/layout
+block variables
+  -var preloader = false
+  -var namespace = 'case'
+block title
+  title #{title} - День поля
+block content 
+
+  section.section.template-screen.case-screen.field-day-screen
+    //video
+    .background-video.template-screen__background-video(data-video='https://youtu.be/iEc96EDJFRs' data-parralax='0.15')
+      .image.image_cover.background-video__background
+        img(data-src='./img/2I5A5799 233.jpg', alt="bg").lazyload
+      .background-video__wrap
+        #bg-player.background-video__element
+    //content
+    .container.template-screen__container
+      //prev
+      a(href="./").back-button.template-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
+        span Главная страница
+
+      .template-screen__content
+        h1.template-screen__title.template-screen__item День поля
+        p.template-screen__text.template-screen__item.field-day-screen__text-1 Мы знаем, что нужно для идеальной организации.
+        p.template-screen__text.template-screen__item.field-day-screen__text-2 Получи бесплатно чек-лист «День поля»
+        a(href="#modal-check-list" data-modal='open').button.button_style-1.template-screen__button.template-screen__item Получить чек-лист
+
+  section.section.section_mb2.category-about-wrapper
+    .background.lazyload.category-about-wrapper__bg(data-src='./img/iStock-613111906.jpg')
+
+    section.section.about-text
+      .container
+        h2.about-text__title О мероприятии
+        .about-text__text
+          p День поля - это один самых популярных форматов мероприятий в сфере АПК, потому что позволяет показать продукцию в наиболее удобном формате. 
+          p Мы можем взять на себя, как всю техническую часть организации - шатры, стенды, питание, звук, экраны и генераторы, так и содержательную. Проработать концепцию, добиться поставленных целей через программу мероприятия. 
+              
+  section.section.organization.field-day-organization(data-scroll-block)
+    .container
+      h2.section__title.organization__title Берем на себя все<br> организационные задачи:
+      .organization__container.row.justify-content-center
+        .col-xl-10.col-lg-12.col-md-10
+          .organization-block.row 
+            .col-lg-6.order-lg-2
+              .organization-block__content
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Застройка и брендинг  
+                  .organization-block__item-content
+                    p.organization-block__item-text Индивидуальные решения под клиента: шатры, пагоды, эко-дом, арки, стенды, навигация
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Профессиональный кейтеринг 
+                  .organization-block__item-content 
+                    p.organization-block__item-text Ресторанное обслуживание в «полевых» условиях
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Техническое оснащение 
+                  .organization-block__item-content
+                    p.organization-block__item-text Сцена, видеоэкран, звук, свет, трибуна, генератор
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Разработка программы 
+                  .organization-block__item-content
+                    p.organization-block__item-text Подбор шоу-программы от встречи гостей до банкета
+            .col-lg-6.order-lg-1
+              .organization-block__images
+                svg(viewBox='0 0 608 608' fill='none' stroke='currentColor').organization-block__loader
+                  path(d='M607.5 607.5L0.499973 607.5L0.5 0.499973L348.846 0.499989L607.5 0.5L607.5 607.5Z')
+                .organization-block__images-content
+                  .organization-block__image.field-day-organization__image.image.image_cover
+                    img(data-src="./img/den-polya/1.jpg", alt="service").lazyload
+                  .organization-block__image.field-day-organization__image.image.image_cover
+                    img(data-src="./img/den-polya/2.jpg", alt="service").lazyload
+                  .organization-block__image.field-day-organization__image.image.image_cover
+                    img(data-src="./img/den-polya/3.jpg", alt="service").lazyload
+                  .organization-block__image.field-day-organization__image.image.image_cover
+                    img(data-src="./img/den-polya/4.jpg", alt="service").lazyload
+          
+  
+  include blocks/clients
+  include blocks/contacts
