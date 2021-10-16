@@ -1186,8 +1186,9 @@ const Modal = {
       if($button) {
         event.preventDefault();
         if($button.getAttribute('data-modal')=='open') {
-          let $modal = document.querySelector(`${$button.getAttribute('href')}`);
-          this.open($modal);
+          let $modal = document.querySelector(`${$button.getAttribute('href')}`),
+              modalSubject = $button.getAttribute('data-subject');
+          this.open($modal, modalSubject);
         } else if($button.getAttribute('data-modal')=='video') {
           let href = $button.getAttribute('href');
           this.video(href);
@@ -1198,7 +1199,7 @@ const Modal = {
       }
     })
   }, 
-  open: function($modal) {
+  open: function($modal, modalSubject) {
 
     let play = ()=> {
       disablePageScroll();
@@ -1227,6 +1228,12 @@ const Modal = {
       } else {
         play();
       }
+    }
+
+    //значение формы
+    let $input = $modal.querySelector('[data-subject]');
+    if(modalSubject && $input) {
+      $input.setAttribute('value', modalSubject);
     }
   }, 
   close: function($modal, callback) {
