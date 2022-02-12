@@ -1,0 +1,98 @@
+extends layout/layout
+block variables
+  -var namespace = 'category'
+block title
+  title #{title} - Mice
+block content
+
+  section.section.template-screen.service-screen
+    //video
+    .background-video.template-screen__background-video(data-video='https://youtu.be/HLbnyC3UGDA' data-parralax='0.15')
+      .image.image_cover.background-video__background
+        img(data-src='./img/20191206-117.jpg', alt="bg").lazyload
+      .background-video__wrap
+        #bg-player.background-video__element
+    //content
+    .container.template-screen__container
+      //prev
+      a(href="./index.html").back-button.template-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
+        span Главная страница
+      a(href="https://youtu.be/PfyXBk0Eh0U" data-modal='video').video-play-round.template-screen__item
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#play')
+      .template-screen__content
+        h1.template-screen__title.template-screen__item Организация и проведение MICE-мероприятий
+        p.template-screen__text.template-screen__item 
+          span.d-none.d-sm-block Готовы обсудить ваши задачи и предоставить<br> концепт мероприятия за 24 часа!
+          span.d-block.d-sm-none Концепт мероприятия за 24 часа!
+        a(href="#modal-form" data-modal='open' data-subject='Свяжитесь с нами | Mice').button.button_style-1.template-screen__button.template-screen__item Свяжитесь с нами
+
+  section.section.section_mb2.category-about-wrapper
+    .background.lazyload.category-about-wrapper__bg(data-src='./img/iStock-613111906.jpg')
+    section.section.about-text
+      .container
+        h2.about-text__title MICE-мероприятия
+        .about-text__text
+          p MICE - область делового туризма, связанная с организацией и проведением различных корпоративных мероприятий.
+          p Это необычно, это непросто, это другие города, а следовательно другие места и подрядчики, но это безумно интересно и главное - мы точно знаем, что сможем сделать хорошее деловое мероприятие даже на необитаемом острове! 
+          .hidden-text
+            .hidden-text__wrapper
+              .hidden-text__content
+                p Это необычно, это непросто, это другие города, а следовательно другие места и подрядчики, но это безумно интересно и главное - мы точно знаем, что сможем сделать хорошее деловое мероприятие даже на необитаемом острове! 
+          a(href="javascript:void(0);").hidden-text-toggle 
+            svg.icon
+              use(xlink:href='./img/icons/icons-sprite.svg#double-arrow')
+              
+    include blocks/cases
+
+  section.section.organization
+    .container
+      h2.section__title.organization__title Берем на себя все<br> организационные задачи:
+      .organization__container.row.justify-content-center
+        .col-xl-10.col-lg-12.col-md-10
+          .organization-block.row 
+            .col-lg-6.order-lg-2
+              .organization-block__content
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Концепция 
+                  .organization-block__item-content
+                    p.organization-block__item-text Разработаем концепцию.
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Планирование
+                  .organization-block__item-content 
+                    p.organization-block__item-text Составим план деловой<br> и культурной программы.
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Бронирование
+                  .organization-block__item-content
+                    p.organization-block__item-text Забронируем отели, трансферы, авиабилеты.
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover Положитесь на нас
+                  .organization-block__item-content
+                    p.organization-block__item-text Решим все технические задачи.
+                .organization-block__item
+                  h3.organization-block__item-title.jsTouchHover На связи
+                  .organization-block__item-content
+                    p.organization-block__item-text Будем на связи со всеми участниками 24/7.
+
+            .col-lg-6.order-lg-1
+              .organization-block__images
+                svg(viewBox='0 0 608 608' fill='none' stroke='currentColor').organization-block__loader
+                  path(d='M607.5 607.5L0.499973 607.5L0.5 0.499973L348.846 0.499989L607.5 0.5L607.5 607.5Z')
+                .organization-block__images-content
+                  .organization-block__image.image.image_contain
+                    img(data-src="./img/mice/1.png", alt="service").lazyload
+                  .organization-block__image.image.image_contain
+                    img(data-src="./img/mice/2.png", alt="service").lazyload
+                  .organization-block__image.image.image_contain
+                    img(data-src="./img/mice/3.png", alt="service").lazyload
+                  .organization-block__image.image.image_contain
+                    img(data-src="./img/mice/4.png", alt="service").lazyload
+                  .organization-block__image.image.image_contain
+                    img(data-src="./img/mice/5.png", alt="service").lazyload
+            
+
+  include blocks/clients
+
+  include blocks/contacts

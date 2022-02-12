@@ -669,7 +669,7 @@ const Cases = {
       }
     });
 
-    document.addEventListener('click', (event)=>{
+    /* document.addEventListener('click', (event)=>{
       let $target = event.target!==document?event.target.closest('.cases-slider__nav-slide-container'):false,
           slide_index,
           next_index;
@@ -686,7 +686,7 @@ const Cases = {
         let value = next_index-slide_index+1;
         slider.go(`+${value}`, false)
       }
-    })
+    }) */
 
     $next.addEventListener('click', ()=>{
       if(!inAnimation) slider.go('+1', false)

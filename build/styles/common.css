@@ -4036,6 +4036,13 @@ textarea {
     flex-direction: column;
     justify-content: center;
     flex: 0 0 auto; }
+  .home__desktop-buttons {
+    position: absolute;
+    z-index: 10;
+    top: calc(50% - 342px);
+    right: 120px;
+    display: flex;
+    gap: 44px; }
   .home-logo {
     width: 310px;
     height: 310px;
@@ -4101,10 +4108,16 @@ textarea {
   .home__button {
     width: 290px;
     margin: 60px 0 0 0; }
+  @media (min-width: 576px) {
+    .home__mobile-buttons {
+      display: none; } }
   @media (min-width: 1600px) {
     .home__text br {
       display: none; } }
   @media (max-width: 1599.98px) {
+    .home__desktop-buttons {
+      top: calc(50% - 272px);
+      right: 140px; }
     .home__container {
       min-height: 620px;
       max-height: 800px; }
@@ -4132,9 +4145,18 @@ textarea {
     margin: 0 0 20px 0; }
   .home__button {
     margin: 30px 0 0 0; } }
+  @media (max-width: 1279.98px) {
+    .home__desktop-buttons {
+      right: 90px;
+      gap: 40px; } }
   @media (max-width: 1023.98px) {
     .home {
       border-bottom: none; }
+      .home__desktop-buttons {
+        right: initial;
+        left: calc(50% + 114px);
+        gap: 20px;
+        top: 100px; }
       .home__container {
         padding-top: 80px;
         padding-bottom: 60px; }
@@ -4167,7 +4189,39 @@ textarea {
           left: 0;
           background: linear-gradient(180deg, #343434 47.4%, rgba(52, 52, 52, 0) 124.85%);
           opacity: 0.65; } }
+  @media (max-width: 767.98px) {
+    .home__desktop-buttons {
+      left: calc(50% + 95px); } }
   @media (max-width: 575.98px) {
+    .home__mobile-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      position: absolute;
+      z-index: 10;
+      right: 16px;
+      top: 80px; }
+    .home__mobile-button {
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.15s ease-in-out; }
+      .home__mobile-button .icon {
+        height: auto; }
+      .home__mobile-button_1 .icon {
+        width: 11px; }
+      .home__mobile-button_2 .icon {
+        width: 17px; }
+      .home__mobile-button.touch, .home__mobile-button.hover {
+        opacity: 0.7; }
+    .home__desktop-buttons {
+      display: none; }
     .home__container {
       padding-bottom: 50px;
       height: 620px; }
@@ -5910,50 +5964,36 @@ textarea {
   .field-day-organization__image img {
     padding: 20px; }
 
-.field-day-icon {
+.field-day-icon, .mice-day-icon {
   --size: 158px;
   display: block;
-  position: absolute;
-  z-index: 10;
-  right: 250px;
-  top: 80px;
   width: var(--size);
   height: var(--size);
   transition: transform 0.15s ease-in-out;
   will-change: transform; }
-  .field-day-icon.touch, .field-day-icon.hover {
+  .field-day-icon.touch, .field-day-icon.hover, .mice-day-icon.touch, .mice-day-icon.hover {
     transform: scale(1.05); }
-  .field-day-icon img {
+  .field-day-icon img, .mice-day-icon img {
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0; }
-    .field-day-icon img:first-child {
+    .field-day-icon img:first-child, .mice-day-icon img:first-child {
       z-index: 1; }
-    .field-day-icon img:last-child {
+    .field-day-icon img:last-child, .mice-day-icon img:last-child {
       z-index: 2;
       animation: 7s linear rotation infinite; }
   @media (max-width: 1599.98px) {
-    .field-day-icon {
-      --size: 120px;
-      right: 230px; } }
+    .field-day-icon, .mice-day-icon {
+      --size: 120px; } }
   @media (max-width: 1279.98px) {
-    .field-day-icon {
-      --size: 100px;
-      right: 150px; } }
-  @media (max-width: 1023.98px) {
-    .field-day-icon {
-      right: 115px; } }
+    .field-day-icon, .mice-day-icon {
+      --size: 100px; } }
   @media (max-width: 767.98px) {
-    .field-day-icon {
-      right: 60px; } }
-  @media (max-width: 767.98px) {
-    .field-day-icon {
-      --size: 70px;
-      top: 65px;
-      right: calc(50% - 130px); } }
+    .field-day-icon, .mice-day-icon {
+      --size: 70px; } }
 
 @keyframes rotation {
   0% {

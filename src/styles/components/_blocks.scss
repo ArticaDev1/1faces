@@ -62,6 +62,14 @@
     justify-content: center;
     flex: 0 0 auto;
   }
+  &__desktop-buttons {
+    position: absolute;
+    z-index: 10;
+    top: calc(50% - 342px);
+    right: 120px;
+    display: flex;
+    gap: 44px;
+  }
   &-logo {
     width: 310px;
     height: 310px;
@@ -138,6 +146,11 @@
     width: 290px;
     margin: 60px 0 0 0;
   }
+  @include media-breakpoint-up(sm) {
+    &__mobile-buttons {
+      display: none;
+    }
+  }
   @include media-breakpoint-up(xxl) {
     &__text {
       br {
@@ -146,6 +159,10 @@
     }
   }
   @include media-breakpoint-down(xxl) {
+    &__desktop-buttons {
+      top: calc(50% - 272px);
+      right: 140px;
+    }
     &__container {
       min-height: 620px;
       max-height: 800px;
@@ -184,8 +201,20 @@
       }
     }
   }
+  @include media-breakpoint-down(xl) {
+    &__desktop-buttons {
+      right: 90px;
+      gap: 40px;
+    }
+  }
   @include media-breakpoint-down(lg) {
     border-bottom: none;
+    &__desktop-buttons {
+      right: initial;
+      left: calc(50% + 114px);
+      gap: 20px;
+      top: 100px;
+    }
     &__container {
       padding-top: 80px;
       padding-bottom: 60px;
@@ -225,7 +254,53 @@
       }
     }
   }
+  @include media-breakpoint-down(md) {
+    &__desktop-buttons {
+      left: calc(50% + 95px);
+    }
+  }
   @include media-breakpoint-down(sm) {
+    &__mobile-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      position: absolute;
+      z-index: 10;
+      right: 16px;
+      top: 80px;
+    }
+    &__mobile-button {
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity $trs1;
+      .icon {
+        height: auto;
+      }
+      &_1 {
+        .icon {
+          width: 11px;
+        }
+      }
+      &_2 {
+        .icon {
+          width: 17px;
+        }
+      }
+      &.touch,
+      &.hover {
+        opacity: 0.7;
+      }
+    }
+    &__desktop-buttons {
+      display: none;
+    }
     &__container {
       padding-bottom: 50px;
       height: 620px;
@@ -384,6 +459,14 @@
     }
   }
 }
+
+
+
+
+
+
+
+
 
 .service-screen {
   .video-play-round {
@@ -2540,13 +2623,9 @@
   }
 }
 
-.field-day-icon {
+.field-day-icon, .mice-day-icon {
   --size: 158px;
   display: block;
-  position: absolute;
-  z-index: 10;
-  right: 250px;
-  top: 80px;
   width: var(--size);
   height: var(--size);
   transition: transform $trs1;
@@ -2571,22 +2650,12 @@
   }
   @include media-breakpoint-down(xxl) {
     --size: 120px;
-    right: 230px;
   }
   @include media-breakpoint-down(xl) {
     --size: 100px;
-    right: 150px;
-  }
-  @include media-breakpoint-down(lg) {
-    right: 115px;
-  }
-  @include media-breakpoint-down(md) {
-    right: 60px;
   }
   @include media-breakpoint-down(md) {
     --size: 70px;
-    top: 65px;
-    right: calc(50% - 130px);
   }
 }
 

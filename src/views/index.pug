@@ -36,11 +36,26 @@ block content
         .background-video__wrap
           #bg-player.background-video__element
       .container.home__container
-        //new element start
-        a(href="./den-polya.html").field-day-icon
-          img(src="./img/den-polya/den-polya-icon-back.svg", alt="image")
-          img(src="./img/den-polya/den-polya-icon-front.svg", alt="image")
-        //new element end
+
+        .home__desktop-buttons 
+          //button
+          a(href="./den-polya.html").field-day-icon
+            img(src="./img/den-polya/den-polya-icon-back.svg", alt="image")
+            img(src="./img/den-polya/den-polya-icon-front.svg", alt="image")
+          //button
+          a(href="./mice.html").mice-day-icon
+            img(src="./img/mice/mice-icon-back.svg", alt="image")
+            img(src="./img/mice/mice-icon-front.svg", alt="image")
+
+        .home__mobile-buttons 
+          a(href="./den-polya.html").home__mobile-button.home__mobile-button_1
+            img(src="./img/den-polya/den-polya-icon.svg", alt="icon").icon
+            span ДЕНЬ ПОЛЯ
+          a(href="./mice.html").home__mobile-button.home__mobile-button_2
+            img(src="./img/mice/mice-icon.svg", alt="icon").icon
+            span MICE
+
+
         a(href="https://youtu.be/0zxNqsKiQxE" data-modal='video').video-play-round.home__item
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#play')
