@@ -598,6 +598,7 @@ const ServicesCards = {
     })
   }
 }
+
 const Cases = {
   init: function() {
     this.$parent = document.querySelector('.cases-slider');
@@ -696,6 +697,7 @@ const Cases = {
     })
   }
 }
+
 const Dots = {
   init: function() {
     this.$parent = document.querySelector('.home-dots');
@@ -802,6 +804,7 @@ const Dots = {
     })
   }
 }
+
 const BackgroundVideo = {
   init: function() {
     this.$parent = document.querySelector('.background-video');
@@ -948,6 +951,7 @@ const BackgroundVideo = {
     }
   }
 }
+
 const Nav = {
   init: function() {
     this.$nav = document.querySelector('.nav');
@@ -1001,6 +1005,7 @@ const Nav = {
     enablePageScroll();
   }
 }
+
 const Header = {
   init: function() {
     this.height = $header.getBoundingClientRect().height;
@@ -1043,6 +1048,7 @@ const Header = {
     this.scrollY = y;
   }
 }
+
 const Parralax = {
   init: function() {
     window.addEventListener('scroll', ()=>{

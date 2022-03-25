@@ -8,5 +8,3 @@ ehthumbs.db
 Thumbs.db
 _config.yml
 /node_modules
-gulpfile.js
-package-lock.json
