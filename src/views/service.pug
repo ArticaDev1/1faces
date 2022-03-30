@@ -7,11 +7,12 @@ block content
 
   section.section.template-screen.service-screen
     //video
-    .background-video.template-screen__background-video(data-video='https://youtu.be/PfyXBk0Eh0U' data-parralax='0.15')
+    .background-video.template-screen__background-video(data-video='https://1faces.com/storage/app/media/video/retert.mp4' data-parralax='0.15')
       .image.image_cover.background-video__background
         img(data-src='./img/20191206-117.jpg', alt="bg").lazyload
       .background-video__wrap
         #bg-player.background-video__element
+    div.background-video-dark-layer
     //content
     .container.template-screen__container
       //prev
@@ -19,7 +20,7 @@ block content
         svg.icon
           use(xlink:href='./img/icons/icons-sprite.svg#arrow-back')
         span Главная страница
-      a(href="https://youtu.be/PfyXBk0Eh0U" data-modal='video').video-play-round.template-screen__item
+      a(href="https://youtu.be/PfyXBk0Eh0U" data-src="https://1faces.com/storage/app/media/video/retert.mp4" data-modal='video').video-play-round.template-screen__item
         svg.icon
           use(xlink:href='./img/icons/icons-sprite.svg#play')
       .template-screen__content

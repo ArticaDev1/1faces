@@ -24,7 +24,6 @@ var Helper = {
         value = local ? local : 0,
         themes = document.querySelectorAll('.theme'),
         $triggers = document.querySelectorAll('.helper__section-button-theme');
-    console.log(local);
 
     function check() {
       themes.forEach(function (theme, index) {
