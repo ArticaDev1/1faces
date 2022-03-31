@@ -17,7 +17,7 @@ var gulp = require("gulp"),
     webpackStream = require('webpack-stream'),
     ftp = require( 'vinyl-ftp' );
 
-let $images = ["./src/img/**/*.{jpg,jpeg,png,gif}", "!./src/img/favicons/*.{jpg,jpeg,png,gif}"],
+let $images = ["./src/img/**/*.{jpg,jpeg,png,gif,mp4}", "!./src/img/favicons/*.{jpg,jpeg,png,gif}"],
     $images_watch = $images,
 
     $pug = ["./src/views/**/*.pug", "!./src/views/blocks/*.pug", "!./src/views/layout/*.pug"],

@@ -25,8 +25,6 @@ const Helper = {
         themes = document.querySelectorAll('.theme'),
         $triggers = document.querySelectorAll('.helper__section-button-theme');
     
-    console.log(local)
-
     function check() {
       themes.forEach((theme, index)=>{
         if(value==index) {
@@ -61,12 +59,12 @@ const Helper = {
     let $links = this.$block.querySelectorAll('a');
 
     $links.forEach(($this)=>{
-      let href_values = $this.getAttribute('href').split('/'),
-          href_page = href_values[href_values.length-1];
-          
-      if(page==href_page) {
-        $this.classList.add('active');
-      }
+        let href_values = $this.getAttribute('href').split('/'),
+            href_page = href_values[href_values.length-1];
+
+        if(page==href_page) {
+          $this.classList.add('active');
+        }
     })
   },
   open: function() {

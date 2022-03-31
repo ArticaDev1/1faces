@@ -816,6 +816,7 @@ const BackgroundVideo = {
     let array = this.$parent.getAttribute('data-video').split('/');
     this.$video = document.querySelector('.background-video__wrap');
     this.id = array[array.length-1];
+    this.path = this.$parent.getAttribute('data-video')
     this.loaded = false;
     this.before_end_delay = 8;
 
@@ -830,18 +831,18 @@ const BackgroundVideo = {
         .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {duration:10, css:{'stroke-dashoffset':this.loader_width/2}, ease:'expo.out'})
     }
 
-    if(!youtubeApi.state) {
-      youtubeApi.state = true;
-      let tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.insertAdjacentElement('beforeEnd', tag);
-      window.onYouTubeIframeAPIReady=()=>{
-        this.initPlayer();
-      };
-    } else {
-      this.initPlayer();
-    }
-
+    // if(!youtubeApi.state) {
+    //   youtubeApi.state = true;
+    //   let tag = document.createElement('script');
+    //   tag.src = "https://www.youtube.com/iframe_api";
+    //   document.body.insertAdjacentElement('beforeEnd', tag);
+    //   window.onYouTubeIframeAPIReady=()=>{
+    //     this.initPlayer();
+    //   };
+    // } else {
+    //   this.initPlayer();
+    // }
+    this.initPlayer();
     this.resize();
     window.addEventListener('resize', ()=>{this.resize()})
   },
@@ -859,20 +860,39 @@ const BackgroundVideo = {
     }
   },
   initPlayer: function() {
-    this.player = new YT.Player('bg-player', {
-      videoId: this.id,
-      playerVars: {
-        'controls': 0,
-        'disablekb': 1,
-        'showinfo': 0,
-        'rel': 0, 
-        'enablejsapi':1
-      },
-      events : {
-     	 	'onReady':       (event)=>{this.playerReady(event)},
-        'onStateChange': (event)=>{this.playerStateChange(event)}
-      }
-  	});
+    const playerNode = document.createElement('video')
+    this.$parent.appendChild(playerNode)
+    playerNode.muted = true
+    playerNode.setAttribute('autoplay', 'true')
+    playerNode.setAttribute('muted', 'muted')
+    playerNode.setAttribute('src', this.path)
+
+
+    playerNode.style.width = '100%'
+    playerNode.style.height = '100%'
+    playerNode.style.position = 'absolute'
+    playerNode.style.top = '0'
+    playerNode.style.left = '0'
+    playerNode.style['object-fit'] = 'cover'
+    //   setTimeout(() => {
+    //     console.log(playerNode)
+    //     playerNode.play()
+    //   }, 2000)
+    // this.player = new YT.Player('bg-player', {
+    //   videoId: this.id,
+    //   playerVars: {
+    //     'controls': 0,
+    //     'disablekb': 1,
+    //     'showinfo': 0,
+    //     'rel': 0,
+    //     'enablejsapi':1
+    //   },
+    //   events : {
+    //  	 	'onReady':       (event)=>{this.playerReady(event)},
+    //     'onStateChange': (event)=>{this.playerStateChange(event)}
+    //   }
+  	// });
+    // this.player = document.querySelector('.bg-player')
   },
   playerReady: function(event) {
     this.duration = this.player.getDuration() - this.before_end_delay;
@@ -935,7 +955,7 @@ const BackgroundVideo = {
       if(namespace=='home') {
         this.animationTimeline.pause();
       }
-    } 
+    }
     else if(event.data === YT.PlayerState.PAUSED) {
       if(namespace=='home') {
         this.animationTimeline.pause();
@@ -1196,7 +1216,7 @@ const Modal = {
               modalSubject = $button.getAttribute('data-subject');
           this.open($modal, modalSubject);
         } else if($button.getAttribute('data-modal')=='video') {
-          let href = $button.getAttribute('href');
+          let href = $button.getAttribute('data-src');
           this.video(href);
         } else if($button.getAttribute('data-modal')=='close') {
           let $modal = $button.closest('.modal');
@@ -1315,16 +1335,23 @@ const Modal = {
       let initPlayer = ()=> {
         let array = href.split('/'),
             id = array[array.length-1];
-        let player = new YT.Player('video-player', {
-          videoId: id,
-          events: {
-            'onReady': function(event) {
-              event.target.playVideo();
-              let $video = $modal.querySelector('iframe');
-              gsap.to($video, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
-            }
-          }
-        });
+        const playerNode = document.createElement('video')
+        playerNode.setAttribute('src', href)
+        playerNode.setAttribute('controls', 'controls')
+        playerNode.setAttribute('autoplay', 'autoplay')
+        playerNode.setAttribute('width', '100%')
+        playerNode.volume = 0.6
+        $content.appendChild(playerNode)
+        // let player = new YT.Player('video-player', {
+        //   videoId: id,
+        //   events: {
+        //     'onReady': function(event) {
+        //       event.target.playVideo();
+        //       let $video = $modal.querySelector('iframe');
+        //       gsap.to($video, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
+        //     }
+        //   }
+        // });
       }
       resize(()=>{
         this.newAnimation.play();
