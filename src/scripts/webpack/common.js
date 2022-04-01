@@ -831,17 +831,6 @@ const BackgroundVideo = {
         .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {duration:10, css:{'stroke-dashoffset':this.loader_width/2}, ease:'expo.out'})
     }
 
-    // if(!youtubeApi.state) {
-    //   youtubeApi.state = true;
-    //   let tag = document.createElement('script');
-    //   tag.src = "https://www.youtube.com/iframe_api";
-    //   document.body.insertAdjacentElement('beforeEnd', tag);
-    //   window.onYouTubeIframeAPIReady=()=>{
-    //     this.initPlayer();
-    //   };
-    // } else {
-    //   this.initPlayer();
-    // }
     this.initPlayer();
     this.resize();
     window.addEventListener('resize', ()=>{this.resize()})
@@ -859,12 +848,73 @@ const BackgroundVideo = {
       this.$video.style.width = `${h/ratio}px`;
     }
   },
+  playerReady: function(event) {
+    // this.duration = this.player.getDuration() - this.before_end_delay;
+    this.duration = Math.floor(event.srcElement.duration) - this.before_end_delay;
+    console.log(this.duration)
+    this.delay = 0;
+    //main
+    if(namespace=='home') {
+      if($preloader) {
+        this.delay=speed*4;
+      } else {
+        this.delay=speed*2;
+      }
+      setTimeout(() => {
+        // gsap.timeline()
+        //     .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
+        //     .to(this.$loader, {duration:speed, autoAlpha:0, ease:'power1.in'}, `-=${speed}`)
+        this.startLoaderAnimation.pause();
+
+        this.animationTimeline = gsap.timeline()
+            .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
+            .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {immediateRender:false, duration:this.duration, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed}`)
+            // .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
+      }, 1000)
+     }
+
+    // setTimeout(()=>{
+    //   this.player.playVideo();
+    //   this.player.mute();
+    //   // event.target.setPlaybackQuality('hd720');
+    //   let checkToPause = ()=>{
+    //     let position = this.$video.getBoundingClientRect().y + this.$video.getBoundingClientRect().height;
+    //     if((position<=0 || document.visibilityState=='hidden') && !this.flag) {
+    //       this.flag = true;
+    //       this.player.pauseVideo();
+    //     } else if(position>0 && document.visibilityState=='visible' && this.flag) {
+    //       this.flag = false;
+    //       this.player.playVideo();
+    //     }
+    //   }
+    //   checkToPause();
+    //   window.addEventListener('scroll', ()=>{
+    //     checkToPause();
+    //   })
+    //   document.addEventListener("visibilitychange", function() {
+    //     checkToPause();
+    //   });
+    //
+    //   setInterval(()=>{
+    //     if(this.player.getCurrentTime() >= this.duration) {
+    //       this.fadeIn.reverse();
+    //       //restart video
+    //       this.fadeIn.eventCallback('onReverseComplete', ()=>{
+    //         this.player.pauseVideo();
+    //         this.player.seekTo(0);
+    //         this.player.playVideo();
+    //       })
+    //     }
+    //   }, 100)
+    // }, this.delay*1000)
+  },
   initPlayer: function() {
     const playerNode = document.createElement('video')
     this.$parent.appendChild(playerNode)
     playerNode.muted = true
-    playerNode.setAttribute('autoplay', 'true')
+    // playerNode.setAttribute('autoplay', 'true')
     playerNode.setAttribute('muted', 'muted')
+    // playerNode.setAttribute('loop', 'loop')
     playerNode.setAttribute('src', this.path)
 
 
@@ -874,10 +924,23 @@ const BackgroundVideo = {
     playerNode.style.top = '0'
     playerNode.style.left = '0'
     playerNode.style['object-fit'] = 'cover'
-    //   setTimeout(() => {
-    //     console.log(playerNode)
-    //     playerNode.play()
-    //   }, 2000)
+
+    playerNode.addEventListener('loadeddata', (e) => {
+      this.playerReady(e)
+      playerNode.play()
+    }, false);
+    playerNode.addEventListener('waiting', (e) => {
+      this.animationTimeline.pause()
+    }, false);
+    playerNode.addEventListener('playing', (e) => {
+      this.animationTimeline.play()
+    }, false);
+
+    playerNode.addEventListener('ended', (e) => {
+      this.playerReady(e)
+      playerNode.play()
+    }, false);
+
     // this.player = new YT.Player('bg-player', {
     //   videoId: this.id,
     //   playerVars: {
@@ -894,62 +957,7 @@ const BackgroundVideo = {
   	// });
     // this.player = document.querySelector('.bg-player')
   },
-  playerReady: function(event) {
-    this.duration = this.player.getDuration() - this.before_end_delay;
-    this.delay = 0;
-    //main
-    if(namespace=='home') {
-      if($preloader) {
-        this.delay=speed*4;
-      } else {
-        this.delay=speed*2;
-      }
-      this.startLoaderAnimation.pause();
-      gsap.timeline()
-        .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
-        .to(this.$loader, {duration:speed, autoAlpha:0, ease:'power1.in'}, `-=${speed}`)
 
-      this.animationTimeline = gsap.timeline({paused:true})
-        .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
-        .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {immediateRender:false, duration:this.duration, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed}`)
-        .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
-    }
-
-    setTimeout(()=>{
-      this.player.playVideo();
-      this.player.mute();
-      event.target.setPlaybackQuality('hd720');
-      let checkToPause = ()=>{
-        let position = this.$video.getBoundingClientRect().y + this.$video.getBoundingClientRect().height;
-        if((position<=0 || document.visibilityState=='hidden') && !this.flag) {
-          this.flag = true;
-          this.player.pauseVideo();
-        } else if(position>0 && document.visibilityState=='visible' && this.flag) {
-          this.flag = false;
-          this.player.playVideo();
-        }
-      }
-      checkToPause();
-      window.addEventListener('scroll', ()=>{
-        checkToPause();
-      })
-      document.addEventListener("visibilitychange", function() {
-        checkToPause();
-      });
-
-      setInterval(()=>{
-        if(this.player.getCurrentTime() >= this.duration) {
-          this.fadeIn.reverse();
-          //restart video
-          this.fadeIn.eventCallback('onReverseComplete', ()=>{
-            this.player.pauseVideo();
-            this.player.seekTo(0);
-            this.player.playVideo();
-          })
-        }
-      }, 100)
-    }, this.delay*1000)
-  },
   playerStateChange: function(event) {
     if(event.data === YT.PlayerState.BUFFERING) {
       if(namespace=='home') {
