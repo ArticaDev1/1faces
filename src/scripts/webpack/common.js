@@ -860,18 +860,25 @@ const BackgroundVideo = {
       } else {
         this.delay=speed*2;
       }
+      // setTimeout(() => {
+        gsap.timeline()
+            .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
+            .to(this.$loader, {duration:speed, autoAlpha:0, ease:'power1.in'}, `-=${speed}`)
+
       setTimeout(() => {
-        // gsap.timeline()
-        //     .to(this.$loader, {duration:this.delay, css:{'stroke-dashoffset':0}, ease:'power1.inOut'})
-        //     .to(this.$loader, {duration:speed, autoAlpha:0, ease:'power1.in'}, `-=${speed}`)
         this.startLoaderAnimation.pause();
 
         this.animationTimeline = gsap.timeline()
             .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
             .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {immediateRender:false, duration:this.duration, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed}`)
-            // .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
-      }, 1000)
-     }
+
+        this.playerNode.play()
+      }, 2000)
+              // .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
+      // }, 1000)
+     } else {
+      this.playerNode.play()
+    }
 
     // setTimeout(()=>{
     //   this.player.playVideo();
@@ -909,36 +916,39 @@ const BackgroundVideo = {
     // }, this.delay*1000)
   },
   initPlayer: function() {
-    const playerNode = document.createElement('video')
-    this.$parent.appendChild(playerNode)
-    playerNode.muted = true
+    this.playerNode = document.createElement('video')
+
+    this.$parent.appendChild(this.playerNode)
+    this.playerNode.muted = true
     // playerNode.setAttribute('autoplay', 'true')
-    playerNode.setAttribute('muted', 'muted')
+    this.playerNode.setAttribute('muted', 'muted')
     // playerNode.setAttribute('loop', 'loop')
-    playerNode.setAttribute('src', this.path)
+    this.playerNode.setAttribute('src', this.path)
 
 
-    playerNode.style.width = '100%'
-    playerNode.style.height = '100%'
-    playerNode.style.position = 'absolute'
-    playerNode.style.top = '0'
-    playerNode.style.left = '0'
-    playerNode.style['object-fit'] = 'cover'
+    this.playerNode.style.width = '100%'
+    this.playerNode.style.height = '100%'
+    this.playerNode.style.position = 'absolute'
+    this.playerNode.style.top = '0'
+    this.playerNode.style.left = '0'
+    this.playerNode.style['object-fit'] = 'cover'
 
-    playerNode.addEventListener('loadeddata', (e) => {
-      this.playerReady(e)
-      playerNode.play()
+    this.playerNode.addEventListener('loadeddata', (e) => {
+      setTimeout(() => {
+        this.playerReady(e)
+
+      }, 2000)
     }, false);
-    playerNode.addEventListener('waiting', (e) => {
+    this.playerNode.addEventListener('waiting', (e) => {
       this.animationTimeline.pause()
     }, false);
-    playerNode.addEventListener('playing', (e) => {
+    this.playerNode.addEventListener('playing', (e) => {
       this.animationTimeline.play()
     }, false);
 
-    playerNode.addEventListener('ended', (e) => {
+    this.playerNode.addEventListener('ended', (e) => {
       this.playerReady(e)
-      playerNode.play()
+      this.playerNode.play()
     }, false);
 
     // this.player = new YT.Player('bg-player', {

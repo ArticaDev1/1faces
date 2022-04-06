@@ -57,7 +57,7 @@ var Helper = {
         page = last_value == '' ? 'index.html' : last_value;
     var $links = this.$block.querySelectorAll('a');
     $links.forEach(function ($this) {
-      if ($this.getAttribute('href') != null) {
+      if ($this.getAttribute('href')) {
         var href_values = $this.getAttribute('href').split('/'),
             href_page = href_values[href_values.length - 1];
 

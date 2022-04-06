@@ -161,3 +161,9 @@
   background: rgba(0,0,0,0.8);
   z-index: 2;
 }
+
+@media screen and (max-width: 1024px) {
+  .background-video-dark-layer {
+    display: none;
+  }
+}
