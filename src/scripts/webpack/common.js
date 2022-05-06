@@ -928,7 +928,6 @@ const BackgroundVideo = {
     this.playerNode.setAttribute('loop', 'loop')
     this.playerNode.setAttribute('src', this.path)
     this.playerNode.load()
-    this.playerNode.play()
     this.playerNode.style.width = '100%'
     this.playerNode.style.height = '100%'
     this.playerNode.style.position = 'absolute'
@@ -953,10 +952,14 @@ const BackgroundVideo = {
       }, this.delay*1000)
     }, false);
     this.playerNode.addEventListener('waiting', (e) => {
-      this.animationTimeline.pause()
+      if (this.animationTimeline) {
+        this.animationTimeline.pause()
+      }
     }, false);
     this.playerNode.addEventListener('playing', (e) => {
-      this.animationTimeline.play()
+      if (this.animationTimeline) {
+        this.animationTimeline.play()
+      }
     }, false);
 
     this.playerNode.addEventListener('ended', (e) => {
