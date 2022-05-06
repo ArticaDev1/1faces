@@ -810,6 +810,7 @@ const BackgroundVideo = {
     this.$parent = document.querySelector('.background-video');
     if(this.$parent && device.desktop() && window.innerWidth>Breakpoints.lg) {
       this.initEvent();
+      console.log('init');
     }
   },
   initEvent: function() {
@@ -872,12 +873,12 @@ const BackgroundVideo = {
             .fromTo(this.$loader, {autoAlpha:0}, {immediateRender:false, autoAlpha:1, duration:speed, ease:'power2.inOut'})
             .fromTo(this.$loader, {css:{'stroke-dashoffset':this.loader_width}}, {immediateRender:false, duration:this.duration, css:{'stroke-dashoffset':0}, ease:'linear'}, `-=${speed}`)
 
-        this.playerNode.play()
+        // this.playerNode.play()
       }, 2000)
               // .to(this.$loader, {autoAlpha:0, duration:speed*2, ease:'power2.in'}, `-=${speed}`)
       // }, 1000)
      } else {
-      this.playerNode.play()
+      // this.playerNode.play()
     }
 
     // setTimeout(()=>{
@@ -917,16 +918,16 @@ const BackgroundVideo = {
   },
   initPlayer: function() {
     this.playerNode = document.createElement('video')
-
-    this.$parent.appendChild(this.playerNode)
+    const bgPlayer = document.querySelector('#bg-player')
+    // this.$parent.appendChild(this.playerNode)
+    bgPlayer.appendChild(this.playerNode)
     this.playerNode.muted = true
     // playerNode.setAttribute('autoplay', 'true')
     this.playerNode.setAttribute('muted', 'muted')
     this.playerNode.setAttribute('preload', 'metadata')
-    // playerNode.setAttribute('loop', 'loop')
+    this.playerNode.setAttribute('loop', 'loop')
     this.playerNode.setAttribute('src', this.path)
-
-
+    this.playerNode.pause()
     this.playerNode.style.width = '100%'
     this.playerNode.style.height = '100%'
     this.playerNode.style.position = 'absolute'
@@ -935,10 +936,17 @@ const BackgroundVideo = {
     this.playerNode.style['object-fit'] = 'cover'
 
     this.playerNode.addEventListener('loadeddata', (e) => {
+      // setTimeout(() => {
+      //   this.playerReady(e)
+      // }, 2000)
+      this.playerReady(e)
+      setTimeout(()=>{
+        gsap.timeline({paused:false})
+      .fromTo(this.$video, {autoAlpha:0}, {autoAlpha:1, duration:speed*2, ease:'power2.inOut'})
       setTimeout(() => {
-        this.playerReady(e)
-
-      }, 2000)
+        this.playerNode.play()
+      }, 1000);
+      }, this.delay*1000)
     }, false);
     this.playerNode.addEventListener('waiting', (e) => {
       this.animationTimeline.pause()
@@ -948,8 +956,8 @@ const BackgroundVideo = {
     }, false);
 
     this.playerNode.addEventListener('ended', (e) => {
-      this.playerReady(e)
-      this.playerNode.play()
+      // this.playerReady(e)
+      // this.playerNode.play()
     }, false);
 
     // this.player = new YT.Player('bg-player', {
@@ -969,26 +977,26 @@ const BackgroundVideo = {
     // this.player = document.querySelector('.bg-player')
   },
 
-  playerStateChange: function(event) {
-    if(event.data === YT.PlayerState.BUFFERING) {
-      if(namespace=='home') {
-        this.animationTimeline.pause();
-      }
-    }
-    else if(event.data === YT.PlayerState.PAUSED) {
-      if(namespace=='home') {
-        this.animationTimeline.pause();
-      }
-    }
-    else if(event.data === YT.PlayerState.PLAYING) {
-      if(this.fadeIn.progress()==0) {
-        this.fadeIn.play();
-      }
-      if(namespace=='home') {
-        this.animationTimeline.play(this.player.getCurrentTime());
-      }
-    }
-  }
+  // playerStateChange: function(event) {
+  //   if(event.data === YT.PlayerState.BUFFERING) {
+  //     if(namespace=='home') {
+  //       this.animationTimeline.pause();
+  //     }
+  //   }
+  //   else if(event.data === YT.PlayerState.PAUSED) {
+  //     if(namespace=='home') {
+  //       this.animationTimeline.pause();
+  //     }
+  //   }
+  //   else if(event.data === YT.PlayerState.PLAYING) {
+  //     if(this.fadeIn.progress()==0) {
+  //       this.fadeIn.play();
+  //     }
+  //     if(namespace=='home') {
+  //       this.animationTimeline.play(this.player.getCurrentTime());
+  //     }
+  //   }
+  // }
 }
 
 const Nav = {
