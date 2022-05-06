@@ -922,6 +922,7 @@ const BackgroundVideo = {
     this.playerNode.muted = true
     // playerNode.setAttribute('autoplay', 'true')
     this.playerNode.setAttribute('muted', 'muted')
+    this.playerNode.setAttribute('preload', 'metadata')
     // playerNode.setAttribute('loop', 'loop')
     this.playerNode.setAttribute('src', this.path)
 
