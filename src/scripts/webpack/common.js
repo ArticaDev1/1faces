@@ -924,28 +924,32 @@ const BackgroundVideo = {
     this.playerNode.muted = true
     // playerNode.setAttribute('autoplay', 'true')
     this.playerNode.setAttribute('muted', 'muted')
-    this.playerNode.setAttribute('preload', 'metadata')
+    this.playerNode.setAttribute('preload', 'auto')
     this.playerNode.setAttribute('loop', 'loop')
     this.playerNode.setAttribute('src', this.path)
-    this.playerNode.pause()
+    this.playerNode.load()
+    this.playerNode.play()
     this.playerNode.style.width = '100%'
     this.playerNode.style.height = '100%'
     this.playerNode.style.position = 'absolute'
     this.playerNode.style.top = '0'
     this.playerNode.style.left = '0'
     this.playerNode.style['object-fit'] = 'cover'
-
+    this.playerNode.pause()
     this.playerNode.addEventListener('loadeddata', (e) => {
       // setTimeout(() => {
       //   this.playerReady(e)
       // }, 2000)
       this.playerReady(e)
       setTimeout(()=>{
-        gsap.timeline({paused:false})
-      .fromTo(this.$video, {autoAlpha:0}, {autoAlpha:1, duration:speed*2, ease:'power2.inOut'})
-      setTimeout(() => {
-        this.playerNode.play()
-      }, 1000);
+        if (this.playerNode.readyState === 4) {
+          console.log('da');
+          gsap.timeline({paused:false})
+          .fromTo(this.$video, {autoAlpha:0}, {autoAlpha:1, duration:speed*2, ease:'power2.inOut'})
+          setTimeout(() => {
+            this.playerNode.play()
+          }, 1000);
+        }
       }, this.delay*1000)
     }, false);
     this.playerNode.addEventListener('waiting', (e) => {
