@@ -2556,13 +2556,6 @@
 
 
 .field-day-screen {
-  .template-screen__container {
-    display: flex;
-    align-items: center;
-    .video-play-round {
-      margin-left: -2px;
-    }
-  }
   .template-screen__title {
     font-size: 144px;
     margin: 0 0 25px 0;
@@ -2612,6 +2605,11 @@
   @include media-breakpoint-down(md) {
     .template-screen__container {
       padding-bottom: 60px;
+        display: flex;
+        align-items: center;
+        .video-play-round {
+          margin-left: -2px;
+        }
     }
   }
   @include media-breakpoint-down(sm) {

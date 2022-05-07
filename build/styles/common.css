@@ -5927,12 +5927,6 @@ textarea {
         border-radius: 6px;
         top: calc(0.75em - 3px); } }
 
-.field-day-screen .template-screen__container {
-  display: flex;
-  align-items: center; }
-  .field-day-screen .template-screen__container .video-play-round {
-    margin-left: -2px; }
-
 .field-day-screen .template-screen__title {
   font-size: 144px;
   margin: 0 0 25px 0; }
@@ -5972,7 +5966,11 @@ textarea {
 
 @media (max-width: 767.98px) {
   .field-day-screen .template-screen__container {
-    padding-bottom: 60px; } }
+    padding-bottom: 60px;
+    display: flex;
+    align-items: center; }
+    .field-day-screen .template-screen__container .video-play-round {
+      margin-left: -2px; } }
 
 @media (max-width: 575.98px) {
   .field-day-screen .template-screen__title {
