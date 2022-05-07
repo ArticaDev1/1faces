@@ -924,7 +924,7 @@ const BackgroundVideo = {
     this.playerNode.muted = true
     // playerNode.setAttribute('autoplay', 'true')
     this.playerNode.setAttribute('muted', 'muted')
-    this.playerNode.setAttribute('preload', 'auto')
+    this.playerNode.setAttribute('preload', 'metadata')
     this.playerNode.setAttribute('loop', 'loop')
     this.playerNode.setAttribute('src', this.path)
     this.playerNode.load()
@@ -934,8 +934,9 @@ const BackgroundVideo = {
     this.playerNode.style.top = '0'
     this.playerNode.style.left = '0'
     this.playerNode.style['object-fit'] = 'cover'
+    // this.playerNode.play()
     this.playerNode.pause()
-    this.playerNode.addEventListener('loadeddata', (e) => {
+    this.playerNode.addEventListener('canplaythrough', (e) => {
       // setTimeout(() => {
       //   this.playerReady(e)
       // }, 2000)
