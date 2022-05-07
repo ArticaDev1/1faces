@@ -5927,6 +5927,12 @@ textarea {
         border-radius: 6px;
         top: calc(0.75em - 3px); } }
 
+.field-day-screen .template-screen__container {
+  display: flex;
+  align-items: center; }
+  .field-day-screen .template-screen__container .video-play-round {
+    margin-left: -2px; }
+
 .field-day-screen .template-screen__title {
   font-size: 144px;
   margin: 0 0 25px 0; }

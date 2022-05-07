@@ -2556,6 +2556,13 @@
 
 
 .field-day-screen {
+  .template-screen__container {
+    display: flex;
+    align-items: center;
+    .video-play-round {
+      margin-left: -2px;
+    }
+  }
   .template-screen__title {
     font-size: 144px;
     margin: 0 0 25px 0;
